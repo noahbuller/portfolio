@@ -1,0 +1,103 @@
+.sky {
+  position: absolute;
+  inset: 0;
+  z-index: 9;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.plane {
+  position: absolute;
+  left: 0;
+  will-change: transform;
+  animation-name: fly;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  animation: bob 3.4s ease-in-out infinite alternate;
+}
+
+@keyframes fly {
+  from {
+    transform: translateX(-360px);
+  }
+  to {
+    transform: translateX(calc(100vw + 80px));
+  }
+}
+
+@keyframes bob {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-7px);
+  }
+}
+
+.banner {
+  pointer-events: auto;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 18px 9px 24px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  background: linear-gradient(160deg, #20283f, #161d33);
+  border: 2px solid var(--accent, var(--neon-cyan));
+  border-radius: 8px;
+  box-shadow:
+    0 0 14px var(--accent-glow, rgba(6, 214, 160, 0.5)),
+    0 8px 18px rgba(0, 0, 0, 0.4);
+  white-space: nowrap;
+  /* Forked pennant notch on the trailing (left) edge */
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 14px 50%);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.rope {
+  width: 20px;
+  height: 2px;
+  background: rgba(245, 240, 232, 0.45);
+}
+
+.sprite {
+  display: block;
+}
+
+/* Accent variants */
+.cyan {
+  --accent: var(--neon-cyan);
+  --accent-glow: rgba(6, 214, 160, 0.5);
+}
+
+.lime {
+  --accent: var(--neon-accent);
+  --accent-glow: rgba(255, 209, 102, 0.5);
+}
+
+.coral {
+  --accent: var(--neon-secondary);
+  --accent-glow: rgba(239, 71, 111, 0.5);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .banner:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 0 22px var(--accent-glow, rgba(6, 214, 160, 0.65)),
+      0 12px 24px rgba(0, 0, 0, 0.5);
+  }
+}
+
+.banner:focus-visible {
+  outline: 3px solid var(--accent, var(--neon-cyan));
+  outline-offset: 3px;
+}

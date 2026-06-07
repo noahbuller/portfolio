@@ -1,13 +1,29 @@
+/*
+ * Coastal palette — ocean/sunset direction. Single source of truth for color.
+ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  --sky-top: #0d3b66;
+  --sky-mid: #2a6f97;
+  --sky-horizon: #ffc59e;
+  --water: #2a9d8f;
+  --water-deep: #1d7a70;
+  --foreground-sand: #f4d9a0;
+  --building-far: #3d5a73;
+  --building-mid: #274156;
+  --building-shadow: #16303f;
+  --window-glow: #ffd27a;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --neon-accent: #ffd166;
+  --neon-secondary: #ef476f;
+  --neon-cyan: #06d6a0;
+
+  --gold: #ffcf5c;
+
+  --text-light: #f5f0e8;
+  --text-muted: #cfd8dd;
+
+  --background: var(--sky-top);
+  --foreground: var(--text-light);
 }
 
 html {
@@ -16,17 +32,17 @@ html {
 
 html,
 body {
+  width: 100%;
+  height: 100%;
   max-width: 100vw;
-  overflow-x: hidden;
+  max-height: 100vh;
+  overflow: hidden;
 }
 
 body {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -40,10 +56,4 @@ body {
 a {
   color: inherit;
   text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
 }

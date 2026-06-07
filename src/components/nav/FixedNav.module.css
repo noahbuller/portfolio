@@ -1,0 +1,92 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 28px;
+  background: linear-gradient(
+    180deg,
+    rgba(20, 18, 35, 0.6),
+    rgba(20, 18, 35, 0)
+  );
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.brand {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text-light);
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.link {
+  position: relative;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-light);
+  padding: 4px 0;
+}
+
+.link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--neon-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s ease;
+}
+
+.divider {
+  width: 1px;
+  height: 18px;
+  background: rgba(245, 240, 232, 0.25);
+}
+
+.icon {
+  display: inline-flex;
+  color: var(--text-muted);
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .link:hover::after {
+    transform: scaleX(1);
+  }
+
+  .icon:hover {
+    color: var(--neon-accent);
+    transform: translateY(-2px);
+  }
+}
+
+.link:focus-visible,
+.icon:focus-visible {
+  outline: 2px solid var(--neon-accent);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+@media (max-width: 600px) {
+  .nav {
+    padding: 12px 16px;
+  }
+
+  .links {
+    gap: 14px;
+  }
+}
