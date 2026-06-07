@@ -24,6 +24,9 @@
 
   --background: var(--sky-top);
   --foreground: var(--text-light);
+
+  /* Fixed nav clearance — planes and other sky elements stay below this. */
+  --nav-height: 3.5rem;
 }
 
 html {

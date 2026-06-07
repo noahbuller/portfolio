@@ -28,7 +28,10 @@ function makePlane(id: number, seq: number): PlaneInstance {
     href: cta.href,
     external: cta.external ?? false,
     accent: ACCENTS[seq % ACCENTS.length],
-    topVh: 4 + Math.random() * 9,
+    // Mid-sky corridor: below the hero title (~24vh) but above distant
+    // building tops (~48vh). Positions are relative to the sky layer, which
+    // itself starts below the fixed nav.
+    topVh: 17 + Math.random() * 22,
     durationS: 20 + Math.random() * 6,
   };
 }

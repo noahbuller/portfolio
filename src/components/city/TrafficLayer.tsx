@@ -113,7 +113,7 @@ export function TrafficLayer() {
           <div className={styles.inner}>
             <Car type={car.type} color={car.color} special={car.special} />
             {car.special && (
-              <span className={styles.tag}>the developer&apos;s ride</span>
+              <span className={styles.tag}>My Car: the lovely Honda Civic</span>
             )}
           </div>
         </div>

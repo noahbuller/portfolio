@@ -70,11 +70,6 @@ function Sedan({ body, special }: { body: string; special: boolean }) {
             <path d="M0 10 L0 2 L4 6 L8 0 L12 6 L16 2 L16 10 Z" fill="var(--gold)" stroke="#caa030" strokeWidth="0.6" />
             <circle cx="8" cy="-0.5" r="1.4" fill="#fff3c4" />
           </g>
-          {/* NB license plate */}
-          <g transform="translate(14 40)">
-            <rect width="22" height="11" rx="2" fill="#fffdf3" stroke="var(--gold)" strokeWidth="1" />
-            <text x="11" y="8.6" textAnchor="middle" fontSize="8" fontWeight="700" fill="#1c2227" fontFamily="Arial, sans-serif">NB</text>
-          </g>
         </>
       )}
     </g>
