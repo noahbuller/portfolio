@@ -2,35 +2,40 @@
 
 import Link from "next/link";
 import { ctas } from "@/data/ctas";
+import { useAbout } from "@/components/about/AboutProvider";
 import { SocialSvg } from "@/components/icons";
-import { useAboutOptional } from "@/components/about/AboutProvider";
-import styles from "./FixedNav.module.css";
+import styles from "./SiteNav.module.css";
 
-/**
- * Slim persistent top bar. Mirrors every CTA so nothing is ever unreachable
- * while the city scrolls behind it.
- */
-export function FixedNav() {
-  const about = useAboutOptional();
+interface SiteNavProps {
+  current?: "projects" | "experience";
+}
+
+/** Coastal-themed nav for scrollable sub-pages. */
+export function SiteNav({ current }: SiteNavProps) {
+  const { openAbout } = useAbout();
 
   return (
     <header className={styles.nav}>
-      <Link className={`${styles.brand} font-display`} href="/">
-        {ctas.hero.label}
+      <Link className={styles.brand} href="/">
+        ← Back to city
       </Link>
 
       <nav className={styles.links} aria-label="Primary">
-        <Link className={styles.link} href="/projects">
+        <Link
+          className={`${styles.link} ${current === "projects" ? styles.active : ""}`}
+          href="/projects"
+        >
           Projects
         </Link>
-        <Link className={styles.link} href="/experience">
+        <Link
+          className={`${styles.link} ${current === "experience" ? styles.active : ""}`}
+          href="/experience"
+        >
           Experience
         </Link>
-        {about ? (
-          <button type="button" className={styles.linkButton} onClick={about.openAbout}>
-            About
-          </button>
-        ) : null}
+        <button type="button" className={styles.linkButton} onClick={openAbout}>
+          About
+        </button>
         <a className={styles.link} href={ctas.resume.href} download={ctas.resume.download}>
           {ctas.resume.label}
         </a>

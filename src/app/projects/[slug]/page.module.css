@@ -1,0 +1,129 @@
+.article {
+  max-width: 720px;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--touch-min);
+  margin-bottom: 24px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--neon-accent);
+}
+
+.header {
+  margin-bottom: 28px;
+}
+
+.date {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+}
+
+.role {
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--neon-cyan);
+  font-weight: 600;
+}
+
+.title {
+  margin-top: 8px;
+  font-size: clamp(28px, 6.5vw, 48px);
+  line-height: 1.08;
+}
+
+.tagline {
+  margin-top: 10px;
+  font-size: clamp(16px, 3.5vw, 18px);
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.external {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--touch-min);
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-light);
+  border: 2px solid var(--neon-cyan);
+  background: rgba(6, 214, 160, 0.12);
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .external:hover {
+    background: rgba(6, 214, 160, 0.2);
+    box-shadow: 0 0 16px rgba(6, 214, 160, 0.35);
+  }
+}
+
+.section {
+  padding: 22px 24px;
+  margin-bottom: 20px;
+}
+
+.section p {
+  font-size: clamp(15px, 3.2vw, 16px);
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+
+.section ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.section li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.section li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--neon-cyan);
+}
+
+.back:focus-visible,
+.external:focus-visible {
+  outline: 2px solid var(--neon-accent);
+  outline-offset: 3px;
+}
+
+@media (max-width: 600px) {
+  .section {
+    padding: 18px;
+  }
+}

@@ -1,0 +1,23 @@
+.section {
+  margin-bottom: 60px;
+}
+
+.section :global(.section-eyebrow) {
+  margin-bottom: 20px;
+}
+
+.divided {
+  margin-top: 8px;
+  padding-top: 48px;
+  border-top: 1px solid rgba(255, 209, 102, 0.22);
+}
+
+@media (max-width: 600px) {
+  .section {
+    margin-bottom: 52px;
+  }
+
+  .divided {
+    padding-top: 40px;
+  }
+}

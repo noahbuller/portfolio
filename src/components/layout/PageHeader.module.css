@@ -1,0 +1,31 @@
+.header {
+  margin-bottom: 40px;
+}
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--neon-cyan);
+  font-weight: 600;
+}
+
+.title {
+  margin-top: 8px;
+  font-size: clamp(32px, 7vw, 52px);
+  line-height: 1.05;
+}
+
+.lead {
+  margin-top: 14px;
+  max-width: 640px;
+  font-size: clamp(15px, 3.5vw, 17px);
+  line-height: 1.55;
+  color: rgba(245, 240, 232, 0.9);
+}
+
+@media (max-width: 600px) {
+  .header {
+    margin-bottom: 32px;
+  }
+}

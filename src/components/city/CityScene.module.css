@@ -3,6 +3,7 @@
   inset: 0;
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   background: linear-gradient(180deg, var(--sky-top), var(--sky-mid) 45%, var(--sky-horizon) 70%);
 }
@@ -33,9 +34,7 @@
 
 .heroName {
   font-size: clamp(40px, 8vw, 104px);
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  line-height: 1;
+  line-height: 0.95;
   color: var(--text-light);
   opacity: 0.38;
   text-shadow: 0 4px 30px rgba(0, 0, 0, 0.35);
@@ -178,8 +177,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  min-width: var(--touch-min);
+  min-height: var(--touch-min);
+  width: 44px;
+  height: 44px;
   border-radius: 10px;
   background: rgba(245, 240, 232, 0.08);
   border: 1px solid rgba(245, 240, 232, 0.2);
@@ -202,11 +203,34 @@
 
 /* On smaller screens, nudge the city down so billboards stay reachable */
 @media (max-width: 768px) {
+  .heroTitle {
+    top: calc(var(--nav-height) + 2vh);
+  }
+
+  .heroName {
+    font-size: clamp(28px, 10vw, 48px);
+    opacity: 0.32;
+  }
+
+  .heroSubtitle {
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    opacity: 0.28;
+  }
+
   .skyline {
     bottom: 42vh;
   }
 
   .midground {
     bottom: 28vh;
+  }
+
+  .sunReflection {
+    opacity: 0.2;
+  }
+
+  .billboards {
+    bottom: 2vh;
   }
 }

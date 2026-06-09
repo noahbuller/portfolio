@@ -29,40 +29,6 @@
   }
 }
 
-/* Easter-egg white sedan: interactive (hover label) + soft gold underglow */
-.special {
-  pointer-events: auto;
-  cursor: pointer;
-  filter: drop-shadow(0 0 10px rgba(255, 207, 92, 0.55));
-}
-
-.tag {
-  position: absolute;
-  left: 50%;
-  bottom: 100%;
-  transform: translate(-50%, -6px) scale(0.9);
-  transform-origin: bottom center;
-  margin-bottom: 4px;
-  padding: 4px 10px;
-  white-space: nowrap;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  color: #1c2227;
-  background: var(--gold);
-  border-radius: 999px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.18s ease, transform 0.18s ease;
-}
-
-.special:hover .tag {
-  opacity: 1;
-  transform: translate(-50%, -6px) scale(1);
-}
-
-/* Reduced motion: parked cars, no driving animation */
 .parked {
   animation: none;
   left: var(--parked-left, 20vw);

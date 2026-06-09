@@ -1,0 +1,65 @@
+.frame {
+  position: relative;
+  display: block;
+  margin-bottom: 36px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 2px solid var(--glass-border);
+  box-shadow:
+    0 0 24px rgba(255, 209, 102, 0.15),
+    0 16px 40px rgba(0, 0, 0, 0.35);
+  background: var(--glass-bg);
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.overlay {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  padding: 10px 16px;
+  min-height: var(--touch-min);
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-light);
+  background: rgba(13, 59, 102, 0.88);
+  border: 1px solid var(--neon-cyan);
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .frame:hover .overlay {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.frame:focus-visible {
+  outline: 2px solid var(--neon-accent);
+  outline-offset: 4px;
+}
+
+@media (max-width: 600px) {
+  .frame {
+    margin-bottom: 28px;
+  }
+
+  .overlay {
+    opacity: 1;
+    transform: none;
+    right: 12px;
+    bottom: 12px;
+    font-size: 12px;
+  }
+}

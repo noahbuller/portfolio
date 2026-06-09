@@ -1,0 +1,126 @@
+.profileSkills {
+  margin-top: 22px;
+}
+
+.skillIcons {
+  margin-top: 4px;
+}
+
+.courseSkillIcons {
+  margin-bottom: 14px;
+}
+
+.roleList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.roleCard,
+.educationCard,
+.leadershipCard {
+  padding: 24px 26px;
+}
+
+.roleHeader {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px 24px;
+  margin-bottom: 12px;
+}
+
+.roleCompany {
+  font-size: clamp(18px, 3.5vw, 20px);
+  line-height: 1.25;
+  color: var(--text-light);
+}
+
+.roleTitle {
+  margin-top: 4px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.roleDates {
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--neon-cyan);
+  white-space: nowrap;
+}
+
+.roleSummary {
+  font-size: clamp(15px, 3.2vw, 16px);
+  line-height: 1.65;
+  color: var(--text-light);
+  margin-bottom: 16px;
+}
+
+.gpa {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-light);
+  margin-bottom: 12px;
+}
+
+.bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.bullets li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.bullets li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--neon-cyan);
+}
+
+.courseGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.courseGroup {
+  padding: 20px 22px;
+}
+
+.courseLabel {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-light);
+  margin-bottom: 12px;
+}
+
+@media (max-width: 600px) {
+  .roleHeader {
+    flex-direction: column;
+  }
+
+  .roleCard,
+  .educationCard,
+  .leadershipCard,
+  .courseGroup {
+    padding: 18px;
+  }
+
+  .roleDates {
+    white-space: normal;
+  }
+}

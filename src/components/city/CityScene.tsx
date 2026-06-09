@@ -13,7 +13,7 @@ import { TrafficLayer } from "./TrafficLayer";
 import { PlaneLayer } from "./PlaneLayer";
 import styles from "./CityScene.module.css";
 
-const BILLBOARD_TILE = 2400;
+const BILLBOARD_TILE = 3000;
 
 export function CityScene() {
   // Slowed to 50% of the original 70px/s.
@@ -21,7 +21,7 @@ export function CityScene() {
 
   const renderBillboards = (decorative: boolean) => (
     <div className={styles.billboardTile} style={{ width: BILLBOARD_TILE }}>
-      <div className={`${styles.slot} ${styles.slotElevated}`} style={{ left: 300 }}>
+      <div className={`${styles.slot} ${styles.slotElevated}`} style={{ left: 220 }}>
         <Billboard
           decorative={decorative}
           variant="cyan"
@@ -34,7 +34,19 @@ export function CityScene() {
         />
       </div>
 
-      <div className={styles.slot} style={{ left: 1150 }}>
+      <div className={`${styles.slot} ${styles.slotElevated}`} style={{ left: 880 }}>
+        <Billboard
+          decorative={decorative}
+          variant="lime"
+          mount="building"
+          href="/experience"
+          eyebrow="Career path"
+          title="Experience"
+          subtitle="Internships & Lehigh"
+        />
+      </div>
+
+      <div className={styles.slot} style={{ left: 1540 }}>
         <Billboard
           decorative={decorative}
           variant="coral"
@@ -46,13 +58,12 @@ export function CityScene() {
         />
       </div>
 
-      <div className={`${styles.slot} ${styles.slotElevated}`} style={{ left: 1950 }}>
+      <div className={`${styles.slot} ${styles.slotElevated}`} style={{ left: 2280 }}>
         <Billboard
           decorative={decorative}
+          mode="group"
           variant="lime"
           mount="building"
-          href={ctas.social[0]?.href ?? "#"}
-          external
           eyebrow="Find me"
           title="Social"
         >
@@ -80,7 +91,7 @@ export function CityScene() {
       <SkyLayer />
 
       <div className={styles.heroTitle} aria-hidden="true">
-        <span className={styles.heroName}>{ctas.hero.label}</span>
+        <span className={`${styles.heroName} font-display`}>{ctas.hero.label}</span>
         <span className={styles.heroSubtitle}>{ctas.hero.subtitle}</span>
       </div>
 

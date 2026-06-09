@@ -1,18 +1,16 @@
 "use client";
 
 import { ReactNode, useEffect, useRef, useState } from "react";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import styles from "./Billboard.module.css";
 
 export type BillboardVariant = "lime" | "coral" | "cyan";
 export type BillboardMount = "ground" | "building";
 
-interface BillboardProps {
-  href: string;
+interface BillboardBaseProps {
   variant?: BillboardVariant;
   /** How the sign is physically supported in the scene. */
   mount?: BillboardMount;
-  download?: boolean | string;
-  external?: boolean;
   /** Second (duplicate) copy in the seamless loop: hidden from a11y. */
   decorative?: boolean;
   eyebrow?: string;
@@ -21,64 +19,108 @@ interface BillboardProps {
   children?: ReactNode;
 }
 
-/**
- * A clickable neon billboard. `mount` controls how it sits in the scene:
- * - "ground": raised on two tall poles planted on the road
- * - "building": mounted atop a small lit building block
- * Pops in (scale/opacity) as it enters the viewport via IntersectionObserver.
- */
-export function Billboard({
-  href,
-  variant = "lime",
-  mount = "ground",
-  download,
-  external,
-  decorative,
+interface BillboardLinkProps extends BillboardBaseProps {
+  mode?: "link";
+  href: string;
+  download?: boolean | string;
+  external?: boolean;
+}
+
+interface BillboardGroupProps extends BillboardBaseProps {
+  /** Non-anchor sign with separate child links (e.g. social chips). */
+  mode: "group";
+}
+
+type BillboardProps = BillboardLinkProps | BillboardGroupProps;
+
+function BillboardFrame({
   eyebrow,
   title,
   subtitle,
   children,
-}: BillboardProps) {
-  const boardRef = useRef<HTMLAnchorElement>(null);
-  const [inView, setInView] = useState(false);
+}: Pick<BillboardBaseProps, "eyebrow" | "title" | "subtitle" | "children">) {
+  return (
+    <span className={styles.frame}>
+      {eyebrow && <span className={styles.eyebrow}>{eyebrow}</span>}
+      <span className={`${styles.title} font-display`}>{title}</span>
+      {subtitle && <span className={styles.subtitle}>{subtitle}</span>}
+      {children}
+    </span>
+  );
+}
+
+/**
+ * A clickable neon billboard. `mount` controls how it sits in the scene:
+ * - "ground": raised on two tall poles planted on the road
+ * - "building": mounted atop a small lit building block
+ *
+ * Use `mode="link"` (default) for a single CTA anchor, or `mode="group"` when
+ * the sign contains separate child links.
+ */
+export function Billboard(props: BillboardProps) {
+  const {
+    variant = "lime",
+    mount = "ground",
+    decorative,
+    eyebrow,
+    title,
+    subtitle,
+    children,
+  } = props;
+
+  const isGroup = props.mode === "group";
+  const observeTarget = useRef<HTMLElement | null>(null);
+  const setObserveTarget = (el: HTMLDivElement | HTMLAnchorElement | null) => {
+    observeTarget.current = el;
+  };
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const [observedInView, setObservedInView] = useState(false);
+  const inView = prefersReducedMotion || observedInView;
 
   useEffect(() => {
-    const el = boardRef.current;
+    if (prefersReducedMotion) return;
+
+    const el = observeTarget.current;
     if (!el) return;
 
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) {
-      setInView(true);
-      return;
-    }
-
     const observer = new IntersectionObserver(
-      ([entry]) => setInView(entry.isIntersecting),
+      ([entry]) => setObservedInView(entry.isIntersecting),
       { threshold: 0.55 },
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
+  }, [prefersReducedMotion]);
+
+  const boardClassName = `${styles.board} ${styles[variant]} ${inView ? styles.inView : ""}`;
 
   return (
     <div className={styles.mount}>
-      <a
-        ref={boardRef}
-        className={`${styles.board} ${styles[variant]} ${inView ? styles.inView : ""}`}
-        href={href}
-        download={download}
-        target={external ? "_blank" : undefined}
-        rel={external ? "noopener noreferrer" : undefined}
-        aria-hidden={decorative || undefined}
-        tabIndex={decorative ? -1 : undefined}
-      >
-        <span className={styles.frame}>
-          {eyebrow && <span className={styles.eyebrow}>{eyebrow}</span>}
-          <span className={styles.title}>{title}</span>
-          {subtitle && <span className={styles.subtitle}>{subtitle}</span>}
-          {children && <span className={styles.extra}>{children}</span>}
-        </span>
-      </a>
+      {isGroup ? (
+        <div
+          ref={setObserveTarget}
+          className={boardClassName}
+          aria-hidden={decorative || undefined}
+        >
+          <BillboardFrame eyebrow={eyebrow} title={title} subtitle={subtitle}>
+            {children && <span className={styles.extra}>{children}</span>}
+          </BillboardFrame>
+        </div>
+      ) : (
+        <a
+          ref={setObserveTarget}
+          className={boardClassName}
+          href={props.href}
+          download={props.download}
+          target={props.external ? "_blank" : undefined}
+          rel={props.external ? "noopener noreferrer" : undefined}
+          aria-hidden={decorative || undefined}
+          tabIndex={decorative ? -1 : undefined}
+        >
+          <BillboardFrame eyebrow={eyebrow} title={title} subtitle={subtitle}>
+            {children && <span className={styles.extra}>{children}</span>}
+          </BillboardFrame>
+        </a>
+      )}
 
       {mount === "ground" ? (
         <div className={styles.standGround} aria-hidden="true">

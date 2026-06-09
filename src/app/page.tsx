@@ -1,5 +1,4 @@
-import { CityScene } from "@/components/city/CityScene";
-import { FixedNav } from "@/components/nav/FixedNav";
+import { HomeShell } from "@/components/HomeShell";
 import { ctas } from "@/data/ctas";
 import styles from "./page.module.css";
 
@@ -9,8 +8,7 @@ export default function Home() {
       <h1 className={styles.srOnly}>
         {ctas.hero.label} — {ctas.hero.subtitle}
       </h1>
-      <FixedNav />
-      <CityScene />
+      <HomeShell />
     </main>
   );
 }

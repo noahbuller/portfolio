@@ -1,0 +1,87 @@
+.grid {
+  list-style: none;
+  display: grid;
+  gap: 24px;
+}
+
+.card {
+  display: block;
+  overflow: hidden;
+  padding: 0;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.thumbWrap {
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 209, 102, 0.15);
+}
+
+.thumb {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.35s ease;
+}
+
+.cardBody {
+  padding: 22px 26px 26px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: var(--neon-accent);
+    box-shadow:
+      0 0 18px rgba(255, 209, 102, 0.25),
+      0 16px 32px rgba(0, 0, 0, 0.35);
+  }
+
+  .card:hover .thumb {
+    transform: scale(1.02);
+  }
+}
+
+.date {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.cardTitle {
+  margin-top: 8px;
+  font-size: clamp(20px, 4.5vw, 24px);
+}
+
+.tagline {
+  margin-top: 8px;
+  font-size: clamp(14px, 3.2vw, 15px);
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.icons {
+  margin-top: 16px;
+}
+
+.cta {
+  display: inline-block;
+  margin-top: 18px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--neon-accent);
+}
+
+.card:focus-visible {
+  outline: 3px solid var(--neon-accent);
+  outline-offset: 3px;
+}
+
+@media (max-width: 600px) {
+  .cardBody {
+    padding: 18px 18px 22px;
+  }
+}

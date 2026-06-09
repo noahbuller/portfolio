@@ -8,8 +8,10 @@ export interface SocialLink {
 
 export interface AerialCta {
   label: string;
-  href: string;
+  href?: string;
   external?: boolean;
+  /** Opens the About modal instead of navigating. */
+  action?: "about";
 }
 
 export interface CtaConfig {
@@ -20,7 +22,6 @@ export interface CtaConfig {
   resume: {
     label: string;
     href: string;
-    /** Filename used for the download (the `download` attribute value). */
     download: string;
   };
   contact: {
@@ -28,12 +29,9 @@ export interface CtaConfig {
     href: string;
   };
   social: SocialLink[];
-  /** Secondary CTAs carried by planes/boats across the sky and sea. */
   aerial: AerialCta[];
 }
 
-// Single source of truth for every CTA in the scene and the fixed nav.
-// Swap these placeholder values for real links before launch.
 export const ctas: CtaConfig = {
   hero: {
     label: "Noah Buller",
@@ -60,17 +58,14 @@ export const ctas: CtaConfig = {
       icon: "linkedin",
     },
   ],
-  // Carried by planes (and later boats). Placeholders until dedicated
-  // Projects/About destinations exist.
   aerial: [
     {
       label: "Projects",
-      href: "https://github.com/noahbuller",
-      external: true,
+      href: "/projects",
     },
     {
       label: "About",
-      href: "#about",
+      action: "about",
     },
   ],
 };

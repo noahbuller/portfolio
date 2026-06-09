@@ -1,33 +1,26 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { siteConfig } from "@/data/site";
+import { spaceGrotesk } from "@/lib/fonts";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
-  metadataBase: new URL("https://whoisnoahbuller.com"),
-  title: "Noah Buller — Software Engineer",
-  description:
-    "Portfolio of Noah Buller, software engineer. Take a drive through the city.",
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: siteConfig.title,
+    template: `%s — ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
   openGraph: {
-    title: "Noah Buller — Software Engineer",
-    description:
-      "Portfolio of Noah Buller, software engineer. Take a drive through the city.",
+    title: siteConfig.title,
+    description: siteConfig.ogDescription,
     type: "website",
+    url: siteConfig.url,
+    siteName: siteConfig.name,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Noah Buller — Software Engineer",
-    description:
-      "Portfolio of Noah Buller, software engineer. Take a drive through the city.",
+    title: siteConfig.title,
+    description: siteConfig.ogDescription,
   },
 };
 
@@ -37,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="en" className={spaceGrotesk.variable}>
       <body>{children}</body>
     </html>
   );

@@ -1,3 +1,7 @@
+"use client";
+
+import { useId } from "react";
+
 /**
  * Foreground street buildings with lit windows. Theme-aware via CSS custom
  * properties. Buildings are CONTIGUOUS across the full 2000px tile (no
@@ -32,6 +36,9 @@ const BUILDINGS: Building[] = [
 const GROUND = 540;
 
 export function ForegroundLayer() {
+  const uid = useId().replace(/:/g, "");
+  const windowsId = `${uid}-fgWindows`;
+  const windowsDimId = `${uid}-fgWindowsDim`;
   const win = { fill: "var(--window-glow)" };
 
   return (
@@ -44,10 +51,20 @@ export function ForegroundLayer() {
       style={{ display: "block" }}
     >
       <defs>
-        <pattern id="fgWindows" width="34" height="46" patternUnits="userSpaceOnUse">
+        <pattern
+          id={windowsId}
+          width="34"
+          height="46"
+          patternUnits="userSpaceOnUse"
+        >
           <rect x="9" y="12" width="16" height="22" rx="2" style={win} opacity={0.85} />
         </pattern>
-        <pattern id="fgWindowsDim" width="34" height="46" patternUnits="userSpaceOnUse">
+        <pattern
+          id={windowsDimId}
+          width="34"
+          height="46"
+          patternUnits="userSpaceOnUse"
+        >
           <rect x="9" y="12" width="16" height="22" rx="2" style={win} opacity={0.35} />
         </pattern>
       </defs>
@@ -58,7 +75,8 @@ export function ForegroundLayer() {
           b.tone === "shadow"
             ? "var(--building-shadow)"
             : "var(--building-mid)";
-        const winPattern = b.tone === "shadow" ? "url(#fgWindows)" : "url(#fgWindowsDim)";
+        const winPattern =
+          b.tone === "shadow" ? `url(#${windowsId})` : `url(#${windowsDimId})`;
         return (
           <g key={i}>
             <rect x={b.x} y={b.top} width={b.w} height={h} style={{ fill: toneFill }} />

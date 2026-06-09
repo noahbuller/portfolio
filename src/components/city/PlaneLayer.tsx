@@ -1,6 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useAboutOptional } from "@/components/about/AboutProvider";
+import { useDocumentVisibility } from "@/hooks/useDocumentVisibility";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { ctas } from "@/data/ctas";
 import { Plane } from "./Plane";
 import styles from "./PlaneLayer.module.css";
@@ -12,60 +15,90 @@ const MAX_PLANES = 2;
 interface PlaneInstance {
   id: number;
   label: string;
-  href: string;
+  href?: string;
   external: boolean;
+  action?: "about";
   accent: Accent;
   topVh: number;
   durationS: number;
 }
 
 function makePlane(id: number, seq: number): PlaneInstance {
-  const list = ctas.aerial;
-  const cta = list[seq % list.length];
+  const cta = ctas.aerial[seq % ctas.aerial.length];
   return {
     id,
     label: cta.label,
     href: cta.href,
     external: cta.external ?? false,
+    action: cta.action,
     accent: ACCENTS[seq % ACCENTS.length],
-    // Mid-sky corridor: below the hero title (~24vh) but above distant
-    // building tops (~48vh). Positions are relative to the sky layer, which
-    // itself starts below the fixed nav.
     topVh: 17 + Math.random() * 22,
     durationS: 20 + Math.random() * 6,
   };
 }
 
-/**
- * Spawns occasional planes towing flag-style banner CTAs across the upper sky.
- * Each banner is a real, focusable link cycling through `ctas.aerial`.
- * Skipped under reduced motion to keep the sky calm.
- */
 export function PlaneLayer() {
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const isVisible = useDocumentVisibility();
+  const about = useAboutOptional();
   const [planes, setPlanes] = useState<PlaneInstance[]>([]);
   const nextId = useRef(0);
   const seq = useRef(0);
 
   useEffect(() => {
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) return;
+    if (prefersReducedMotion || !isVisible) return;
 
     const timeouts: number[] = [];
+    let active = true;
+
     const spawn = () => {
+      if (!active || document.visibilityState !== "visible") return;
       setPlanes((prev) =>
         prev.length >= MAX_PLANES
           ? prev
           : [...prev, makePlane(nextId.current++, seq.current++)],
       );
-      timeouts.push(window.setTimeout(spawn, 12000 + Math.random() * 8000));
+      if (active) {
+        timeouts.push(window.setTimeout(spawn, 12000 + Math.random() * 8000));
+      }
     };
     timeouts.push(window.setTimeout(spawn, 2500));
 
-    return () => timeouts.forEach((t) => window.clearTimeout(t));
-  }, []);
+    return () => {
+      active = false;
+      timeouts.forEach((t) => window.clearTimeout(t));
+    };
+  }, [prefersReducedMotion, isVisible]);
 
   const remove = (id: number) =>
     setPlanes((prev) => prev.filter((p) => p.id !== id));
+
+  const renderBanner = (p: PlaneInstance) => {
+    if (p.action === "about") {
+      return (
+        <button
+          type="button"
+          className={`${styles.banner} font-display`}
+          aria-label={p.label}
+          onClick={() => about?.openAbout()}
+        >
+          {p.label}
+        </button>
+      );
+    }
+
+    return (
+      <a
+        className={`${styles.banner} font-display`}
+        href={p.href}
+        target={p.external ? "_blank" : undefined}
+        rel={p.external ? "noopener noreferrer" : undefined}
+        aria-label={p.label}
+      >
+        {p.label}
+      </a>
+    );
+  };
 
   return (
     <div className={styles.sky}>
@@ -79,15 +112,7 @@ export function PlaneLayer() {
           }}
         >
           <div className={styles.inner}>
-            <a
-              className={styles.banner}
-              href={p.href}
-              target={p.external ? "_blank" : undefined}
-              rel={p.external ? "noopener noreferrer" : undefined}
-              aria-label={p.label}
-            >
-              {p.label}
-            </a>
+            {renderBanner(p)}
             <span className={styles.rope} />
             <span className={styles.sprite}>
               <Plane />
