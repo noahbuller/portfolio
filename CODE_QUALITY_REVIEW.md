@@ -1,5 +1,7 @@
 # Code Quality Review
 
+> **Archived — 2026-06-09.** This document reflects an earlier dev snapshot. Many items below are resolved (nested anchors, reduced-motion hook, SVG IDs, CI, sub-pages, fonts). See `README.md` for current structure. Re-run `npm run lint && npm run build` before launch.
+
 Review date: 2026-06-07
 
 Scope: Next.js app structure, React runtime behavior, hydration risk, deploy readiness, and the city animation system. This review assumes the project is still in development and prioritizes launch-blocking issues over polish.

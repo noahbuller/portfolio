@@ -74,6 +74,12 @@
   background: rgba(245, 240, 232, 0.25);
 }
 
+.socialGroup {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
 .icon {
   display: inline-flex;
   align-items: center;

@@ -42,7 +42,7 @@ export function CityScene() {
           href="/experience"
           eyebrow="Career path"
           title="Experience"
-          subtitle="Internships & Lehigh"
+          subtitle="Internships & Education"
         />
       </div>
 

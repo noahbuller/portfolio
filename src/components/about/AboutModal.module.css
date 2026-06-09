@@ -101,6 +101,93 @@
   gap: 12px;
 }
 
+.roleList {
+  gap: 16px;
+}
+
+.roleItem {
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 209, 102, 0.12);
+}
+
+.roleItem:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.roleMeta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 16px;
+  margin-bottom: 4px;
+}
+
+.roleCompany {
+  color: var(--text-light);
+  font-size: 15px;
+}
+
+.roleDates {
+  font-size: 12px;
+  color: var(--neon-cyan);
+  white-space: nowrap;
+}
+
+.roleDetail {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.roleSummary {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-light);
+}
+
+.educationDegree {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--text-light);
+  margin-bottom: 6px;
+}
+
+.educationMeta,
+.educationGpa {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.honors {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.honors li {
+  position: relative;
+  padding-left: 16px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.honors li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--neon-cyan);
+}
+
 .section li,
 .section p {
   font-size: 14px;

@@ -55,6 +55,11 @@ export const projects: Project[] = [
         href: "https://lockerroom-kappa.vercel.app",
       },
     ],
+    preview: {
+      src: "/projects/lockerroom-preview.png",
+      alt: "LockerRoom MLB scores dashboard preview",
+      href: "https://lockerroom-kappa.vercel.app",
+    },
   },
   {
     slug: "headlines-and-sidelines",

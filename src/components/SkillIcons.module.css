@@ -6,5 +6,7 @@
 .img {
   display: block;
   max-width: 100%;
+  width: auto;
   height: auto;
+  min-height: 40px;
 }

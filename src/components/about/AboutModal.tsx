@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { aboutSkillIcons } from "@/data/projects";
-import { experienceRoles } from "@/data/experience";
+import { education, experienceRoles } from "@/data/experience";
 import { SkillIcons } from "@/components/SkillIcons";
 import { useAbout } from "./AboutProvider";
 import styles from "./AboutModal.module.css";
@@ -56,18 +56,24 @@ export function AboutModal() {
         </header>
 
         <p className={styles.bio}>
-          Lehigh CS + Business graduate (GPA 3.62) with startup internship
-          experience building Go backend services, Next.js apps, and AWS
+          Lehigh CS + Business graduate (GPA {education.gpa}) with startup
+          internship experience building Go backend services, Next.js apps, and AWS
           deployments.
         </p>
 
         <section className={styles.section}>
           <h3 className="section-eyebrow">Experience</h3>
-          <ul>
+          <ul className={styles.roleList}>
             {experienceRoles.map((role) => (
-              <li key={role.id}>
-                <strong>{role.company}</strong> — {role.title} ({role.dates}):{" "}
-                {role.summary}
+              <li key={role.id} className={styles.roleItem}>
+                <div className={styles.roleMeta}>
+                  <strong className={styles.roleCompany}>{role.company}</strong>
+                  <span className={styles.roleDates}>{role.dates}</span>
+                </div>
+                <p className={styles.roleDetail}>
+                  {role.title} · {role.location}
+                </p>
+                <p className={styles.roleSummary}>{role.summary}</p>
               </li>
             ))}
           </ul>
@@ -78,9 +84,16 @@ export function AboutModal() {
 
         <section className={styles.section}>
           <h3 className="section-eyebrow">Education</h3>
-          <p>
-            B.S. Computer Science and Business, Lehigh University 
+          <p className={styles.educationDegree}>{education.degree}</p>
+          <p className={styles.educationMeta}>
+            {education.school} · {education.dates}
           </p>
+          <p className={styles.educationGpa}>GPA {education.gpa}</p>
+          <ul className={styles.honors}>
+            {education.honors.map((honor) => (
+              <li key={honor}>{honor}</li>
+            ))}
+          </ul>
         </section>
 
         <section className={styles.section}>

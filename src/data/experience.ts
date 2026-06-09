@@ -90,6 +90,7 @@ export const courseGroups: CourseGroup[] = [
 
 export const leadership = {
   organization: "Lehigh University Brazilian Jiu-Jitsu Club",
+  shortName: "Lehigh BJJ Club",
   role: "Secretary and Cofounder",
   dates: "March 2024 – May 2026",
   summary:

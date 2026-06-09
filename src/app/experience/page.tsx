@@ -25,7 +25,11 @@ export default function ExperiencePage() {
         lead="Two startup internships and a CS + Business degree from Lehigh."
       >
         <div className={styles.profileSkills}>
-          <SkillIcons icons={profileSkillIcons} label="Noah Buller technical skills" />
+          <SkillIcons
+            icons={profileSkillIcons}
+            label="Noah Buller technical skills"
+            lazy={false}
+          />
         </div>
       </PageHeader>
 
@@ -105,7 +109,7 @@ export default function ExperiencePage() {
         <article className={`glass-panel ${styles.leadershipCard}`}>
           <div className={styles.roleHeader}>
             <div>
-              <h3 className={`${styles.roleCompany} font-display`}>{leadership.organization}</h3>
+              <h3 className={`${styles.roleCompany} font-display`}>{leadership.shortName}</h3>
               <p className={styles.roleTitle}>{leadership.role}</p>
             </div>
             <p className={styles.roleDates}>{leadership.dates}</p>

@@ -43,18 +43,20 @@ export function SiteNav({ current }: SiteNavProps) {
           {ctas.contact.label}
         </a>
         <span className={styles.divider} aria-hidden="true" />
-        {ctas.social.map((s) => (
-          <a
-            key={s.label}
-            className={styles.icon}
-            href={s.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={s.label}
-          >
-            <SocialSvg name={s.icon} />
-          </a>
-        ))}
+        <div className={styles.socialGroup}>
+          {ctas.social.map((s) => (
+            <a
+              key={s.label}
+              className={styles.icon}
+              href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={s.label}
+            >
+              <SocialSvg name={s.icon} />
+            </a>
+          ))}
+        </div>
       </nav>
     </header>
   );

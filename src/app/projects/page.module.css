@@ -11,21 +11,6 @@
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.thumbWrap {
-  overflow: hidden;
-  border-bottom: 1px solid rgba(255, 209, 102, 0.15);
-}
-
-.thumb {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  object-position: top center;
-  transition: transform 0.35s ease;
-}
-
 .cardBody {
   padding: 22px 26px 26px;
 }
@@ -39,7 +24,7 @@
       0 16px 32px rgba(0, 0, 0, 0.35);
   }
 
-  .card:hover .thumb {
+  .card:hover :global(img) {
     transform: scale(1.02);
   }
 }
