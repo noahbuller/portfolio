@@ -27,11 +27,11 @@ export const experienceRoles: ExperienceRole[] = [
     summary:
       "Full-stack internship building Go AWS Lambda services, PostgreSQL search tooling, and API validation for production user flows.",
     bullets: [
-      "Developed a Go-based AWS Lambda microservice to validate 12 API keys twice daily, adding retry logic and DynamoDB failure logging to improve reliability.",
-      "Engineered a dynamic search-query builder supporting 8 user-facing inputs across 7 PostgreSQL tables (~5,000–6,000 rows), using indexed queries and cross-table checks to increase search speed and reduce invalid responses.",
-      "Integrated Zod-based server-side validation across 8 user-input API routes to enforce runtime schema checks and improve backend robustness.",
+      "Developed a serverless microservice in Go on AWS Lambda to validate 12 API keys twice daily, adding retry logic and DynamoDB failure logging to improve reliability",
+      "Engineered a dynamic search-query builder supporting 8 user-facing inputs across 7 PostgreSQL tables, using indexed queries and cross-table checks to measurably reduce invalid query responses and improve search response time",
+      "Integrated Zod-based server-side validation across 8 user-input API routes to enforce runtime schema checks and improve backend robustness",
     ],
-    skillIcons: "go,aws,postgres,dynamodb,ts",
+    skillIcons: "ts,nextjs,aws,postgres,go",
   },
   {
     id: "certifydoc",
@@ -42,10 +42,9 @@ export const experienceRoles: ExperienceRole[] = [
     summary:
       "Full-stack internship on a Next.js/React credential platform, shipping core screens and hardening authentication flows.",
     bullets: [
-      "Collaborated with a team of 5 interns to build a Next.js and React web application across 3 core screens for media upload and account workflows.",
-      "Reimplemented hashed credential storage and secure session handling to preserve a secure authentication flow across frontend and backend systems.",
-    ],
-    skillIcons: "nextjs,react,ts,github",
+      "Co-built a React web app with 4 peers, delivering 3 core user-facing screens on time by integrating with existing APIs and preserving secure auth flows",
+      "Reimplemented hashed credential storage and secure session handling in the new application to preserve a secure authentication flow across frontend and backend systems",    ],
+    skillIcons: "react,ts,postman,github",
   },
 ];
 
@@ -54,10 +53,8 @@ export const education = {
   degree: "Bachelor of Science in Computer Science and Business",
   gpa: "3.62",
   dates: "August 2022 – May 2026",
-  summary:
-    "Dual-degree program combining systems fundamentals, software engineering practice, and business application design.",
   honors: [
-    "Member, Upsilon Pi Epsilon — Honors Society for Computer and Information Disciplines",
+    "Member, Upsilon Pi Epsilon Honors Society",
   ],
 };
 
@@ -67,23 +64,24 @@ export const profileSkillIcons =
 
 export const courseGroups: CourseGroup[] = [
   {
-    label: "Computer science core",
+    label: "Computer Science",
     skillIcons: "java,python,ts,linux,docker",
     courses: [
       "Discrete Structures & Algorithms",
       "Operating System Design",
       "Database Systems",
       "Software Engineering Principles",
-      "Computer Architecture",
       "Web Systems Programming",
     ],
   },
   {
-    label: "Business & communication",
+    label: "Business",
     courses: [
       "Business Application Design",
       "Business Communications",
-      "Accounting",
+      "Managerial Accounting",
+      "Finance",
+      "Strategic Mangement in a Global Enviornment"
     ],
   },
 ];
@@ -96,7 +94,7 @@ export const leadership = {
   summary:
     "Cofounded Lehigh's first BJJ club and grew membership from zero to 200+ through outreach, events, and consistent weekly coordination.",
   bullets: [
-    "Helped found the club and grew GroupMe membership to 200+, with peak event attendance of 65 members.",
+    "Cofounded the club and grew GroupMe membership to 200+, with peak event attendance of 65 members.",
     "Coordinated weekly reminders and biweekly events, helping run over 90% of practices and organize meetings with officers and coaches.",
   ],
 };

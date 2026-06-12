@@ -78,7 +78,6 @@ export default function ExperiencePage() {
               <li key={honor}>{honor}</li>
             ))}
           </ul>
-          <p className={styles.roleSummary}>{education.summary}</p>
         </article>
       </PageSection>
 
@@ -87,6 +86,11 @@ export default function ExperiencePage() {
           {courseGroups.map((group) => (
             <article key={group.label} className={`glass-panel ${styles.courseGroup}`}>
               <h3 className={styles.courseLabel}>{group.label}</h3>
+              <ul className={styles.bullets}>
+                {group.courses.map((course) => (
+                  <li key={course}>{course}</li>
+                ))}
+              </ul>
               {group.skillIcons && (
                 <div className={styles.courseSkillIcons}>
                   <SkillIcons
@@ -95,11 +99,6 @@ export default function ExperiencePage() {
                   />
                 </div>
               )}
-              <ul className={styles.bullets}>
-                {group.courses.map((course) => (
-                  <li key={course}>{course}</li>
-                ))}
-              </ul>
             </article>
           ))}
         </div>
