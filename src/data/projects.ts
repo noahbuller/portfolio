@@ -42,15 +42,18 @@ export const projects: Project[] = [
     problem:
       "Sports fans want a single place to follow live games and talk with others in real time, without juggling separate score apps and chat tools.",
     approach:
-      "Built a Next.js sports platform with Supabase realtime chat, authenticated room messaging, and live sports data routes for scores and summaries with semantic HTML to improve user accessibility.",
+      "Built authenticated live game rooms on Next.js with Supabase realtime messaging, API routes for sports data, and room-specific event pages that combine scores, recent plays, and chat.",
     outcomes: [
       "Shipped end-to-end auth callback handling and room message APIs.",
-      "Architected backend API layer for real-time room messaging, handling auth callbacks and live sports event data to support concurrent user sessions.",
-      "Designed live game rooms combining recent plays, authenticated chat, and event context, enabling seamless real-time discussion for concurrent users during live events",
+      "Designed live game rooms that merge event context, recent plays, and realtime chat.",
+      "Integrated live sports data routes for scores and summaries alongside chat.",
     ],
-    skillIcons: "nextjs,react,ts,supabase,github",
+    skillIcons: "nextjs,react,ts,supabase,postgres,github",
     links: [
-
+      {
+        label: "Live site",
+        href: "https://lockerroom-kappa.vercel.app",
+      },
     ],
     preview: {
       src: "/projects/lockerroom-preview.png",
@@ -75,8 +78,12 @@ export const projects: Project[] = [
       "Integrated ESPN scores and standings for NBA, NHL, NFL, MLB, and EPL with client-side caching and error boundaries.",
       "Automated linting, type-checking, and zero-downtime deployment through GitHub Actions.",
     ],
-    skillIcons: "ts,react,nodejs,github,vercel",
+    skillIcons: "ts,react,nodejs,github,vercel,postman",
     links: [
+      {
+        label: "Live site",
+        href: "https://headlinesandsidelines.com",
+      },
     ],
     preview: {
       src: "/projects/headlines-preview.png",

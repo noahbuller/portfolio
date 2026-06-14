@@ -12,10 +12,12 @@
 .plane {
   position: absolute;
   left: 0;
+  transform: translateX(-360px);
   will-change: transform;
   animation-name: fly;
   animation-timing-function: linear;
   animation-iteration-count: 1;
+  animation-fill-mode: both;
 }
 
 .inner {
@@ -96,6 +98,18 @@
     box-shadow:
       0 0 22px var(--accent-glow, rgba(6, 214, 160, 0.65)),
       0 12px 24px rgba(0, 0, 0, 0.5);
+  }
+}
+
+.parked {
+  animation: none;
+  transform: none;
+  left: var(--parked-left, 40vw);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plane {
+    animation: none;
   }
 }
 

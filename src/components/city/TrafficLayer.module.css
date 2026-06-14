@@ -9,10 +9,12 @@
 .car {
   position: absolute;
   left: 0;
+  transform: translateX(-200px);
   will-change: transform;
   animation-name: drive;
   animation-timing-function: linear;
   animation-iteration-count: 1;
+  animation-fill-mode: both;
 }
 
 .inner {

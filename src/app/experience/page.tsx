@@ -6,12 +6,13 @@ import {
   education,
   experienceRoles,
   leadership,
-  profileSkillIcons,
 } from "@/data/experience";
+import { siteConfig } from "@/data/site";
 import styles from "./page.module.css";
 
 export const metadata = {
   title: "Experience",
+  description: `Internships, Lehigh University education, and coursework — ${siteConfig.name}, software engineer.`,
 };
 
 export default function ExperiencePage() {
@@ -21,8 +22,7 @@ export default function ExperiencePage() {
         eyebrow="Background"
         title="Experience"
         lead="Software engineering internships and a Computer Science + Business degree from Lehigh University"
-      >
-      </PageHeader>
+      />
 
       <PageSection id="internships-heading" title="Internships">
         <ul className={styles.roleList}>
@@ -69,6 +69,7 @@ export default function ExperiencePage() {
               <li key={honor}>{honor}</li>
             ))}
           </ul>
+          <p className={styles.roleSummary}>{education.summary}</p>
         </article>
       </PageSection>
 
@@ -77,11 +78,6 @@ export default function ExperiencePage() {
           {courseGroups.map((group) => (
             <article key={group.label} className={`glass-panel ${styles.courseGroup}`}>
               <h3 className={styles.courseLabel}>{group.label}</h3>
-              <ul className={styles.bullets}>
-                {group.courses.map((course) => (
-                  <li key={course}>{course}</li>
-                ))}
-              </ul>
               {group.skillIcons && (
                 <div className={styles.courseSkillIcons}>
                   <SkillIcons
@@ -90,6 +86,11 @@ export default function ExperiencePage() {
                   />
                 </div>
               )}
+              <ul className={styles.bullets}>
+                {group.courses.map((course) => (
+                  <li key={course}>{course}</li>
+                ))}
+              </ul>
             </article>
           ))}
         </div>

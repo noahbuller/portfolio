@@ -37,6 +37,16 @@ function makePlane(id: number, seq: number): PlaneInstance {
   };
 }
 
+const PARKED_PLANE: PlaneInstance = {
+  id: -1,
+  label: ctas.aerial[0].label,
+  href: ctas.aerial[0].href,
+  external: ctas.aerial[0].external ?? false,
+  accent: "cyan",
+  topVh: 24,
+  durationS: 0,
+};
+
 export function PlaneLayer() {
   const prefersReducedMotion = usePrefersReducedMotion();
   const isVisible = useDocumentVisibility();
@@ -100,15 +110,21 @@ export function PlaneLayer() {
     );
   };
 
+  const displayPlanes = prefersReducedMotion ? [PARKED_PLANE] : planes;
+
   return (
     <div className={styles.sky}>
-      {planes.map((p) => (
+      {displayPlanes.map((p) => (
         <div
           key={p.id}
-          className={`${styles.plane} ${styles[p.accent]}`}
-          style={{ top: `${p.topVh}vh`, animationDuration: `${p.durationS}s` }}
+          className={`${styles.plane} ${styles[p.accent]} ${prefersReducedMotion ? styles.parked : ""}`}
+          style={{
+            top: `${p.topVh}vh`,
+            animationDuration: prefersReducedMotion ? undefined : `${p.durationS}s`,
+            "--parked-left": prefersReducedMotion ? "42vw" : undefined,
+          } as React.CSSProperties}
           onAnimationEnd={(e) => {
-            if (e.animationName.includes("fly")) remove(p.id);
+            if (!prefersReducedMotion && e.animationName.includes("fly")) remove(p.id);
           }}
         >
           <div className={styles.inner}>

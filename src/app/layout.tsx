@@ -12,13 +12,15 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   openGraph: {
     title: siteConfig.title,
+    description: siteConfig.ogDescription,
     type: "website",
     url: siteConfig.url,
     siteName: siteConfig.name,
   },
   twitter: {
     card: "summary_large_image",
-    title: siteConfig.title
+    title: siteConfig.title,
+    description: siteConfig.ogDescription,
   },
 };
 
