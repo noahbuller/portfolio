@@ -17,7 +17,7 @@ export default function ProjectsPage() {
       <PageHeader
         eyebrow="Portfolio"
         title="Projects"
-        lead="Selected work from capstone and personal builds."
+        lead="Selected work from capstone and personal projects."
       />
 
       <ul className={styles.grid}>

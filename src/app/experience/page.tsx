@@ -8,12 +8,10 @@ import {
   leadership,
   profileSkillIcons,
 } from "@/data/experience";
-import { siteConfig } from "@/data/site";
 import styles from "./page.module.css";
 
 export const metadata = {
   title: "Experience",
-  description: `Internships, Lehigh University education, and coursework — ${siteConfig.name}, software engineer.`,
 };
 
 export default function ExperiencePage() {
@@ -22,15 +20,8 @@ export default function ExperiencePage() {
       <PageHeader
         eyebrow="Background"
         title="Experience"
-        lead="Two startup internships and a CS + Business degree from Lehigh."
+        lead="Software engineering internships and a Computer Science + Business degree from Lehigh University"
       >
-        <div className={styles.profileSkills}>
-          <SkillIcons
-            icons={profileSkillIcons}
-            label="Noah Buller technical skills"
-            lazy={false}
-          />
-        </div>
       </PageHeader>
 
       <PageSection id="internships-heading" title="Internships">
