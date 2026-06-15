@@ -8,7 +8,7 @@ import styles from "./page.module.css";
 
 export const metadata = {
   title: "Projects",
-  description: `Selected software projects by ${siteConfig.name} — full-stack builds in Next.js, TypeScript, and AWS.`,
+  description: `Selected software projects by ${siteConfig.name} in Next.js, React, and AWS.`,
 };
 
 export default function ProjectsPage() {

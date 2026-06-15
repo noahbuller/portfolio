@@ -56,9 +56,7 @@ export function AboutModal() {
         </header>
 
         <p className={styles.bio}>
-          Lehigh CS + Business graduate (GPA {education.gpa}) with startup
-          internship experience building Go backend services, Next.js apps, and AWS
-          deployments.
+          Lehigh CS + Business graduate with full-stack internship experience in Next.js, React, and AWS.
         </p>
 
         <section className={styles.section}>
@@ -84,11 +82,10 @@ export function AboutModal() {
 
         <section className={styles.section}>
           <h3 className="section-eyebrow">Education</h3>
-          <p className={styles.educationDegree}>{education.degree}</p>
           <p className={styles.educationMeta}>
-            {education.school} · {education.dates}
+            {education.school}
           </p>
-          <p className={styles.educationGpa}>GPA {education.gpa}</p>
+          <p className={styles.educationDegree}>{education.degree}</p>
           <ul className={styles.honors}>
             {education.honors.map((honor) => (
               <li key={honor}>{honor}</li>

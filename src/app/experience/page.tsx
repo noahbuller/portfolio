@@ -12,7 +12,7 @@ import styles from "./page.module.css";
 
 export const metadata = {
   title: "Experience",
-  description: `Internships, Lehigh University education, and coursework — ${siteConfig.name}, software engineer.`,
+  description: `Internships, Education, and Coursework`,
 };
 
 export default function ExperiencePage() {

@@ -57,7 +57,8 @@ export const education = {
   summary:
     "Dual-degree program combining systems fundamentals, software engineering practice, and business application design.",
   honors: [
-    "Member, Upsilon Pi Epsilon — Honors Society for Computer and Information Disciplines",
+    "Upsilon Pi Epsilon Honor Society",
+    "Dean's List (5 Semesters)",
   ],
 };
 
@@ -79,7 +80,9 @@ export const courseGroups: CourseGroup[] = [
     courses: [
       "Business Application Design",
       "Business Communications",
-      "Accounting",
+      "Manegerial Accounting",
+      "Princples of Finance",
+      "Strategic Management in a Global Enviornment"
     ],
   },
 ];
