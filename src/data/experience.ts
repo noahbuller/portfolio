@@ -31,7 +31,7 @@ export const experienceRoles: ExperienceRole[] = [
       "Engineered a dynamic search-query builder supporting 8 user-facing inputs across 7 PostgreSQL tables (~5,000–6,000 rows), using indexed queries and cross-table checks to increase search speed and reduce invalid responses.",
       "Integrated Zod-based server-side validation across 8 user-input API routes to enforce runtime schema checks and improve backend robustness.",
     ],
-    skillIcons: "go,aws,postgres,dynamodb,ts",
+    skillIcons: "ts,aws,postgres,go,lambda",
   },
   {
     id: "certifydoc",

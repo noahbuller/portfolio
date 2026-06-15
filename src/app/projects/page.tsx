@@ -35,7 +35,7 @@ export default function ProjectsPage() {
                     label={`${project.title} tech stack`}
                   />
                 </div>
-                <span className={styles.cta}>View case study →</span>
+                <span className={styles.cta}>Learn more →</span>
               </div>
             </Link>
           </li>

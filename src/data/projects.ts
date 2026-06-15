@@ -72,10 +72,10 @@ export const projects: Project[] = [
     problem:
       "Daily sports coverage needs both editorial voice and reliable live scores across multiple leagues, with a workflow that supports consistent publishing.",
     approach:
-      "Combined a Markdown CMS and Node.js publishing pipeline with a React frontend that pulls ESPN data through cached API integrations and ships via GitHub Actions to Vercel.",
+      "Developed a full-stack sports news platform with React/TypeScript, FastAPI, and PostgreSQL, supporting 56+ published stories and a JWT-secured admin portal for content management.",
     outcomes: [
       "Published 2 sports articles per day throughout February 2026.",
-      "Integrated ESPN scores and standings for NBA, NHL, NFL, MLB, and EPL with client-side caching and error boundaries.",
+      "Implemented ESPN scores and standings for NBA, NHL, NFL, MLB, and EPL using client-side caching and error boundaries.",
       "Automated linting, type-checking, and zero-downtime deployment through GitHub Actions.",
     ],
     skillIcons: "ts,react,nodejs,github,vercel,postman",
@@ -102,7 +102,7 @@ export const projects: Project[] = [
     problem:
       "The capstone prototype ran locally behind a reverse proxy and needed production-grade cloud infrastructure while connecting multiple AI services to secured personal data payloads.",
     approach:
-      "Integrated four AI services for querying blockchain-secured iQubes, then owned the AWS migration—EC2, DNS, Route 53, Secrets Manager, and Amplify—to move from local prototype to stable production.",
+      "Engineered integrations with OpenAI ChatGPT and DeepSeek to enable AI-driven querying and interaction with blockchain-secured personal data payloads (iQubes).",
     outcomes: [
       "Enabled AI-driven querying across four integrated AI services and iQube payloads.",
       "Migrated from reverse-proxied local prototype to production on AWS.",
