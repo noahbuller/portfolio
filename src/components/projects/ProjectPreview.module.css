@@ -30,7 +30,7 @@
   font-weight: 600;
   color: var(--text-light);
   background: rgba(13, 59, 102, 0.88);
-  border: 1px solid var(--neon-cyan);
+  border: 1px solid var(--foreground-sand);
   opacity: 0;
   transform: translateY(6px);
   transition:
@@ -46,7 +46,7 @@
 }
 
 .frame:focus-visible {
-  outline: 2px solid var(--neon-accent);
+  outline: 2px solid var(--gold);
   outline-offset: 4px;
 }
 

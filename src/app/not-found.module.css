@@ -17,7 +17,7 @@
   font-size: 13px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--neon-cyan);
+  color: var(--foreground-sand);
   font-weight: 600;
 }
 
@@ -55,7 +55,7 @@
 
 .primary {
   color: var(--text-light);
-  border: 2px solid var(--neon-accent);
+  border: 2px solid var(--gold);
   background: rgba(255, 209, 102, 0.12);
 }
 
@@ -67,7 +67,7 @@
 
 .primary:focus-visible,
 .secondary:focus-visible {
-  outline: 2px solid var(--neon-accent);
+  outline: 2px solid var(--gold);
   outline-offset: 3px;
 }
 

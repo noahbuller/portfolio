@@ -9,7 +9,7 @@
   margin-bottom: 24px;
   font-size: 14px;
   font-weight: 500;
-  color: var(--neon-accent);
+  color: var(--gold);
 }
 
 .header {
@@ -34,7 +34,7 @@
   font-size: 12px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--neon-cyan);
+  color: var(--foreground-sand);
   font-weight: 600;
 }
 
@@ -67,15 +67,15 @@
   font-size: 14px;
   font-weight: 600;
   color: var(--text-light);
-  border: 2px solid var(--neon-cyan);
-  background: rgba(6, 214, 160, 0.12);
+  border: 2px solid var(--foreground-sand);
+  background: rgba(244, 217, 160, 0.12);
   transition: background 0.2s ease, box-shadow 0.2s ease;
 }
 
 @media (hover: hover) and (pointer: fine) {
   .external:hover {
-    background: rgba(6, 214, 160, 0.2);
-    box-shadow: 0 0 16px rgba(6, 214, 160, 0.35);
+    background: rgba(244, 217, 160, 0.2);
+    box-shadow: 0 0 16px rgba(244, 217, 160, 0.35);
   }
 }
 
@@ -113,12 +113,12 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--neon-cyan);
+  background: var(--window-glow);
 }
 
 .back:focus-visible,
 .external:focus-visible {
-  outline: 2px solid var(--neon-accent);
+  outline: 2px solid var(--gold);
   outline-offset: 3px;
 }
 

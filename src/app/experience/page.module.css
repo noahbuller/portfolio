@@ -42,7 +42,7 @@
 .roleDates {
   font-size: 13px;
   letter-spacing: 0.04em;
-  color: var(--neon-cyan);
+  color: var(--foreground-sand);
   white-space: nowrap;
 }
 
@@ -84,7 +84,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--neon-cyan);
+  background: var(--window-glow);
 }
 
 .courseGrid {

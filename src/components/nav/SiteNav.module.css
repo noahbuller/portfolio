@@ -18,7 +18,7 @@
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.04em;
-  color: var(--neon-accent);
+  color: var(--gold);
   min-height: var(--touch-min);
   display: inline-flex;
   align-items: center;
@@ -56,7 +56,7 @@
   bottom: 6px;
   width: 100%;
   height: 2px;
-  background: var(--neon-accent);
+  background: var(--gold);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.2s ease;
@@ -95,7 +95,7 @@
   }
 
   .icon:hover {
-    color: var(--neon-accent);
+    color: var(--gold);
     transform: translateY(-2px);
   }
 }
@@ -103,7 +103,7 @@
 .link:focus-visible,
 .linkButton:focus-visible,
 .icon:focus-visible {
-  outline: 2px solid var(--neon-accent);
+  outline: 2px solid var(--gold);
   outline-offset: 4px;
   border-radius: 4px;
 }

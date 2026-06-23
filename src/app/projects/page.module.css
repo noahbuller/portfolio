@@ -18,7 +18,7 @@
 @media (hover: hover) and (pointer: fine) {
   .card:hover {
     transform: translateY(-4px);
-    border-color: var(--neon-accent);
+    border-color: var(--gold);
     box-shadow:
       0 0 18px rgba(255, 209, 102, 0.25),
       0 16px 32px rgba(0, 0, 0, 0.35);
@@ -57,11 +57,11 @@
   margin-top: 18px;
   font-size: 13px;
   font-weight: 600;
-  color: var(--neon-accent);
+  color: var(--gold);
 }
 
 .card:focus-visible {
-  outline: 3px solid var(--neon-accent);
+  outline: 3px solid var(--gold);
   outline-offset: 3px;
 }
 
