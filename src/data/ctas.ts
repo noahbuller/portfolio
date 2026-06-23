@@ -6,12 +6,14 @@ export interface SocialLink {
   icon: SocialIcon;
 }
 
+export type OverlayAction = "about" | "projects" | "experience";
+
 export interface AerialCta {
   label: string;
   href?: string;
   external?: boolean;
-  /** Opens the About modal instead of navigating. */
-  action?: "about";
+  /** Opens an in-app overlay instead of navigating. */
+  action?: OverlayAction;
 }
 
 export interface CtaConfig {
@@ -61,7 +63,7 @@ export const ctas: CtaConfig = {
   aerial: [
     {
       label: "Projects",
-      href: "/projects",
+      action: "projects",
     },
     {
       label: "About",

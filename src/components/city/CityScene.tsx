@@ -37,9 +37,10 @@ export function CityScene() {
       <div className={`${styles.slot} ${styles.slotElevated}`} style={{ left: 880 }}>
         <Billboard
           decorative={decorative}
+          mode="action"
+          action="experience"
           variant="lime"
           mount="building"
-          href="/experience"
           eyebrow="Career path"
           title="Experience"
           subtitle="Internships & Education"

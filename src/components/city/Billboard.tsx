@@ -1,6 +1,8 @@
 "use client";
 
 import { ReactNode, useEffect, useRef, useState } from "react";
+import { useOverlayOptional } from "@/components/overlays/OverlayProvider";
+import type { OverlayAction } from "@/data/ctas";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import styles from "./Billboard.module.css";
 
@@ -26,12 +28,17 @@ interface BillboardLinkProps extends BillboardBaseProps {
   external?: boolean;
 }
 
+interface BillboardActionProps extends BillboardBaseProps {
+  mode: "action";
+  action: OverlayAction;
+}
+
 interface BillboardGroupProps extends BillboardBaseProps {
   /** Non-anchor sign with separate child links (e.g. social chips). */
   mode: "group";
 }
 
-type BillboardProps = BillboardLinkProps | BillboardGroupProps;
+type BillboardProps = BillboardLinkProps | BillboardActionProps | BillboardGroupProps;
 
 function BillboardFrame({
   eyebrow,
@@ -54,8 +61,8 @@ function BillboardFrame({
  * - "ground": raised on two tall poles planted on the road
  * - "building": mounted atop a small lit building block
  *
- * Use `mode="link"` (default) for a single CTA anchor, or `mode="group"` when
- * the sign contains separate child links.
+ * Use `mode="link"` (default) for a single CTA anchor, `mode="action"` for
+ * in-app overlays, or `mode="group"` when the sign contains separate child links.
  */
 export function Billboard(props: BillboardProps) {
   const {
@@ -68,9 +75,11 @@ export function Billboard(props: BillboardProps) {
     children,
   } = props;
 
+  const overlay = useOverlayOptional();
   const isGroup = props.mode === "group";
+  const isAction = props.mode === "action";
   const observeTarget = useRef<HTMLElement | null>(null);
-  const setObserveTarget = (el: HTMLDivElement | HTMLAnchorElement | null) => {
+  const setObserveTarget = (el: HTMLDivElement | HTMLAnchorElement | HTMLButtonElement | null) => {
     observeTarget.current = el;
   };
   const prefersReducedMotion = usePrefersReducedMotion();
@@ -93,6 +102,15 @@ export function Billboard(props: BillboardProps) {
 
   const boardClassName = `${styles.board} ${styles[variant]} ${inView ? styles.inView : ""}`;
 
+  const runAction = () => {
+    if (!overlay) return;
+    if (props.mode === "action") {
+      if (props.action === "about") overlay.openAbout();
+      if (props.action === "projects") overlay.openProjects();
+      if (props.action === "experience") overlay.openExperience();
+    }
+  };
+
   return (
     <div className={styles.mount}>
       {isGroup ? (
@@ -105,6 +123,19 @@ export function Billboard(props: BillboardProps) {
             {children && <span className={styles.extra}>{children}</span>}
           </BillboardFrame>
         </div>
+      ) : isAction ? (
+        <button
+          ref={setObserveTarget}
+          type="button"
+          className={boardClassName}
+          onClick={runAction}
+          aria-hidden={decorative || undefined}
+          tabIndex={decorative ? -1 : undefined}
+        >
+          <BillboardFrame eyebrow={eyebrow} title={title} subtitle={subtitle}>
+            {children && <span className={styles.extra}>{children}</span>}
+          </BillboardFrame>
+        </button>
       ) : (
         <a
           ref={setObserveTarget}

@@ -1,9 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { ctas } from "@/data/ctas";
 import { SocialSvg } from "@/components/icons";
-import { useAboutOptional } from "@/components/about/AboutProvider";
+import { useOverlay } from "@/components/overlays/OverlayProvider";
 import styles from "./FixedNav.module.css";
 
 /**
@@ -11,26 +10,44 @@ import styles from "./FixedNav.module.css";
  * while the city scrolls behind it.
  */
 export function FixedNav() {
-  const about = useAboutOptional();
+  const { view, openAbout, openProjects, openExperience, closeOverlay } = useOverlay();
 
   return (
     <header className={styles.nav}>
-      <Link className={`${styles.brand} font-display`} href="/">
+      <button
+        type="button"
+        className={`${styles.brand} font-display`}
+        onClick={closeOverlay}
+        aria-current={view === null ? "page" : undefined}
+      >
         {ctas.hero.label}
-      </Link>
+      </button>
 
       <nav className={styles.links} aria-label="Primary">
-        <Link className={styles.link} href="/projects">
+        <button
+          type="button"
+          className={styles.linkButton}
+          onClick={openProjects}
+          aria-current={view === "projects" || (typeof view === "object" && view?.type === "project") ? "page" : undefined}
+        >
           Projects
-        </Link>
-        <Link className={styles.link} href="/experience">
+        </button>
+        <button
+          type="button"
+          className={styles.linkButton}
+          onClick={openExperience}
+          aria-current={view === "experience" ? "page" : undefined}
+        >
           Experience
-        </Link>
-        {about ? (
-          <button type="button" className={styles.linkButton} onClick={about.openAbout}>
-            About
-          </button>
-        ) : null}
+        </button>
+        <button
+          type="button"
+          className={styles.linkButton}
+          onClick={openAbout}
+          aria-current={view === "about" ? "page" : undefined}
+        >
+          About
+        </button>
         <a className={styles.link} href={ctas.resume.href} download={ctas.resume.download}>
           {ctas.resume.label}
         </a>

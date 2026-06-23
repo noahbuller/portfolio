@@ -1,27 +1,34 @@
+"use client";
+
 import { PageHeader } from "@/components/layout/PageHeader";
 import { PageSection } from "@/components/layout/PageSection";
 import { SkillIcons } from "@/components/SkillIcons";
+import { OverlayShell } from "@/components/overlays/OverlayShell";
+import { useOverlay } from "@/components/overlays/OverlayProvider";
 import {
   courseGroups,
   education,
   experienceRoles,
   leadership,
 } from "@/data/experience";
-import { siteConfig } from "@/data/site";
-import styles from "./page.module.css";
+import styles from "./experience.module.css";
 
-export const metadata = {
-  title: "Experience",
-  description: `Internships, Education, and Coursework`,
-};
+export function ExperienceOverlay() {
+  const { view, closeOverlay } = useOverlay();
+  const isOpen = view === "experience";
 
-export default function ExperiencePage() {
   return (
-    <>
+    <OverlayShell
+      isOpen={isOpen}
+      onClose={closeOverlay}
+      titleId="experience-overlay-title"
+      size="full"
+    >
       <PageHeader
         eyebrow="Background"
         title="Experience"
         lead="Software engineering internships and a Computer Science + Business degree from Lehigh University"
+        titleId="experience-overlay-title"
       />
 
       <PageSection id="internships-heading" title="Internships">
@@ -113,6 +120,6 @@ export default function ExperiencePage() {
           </ul>
         </article>
       </PageSection>
-    </>
+    </OverlayShell>
   );
 }

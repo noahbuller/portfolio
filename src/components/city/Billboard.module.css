@@ -9,6 +9,10 @@
   position: relative;
   z-index: 2;
   display: block;
+  width: 100%;
+  font: inherit;
+  text-align: inherit;
+  color: inherit;
   border-radius: 14px;
   padding: 4px;
   background: linear-gradient(160deg, #20283f, #161d33);

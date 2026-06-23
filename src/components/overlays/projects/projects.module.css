@@ -6,8 +6,12 @@
 
 .card {
   display: block;
+  width: 100%;
   overflow: hidden;
   padding: 0;
+  border: none;
+  text-align: left;
+  cursor: pointer;
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 

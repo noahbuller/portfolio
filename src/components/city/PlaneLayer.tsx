@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useAboutOptional } from "@/components/about/AboutProvider";
+import { useOverlayOptional } from "@/components/overlays/OverlayProvider";
+import type { OverlayAction } from "@/data/ctas";
 import { useDocumentVisibility } from "@/hooks/useDocumentVisibility";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { ctas } from "@/data/ctas";
@@ -17,7 +18,7 @@ interface PlaneInstance {
   label: string;
   href?: string;
   external: boolean;
-  action?: "about";
+  action?: OverlayAction;
   accent: Accent;
   topVh: number;
   durationS: number;
@@ -42,6 +43,7 @@ const PARKED_PLANE: PlaneInstance = {
   label: ctas.aerial[0].label,
   href: ctas.aerial[0].href,
   external: ctas.aerial[0].external ?? false,
+  action: ctas.aerial[0].action,
   accent: "cyan",
   topVh: 24,
   durationS: 0,
@@ -50,7 +52,7 @@ const PARKED_PLANE: PlaneInstance = {
 export function PlaneLayer() {
   const prefersReducedMotion = usePrefersReducedMotion();
   const isVisible = useDocumentVisibility();
-  const about = useAboutOptional();
+  const overlay = useOverlayOptional();
   const [planes, setPlanes] = useState<PlaneInstance[]>([]);
   const nextId = useRef(0);
   const seq = useRef(0);
@@ -83,14 +85,21 @@ export function PlaneLayer() {
   const remove = (id: number) =>
     setPlanes((prev) => prev.filter((p) => p.id !== id));
 
+  const runAction = (action: OverlayAction) => {
+    if (!overlay) return;
+    if (action === "about") overlay.openAbout();
+    if (action === "projects") overlay.openProjects();
+    if (action === "experience") overlay.openExperience();
+  };
+
   const renderBanner = (p: PlaneInstance) => {
-    if (p.action === "about") {
+    if (p.action) {
       return (
         <button
           type="button"
           className={`${styles.banner} font-display`}
           aria-label={p.label}
-          onClick={() => about?.openAbout()}
+          onClick={() => runAction(p.action!)}
         >
           {p.label}
         </button>
