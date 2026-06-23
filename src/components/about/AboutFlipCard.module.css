@@ -79,15 +79,15 @@
 
 .profileCard :global(.pc-card) {
   width: 100%;
-  height: min(85dvh, 720px);
-  max-height: min(85dvh, 720px);
+  height: 80svh;
+  max-height: 540px;
   aspect-ratio: 0.718;
 }
 
 .backPanel {
   width: 100%;
-  height: min(85dvh, 720px);
-  max-height: min(85dvh, 720px);
+  height: 80svh;
+  max-height: 540px;
   aspect-ratio: 0.718;
   overflow-x: hidden;
   overflow-y: auto;
@@ -112,20 +112,44 @@
   cursor: pointer;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .backPanel {
     padding: 24px 20px 28px;
     border-radius: 24px;
-    height: min(90dvh, 720px);
-    max-height: min(90dvh, 720px);
+    height: 70svh;
+    max-height: 450px;
   }
 
   .profileCard :global(.pc-card) {
-    height: min(90dvh, 720px);
-    max-height: min(90dvh, 720px);
+    height: 70svh;
+    max-height: 450px;
   }
 
   .scene:focus-visible {
     border-radius: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .backPanel {
+    height: 60svh;
+    max-height: 380px;
+  }
+
+  .profileCard :global(.pc-card) {
+    height: 60svh;
+    max-height: 380px;
+  }
+}
+
+@media (max-width: 320px) {
+  .backPanel {
+    height: 55svh;
+    max-height: 320px;
+  }
+
+  .profileCard :global(.pc-card) {
+    height: 55svh;
+    max-height: 320px;
   }
 }

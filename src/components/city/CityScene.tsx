@@ -1,6 +1,7 @@
 "use client";
 
 import { useAutoScroll } from "@/hooks/useAutoScroll";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { ctas } from "@/data/ctas";
 import { SocialSvg } from "@/components/icons";
 import { SkyLayer } from "./SkyLayer";
@@ -16,8 +17,8 @@ import styles from "./CityScene.module.css";
 const BILLBOARD_TILE = 3000;
 
 export function CityScene() {
-  // Slowed to 50% of the original 70px/s.
-  const { registerLayer } = useAutoScroll({ pixelsPerSecond: 35 });
+  const isMobile = useMediaQuery("(max-width: 768px)");
+  const { registerLayer } = useAutoScroll({ pixelsPerSecond: isMobile ? 22 : 35 });
 
   const renderBillboards = (decorative: boolean) => (
     <div className={styles.billboardTile} style={{ width: BILLBOARD_TILE }}>

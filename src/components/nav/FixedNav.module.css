@@ -4,11 +4,17 @@
   left: 0;
   right: 0;
   z-index: 20;
+  padding-top: var(--safe-top);
+}
+
+.bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
   padding: 14px 28px;
+  padding-right: calc(28px + var(--safe-right));
+  padding-left: calc(28px + var(--safe-left));
   min-height: var(--nav-height);
   background: linear-gradient(
     180deg,
@@ -39,6 +45,69 @@
   outline: 2px solid var(--gold);
   outline-offset: 4px;
   border-radius: 4px;
+}
+
+.menuButton {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--touch-min);
+  min-height: var(--touch-min);
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background: rgba(245, 240, 232, 0.08);
+  color: var(--text-light);
+  cursor: pointer;
+}
+
+.menuIcon {
+  position: relative;
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 1px;
+  transition: background 0.2s ease;
+}
+
+.menuIcon::before,
+.menuIcon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: currentColor;
+  border-radius: 1px;
+  transition: transform 0.2s ease, top 0.2s ease;
+}
+
+.menuIcon::before {
+  top: -6px;
+}
+
+.menuIcon::after {
+  top: 6px;
+}
+
+.menuButton[aria-expanded="true"] .menuIcon {
+  background: transparent;
+}
+
+.menuButton[aria-expanded="true"] .menuIcon::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.menuButton[aria-expanded="true"] .menuIcon::after {
+  top: 0;
+  transform: rotate(-45deg);
+}
+
+.menuButton:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
 }
 
 .links {
@@ -101,6 +170,14 @@
   transition: color 0.2s ease, transform 0.2s ease;
 }
 
+.menuBackdrop {
+  display: none;
+}
+
+.mobileMenu {
+  display: none;
+}
+
 @media (hover: hover) and (pointer: fine) {
   .link:hover::after,
   .linkButton:hover::after {
@@ -122,29 +199,113 @@
 }
 
 @media (max-width: 768px) {
-  .nav {
+  .bar {
     padding: 10px 16px;
-    flex-wrap: wrap;
+    padding-right: calc(16px + var(--safe-right));
+    padding-left: calc(16px + var(--safe-left));
   }
 
   .brand {
     font-size: 14px;
   }
 
-  .links {
-    width: 100%;
-    gap: 4px 14px;
+  .menuButton {
+    display: inline-flex;
   }
 
-  .divider {
+  .links {
     display: none;
+  }
+
+  .menuBackdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: rgba(13, 59, 102, 0.45);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  .mobileMenu {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 16px;
+    padding-left: calc(16px + var(--safe-left));
+    padding-right: calc(16px + var(--safe-right));
+    background: linear-gradient(
+      180deg,
+      rgba(13, 59, 102, 0.98),
+      rgba(13, 59, 102, 0.92)
+    );
+    border-bottom: 1px solid rgba(255, 209, 102, 0.12);
+    transition: max-height 0.3s ease, padding 0.3s ease;
+  }
+
+  .mobileMenuOpen {
+    max-height: 420px;
+    padding-top: 8px;
+    padding-bottom: calc(16px + var(--safe-bottom));
+  }
+
+  .mobileLink {
+    display: flex;
+    align-items: center;
+    min-height: var(--touch-min);
+    padding: 12px 8px;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-light);
+    background: none;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    text-align: left;
+    transition: background 0.15s ease;
+  }
+
+  .mobileLink:active {
+    background: rgba(245, 240, 232, 0.08);
+  }
+
+  .mobileSocial {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(245, 240, 232, 0.12);
+  }
+
+  .mobileIcon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: var(--touch-min);
+    min-height: var(--touch-min);
+    border-radius: 8px;
+    color: var(--text-muted);
+    background: rgba(245, 240, 232, 0.06);
+    transition: color 0.15s ease, background 0.15s ease;
+  }
+
+  .mobileIcon:active {
+    color: var(--gold);
+    background: rgba(245, 240, 232, 0.12);
+  }
+
+  .mobileLink:focus-visible,
+  .mobileIcon:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
   }
 }
 
 @media (max-width: 420px) {
-  .link,
-  .linkButton {
-    font-size: 13px;
-    padding: 8px 2px;
+  .mobileLink {
+    font-size: 15px;
   }
 }
