@@ -10,6 +10,9 @@ interface OverlayShellProps {
   onClose: () => void;
   titleId: string;
   size?: OverlaySize;
+  modalClassName?: string;
+  /** Renders children directly on the backdrop — no glass modal panel. */
+  bare?: boolean;
   children: ReactNode;
 }
 
@@ -25,6 +28,8 @@ export function OverlayShell({
   onClose,
   titleId,
   size = "compact",
+  modalClassName,
+  bare = false,
   children,
 }: OverlayShellProps) {
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -47,10 +52,39 @@ export function OverlayShell({
 
   if (!isOpen) return null;
 
+  const closeButton = (
+    <button
+      ref={closeRef}
+      type="button"
+      className={bare ? styles.closeBare : styles.close}
+      onClick={onClose}
+      aria-label="Close panel"
+    >
+      ×
+    </button>
+  );
+
+  if (bare) {
+    return (
+      <div className={styles.backdrop} onClick={onClose} role="presentation">
+        {closeButton}
+        <div
+          className={styles.barePanel}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby={titleId}
+          onClick={(e) => e.stopPropagation()}
+        >
+          {children}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.backdrop} onClick={onClose} role="presentation">
       <div
-        className={[styles.modal, sizeClass[size]].filter(Boolean).join(" ")}
+        className={[styles.modal, sizeClass[size], modalClassName].filter(Boolean).join(" ")}
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}

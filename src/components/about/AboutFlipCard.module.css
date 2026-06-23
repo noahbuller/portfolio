@@ -1,0 +1,131 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.flipHint {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.scene {
+  width: 100%;
+  perspective: 1400px;
+  cursor: pointer;
+  outline: none;
+}
+
+.scene:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 6px;
+  border-radius: 30px;
+}
+
+.inner {
+  position: relative;
+  width: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.65s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+.flipped .inner {
+  transform: rotateY(180deg);
+}
+
+.face {
+  width: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.front {
+  overflow: hidden;
+}
+
+.flipped .front {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.back {
+  position: absolute;
+  inset: 0;
+  transform: rotateY(180deg);
+}
+
+.profileCard {
+  width: 100%;
+}
+
+.profileCard :global(.pc-contact-btn) {
+  cursor: pointer;
+}
+
+.profileCard :global(.pc-card) {
+  width: 100%;
+  height: min(85dvh, 720px);
+  max-height: min(85dvh, 720px);
+  aspect-ratio: 0.718;
+}
+
+.backPanel {
+  width: 100%;
+  height: min(85dvh, 720px);
+  max-height: min(85dvh, 720px);
+  aspect-ratio: 0.718;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 28px 24px 32px;
+  border-radius: 30px;
+  border: 2px solid var(--glass-border);
+  background: linear-gradient(
+    165deg,
+    rgba(13, 59, 102, 0.97),
+    rgba(42, 157, 143, 0.94)
+  );
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow:
+    0 0 24px rgba(255, 209, 102, 0.2),
+    0 24px 48px rgba(0, 0, 0, 0.45);
+  pointer-events: auto;
+}
+
+.backPanel :global(button),
+.backPanel :global(a) {
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .backPanel {
+    padding: 24px 20px 28px;
+    border-radius: 24px;
+    height: min(90dvh, 720px);
+    max-height: min(90dvh, 720px);
+  }
+
+  .profileCard :global(.pc-card) {
+    height: min(90dvh, 720px);
+    max-height: min(90dvh, 720px);
+  }
+
+  .scene:focus-visible {
+    border-radius: 24px;
+  }
+}

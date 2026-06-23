@@ -63,6 +63,39 @@
   outline-offset: 2px;
 }
 
+.barePanel {
+  position: relative;
+  width: min(560px, 100%);
+  max-height: min(85dvh, 720px);
+  color: var(--text-light);
+}
+
+.closeBare {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 51;
+  width: var(--touch-min);
+  height: var(--touch-min);
+  border: none;
+  border-radius: 8px;
+  background: rgba(245, 240, 232, 0.12);
+  color: var(--text-light);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.closeBare:hover {
+  background: rgba(245, 240, 232, 0.22);
+}
+
+.closeBare:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
 @media (max-width: 600px) {
   .backdrop {
     padding: 12px;
