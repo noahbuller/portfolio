@@ -13,10 +13,12 @@ import styles from "./FixedNav.module.css";
 export function FixedNav() {
   const { view, openAbout, openProjects, openExperience, closeOverlay } = useOverlay();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [prevView, setPrevView] = useState(view);
 
-  useEffect(() => {
+  if (prevView !== view) {
+    setPrevView(view);
     setMenuOpen(false);
-  }, [view]);
+  }
 
   useEffect(() => {
     if (!menuOpen) return;
