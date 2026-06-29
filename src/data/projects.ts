@@ -56,7 +56,7 @@ export const projects: Project[] = [
       },
     ],
     preview: {
-      src: "/projects/lockerroom-preview.png",
+      src: "/projects/lockerroom-preview.jpg",
       alt: "LockerRoom MLB scores dashboard preview",
       href: "https://lockerroom-kappa.vercel.app",
     },
@@ -86,7 +86,7 @@ export const projects: Project[] = [
       },
     ],
     preview: {
-      src: "/projects/headlines-preview.png",
+      src: "/projects/headlines-preview.jpg",
       alt: "Headlines and Sidelines sports news site preview",
       href: "https://headlinesandsidelines.com",
     },

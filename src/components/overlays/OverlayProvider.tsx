@@ -64,6 +64,21 @@ export function OverlayProvider({ children }: { children: ReactNode }) {
   }, [view, navigate, closeOverlay]);
 
   useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.closest("input, textarea, select, [contenteditable='true']")) return;
+
+      if (e.key === "?" && !e.metaKey && !e.ctrlKey && !e.altKey) {
+        e.preventDefault();
+        openAbout();
+      }
+    };
+
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [openAbout]);
+
+  useEffect(() => {
     const onPopState = () => {
       skipHashSync.current = false;
       setView(hashToView(window.location.hash));

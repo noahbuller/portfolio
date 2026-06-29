@@ -1,10 +1,12 @@
+"use client";
+
 import { aboutSkillIcons } from "@/data/projects";
 import { education, experienceRoles } from "@/data/experience";
 import { SkillIcons } from "@/components/SkillIcons";
 import { useOverlay } from "@/components/overlays/OverlayProvider";
 import styles from "./AboutOverlay.module.css";
 
-/** Resume-sourced bio, education, experience, and skills — shown on the flip-card back. */
+/** Resume-sourced bio, education, experience, and skills for the About modal. */
 export function AboutContent() {
   const { openExperience } = useOverlay();
 
@@ -12,7 +14,7 @@ export function AboutContent() {
     <>
       <header className={styles.header}>
         <p className={styles.eyebrow}>About</p>
-        <h2 className={`${styles.title} font-display`}>
+        <h2 id="about-title" className={`${styles.title} font-display`}>
           Noah Buller
         </h2>
         <p className={styles.subtitle}>Software Engineer</p>
