@@ -16,11 +16,17 @@ export function MidgroundLayer() {
       style={{ display: "block" }}
     >
       <g style={land}>
-        <path d="M0,90 Q120,60 260,82 Q400,100 560,80 L560,140 L0,140 Z" />
-        <path d="M1180,86 Q1320,58 1480,80 Q1640,98 1820,78 Q1920,82 2000,90 L2000,140 L1180,140 Z" />
+        <path d="M0,90 Q120,60 260,82 Q400,100 560,106 L560,140 L0,140 Z" />
+        <path d="M1180,106 Q1320,58 1480,80 Q1640,98 1820,78 Q1920,82 2000,90 L2000,140 L1180,140 Z" />
       </g>
 
-      <rect x="620" y="96" width="520" height="10" style={{ fill: "var(--building-far)" }} />
+      <rect
+        x="620"
+        y="96"
+        width="520"
+        height="10"
+        style={{ fill: "var(--building-far)" }}
+      />
 
       <g style={{ ...bridge, strokeWidth: 4, fill: "none" }}>
         <path d="M700,96 L740,40 L780,96" />
@@ -33,7 +39,13 @@ export function MidgroundLayer() {
         <line x1="1020" y1="40" x2="1020" y2="96" />
       </g>
 
-      <rect x="0" y="106" width="2000" height="174" style={{ fill: "var(--water-deep)" }} />
+      <rect
+        x="0"
+        y="106"
+        width="2000"
+        height="174"
+        style={{ fill: "var(--water-deep)" }}
+      />
 
       <g style={{ fill: "var(--water)" }} opacity={0.55}>
         <rect x="120" y="150" width="180" height="4" rx="2" />

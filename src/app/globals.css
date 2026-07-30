@@ -20,6 +20,16 @@
   --building-shadow: #16303f;
   --window-glow: #ffd27a;
 
+  /* ── Road (coastal light) ── */
+  --road-top: #1a3146;
+  --road-bottom: #0e1d2b;
+
+  /* ── Plane sprite (coastal light) ── */
+  --plane-hull: #eef2f6;
+  --plane-hull-shade: #dde3ea;
+  --plane-far-wing: #c7ced6;
+  --plane-window-dim: #9fb3c0;
+
   /* ── Signature/sign colors (coastal light) ── */
   --sign-gold: #ffd166;
   --sign-rose: #ef476f;
@@ -73,8 +83,12 @@
   --bp-sm: 600px;
   --bp-md: 768px;
 
-  /* Fixed nav clearance — planes and other sky elements stay below this. */
-  --nav-height: 3.5rem;
+  /* Fixed nav clearance — planes and other sky elements stay below this.
+     Derived from FixedNav's own padding + touch target + border (14px * 2 +
+     44px + 1px = 73px) instead of a guessed constant, so it can't drift out
+     of sync with the bar's real content-driven height. See mobile override
+     below matching FixedNav's smaller padding at the same breakpoint. */
+  --nav-height: calc(14px * 2 + var(--touch-min) + 1px);
 
   /* Safe-area insets for notched devices. */
   --safe-top: env(safe-area-inset-top, 0px);
@@ -129,6 +143,18 @@
   --building-shadow: #14100a;
   --window-glow: #f7dfa0;
 
+  /* ── Road (Silhouette Theatre) — darker than the buildings so it reads
+       as the lowest, furthest-back surface, warm-neutral asphalt not navy. ── */
+  --road-top: #1c140d;
+  --road-bottom: #0a0704;
+
+  /* ── Plane sprite (Silhouette Theatre) — muted warm silhouette instead of
+       a bright white toy plane, matching the near-black building tones. ── */
+  --plane-hull: #4a4238;
+  --plane-hull-shade: #3a332b;
+  --plane-far-wing: #5a5248;
+  --plane-window-dim: #6b5f4d;
+
   --sign-gold: #eab155;
   --sign-rose: #b8452e;
   --sign-pale: #f0dbb0;
@@ -143,6 +169,14 @@
   --glass-border: rgba(var(--sign-gold-rgb), 0.32);
   --glass-bg: rgba(20, 16, 10, 0.82);
   --glass-nav-bg: rgba(20, 16, 10, 0.92);
+}
+
+/* FixedNav switches to smaller padding at this breakpoint (10px vs 14px) —
+   keep --nav-height in sync so it still matches the bar's real height. */
+@media (max-width: 768px) {
+  :root {
+    --nav-height: calc(10px * 2 + var(--touch-min) + 1px);
+  }
 }
 
 html {

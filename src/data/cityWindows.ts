@@ -10,7 +10,16 @@ export const WINDOW_CELL_HEIGHT = 46;
 
 /** Empty margin on each side of the window grid within a building's silhouette. */
 export const BUILDING_SIDE_MARGIN = 12;
-export const BUILDING_TOP_MARGIN = 18;
+
+/**
+ * Roofline margin above the window grid. Scales down for shorter buildings
+ * so the plain-color cap stays a small, consistent slice of the facade
+ * instead of ballooning into a disproportionate solid bar on short
+ * buildings — capped at 18px so tall buildings are unchanged.
+ */
+export function buildingTopMargin(rows: number): number {
+  return Math.max(10, Math.min(18, rows * 2.5));
+}
 
 /** Exact building width so `cols` window columns fit with no partial column. */
 export function tightBuildingWidth(cols: number): number {
@@ -22,7 +31,7 @@ export function tightBuildingWidth(cols: number): number {
  * partial row between the top margin and the ground line.
  */
 export function tightBuildingTop(rows: number, ground: number): number {
-  return ground - (rows * WINDOW_CELL_HEIGHT + BUILDING_TOP_MARGIN);
+  return ground - (rows * WINDOW_CELL_HEIGHT + buildingTopMargin(rows));
 }
 
 /** Resolved window-grid dimensions for a building spec. */

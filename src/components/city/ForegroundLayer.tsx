@@ -8,7 +8,7 @@ import {
 } from "@/data/cityBuildings";
 import {
   BUILDING_SIDE_MARGIN,
-  BUILDING_TOP_MARGIN,
+  buildingTopMargin,
   WINDOW_CELL_WIDTH,
   WINDOW_CELL_HEIGHT,
 } from "@/data/cityWindows";
@@ -45,7 +45,7 @@ export function ForegroundLayer() {
         const winOpacity = b.tone === "shadow" ? 0.85 : 0.35;
         const patternId = `${uid}-win-${i}`;
         const winX = b.x + BUILDING_SIDE_MARGIN;
-        const winY = b.top + BUILDING_TOP_MARGIN;
+        const winY = b.top + buildingTopMargin(b.rows);
 
         return (
           <g key={i}>

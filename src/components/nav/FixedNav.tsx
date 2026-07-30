@@ -11,7 +11,7 @@ import styles from "./FixedNav.module.css";
  * while the city scrolls behind it.
  */
 export function FixedNav() {
-  const { view, openAbout, openProjects, openExperience, closeOverlay } = useOverlay();
+  const { view, openAbout, openProjects, openExperience } = useOverlay();
   const [menuOpen, setMenuOpen] = useState(false);
   const [prevView, setPrevView] = useState(view);
 
@@ -52,23 +52,9 @@ export function FixedNav() {
     openAbout();
   };
 
-  const handleCloseOverlay = () => {
-    closeMenu();
-    closeOverlay();
-  };
-
   return (
     <header className={styles.nav}>
       <div className={styles.bar}>
-        <button
-          type="button"
-          className={`${styles.brand} font-display`}
-          onClick={handleCloseOverlay}
-          aria-current={view === null ? "page" : undefined}
-        >
-          {ctas.hero.label}
-        </button>
-
         <button
           type="button"
           className={styles.menuButton}
@@ -85,7 +71,12 @@ export function FixedNav() {
             type="button"
             className={styles.linkButton}
             onClick={openProjects}
-            aria-current={view === "projects" || (typeof view === "object" && view?.type === "project") ? "page" : undefined}
+            aria-current={
+              view === "projects" ||
+              (typeof view === "object" && view?.type === "project")
+                ? "page"
+                : undefined
+            }
           >
             Projects
           </button>
@@ -105,7 +96,11 @@ export function FixedNav() {
           >
             About
           </button>
-          <a className={styles.link} href={ctas.resume.href} download={ctas.resume.download}>
+          <a
+            className={styles.link}
+            href={ctas.resume.href}
+            download={ctas.resume.download}
+          >
             {ctas.resume.label}
           </a>
           <a className={styles.link} href={ctas.contact.href}>
@@ -147,7 +142,12 @@ export function FixedNav() {
           type="button"
           className={styles.mobileLink}
           onClick={handleOpenProjects}
-          aria-current={view === "projects" || (typeof view === "object" && view?.type === "project") ? "page" : undefined}
+          aria-current={
+            view === "projects" ||
+            (typeof view === "object" && view?.type === "project")
+              ? "page"
+              : undefined
+          }
         >
           Projects
         </button>
@@ -167,10 +167,19 @@ export function FixedNav() {
         >
           About
         </button>
-        <a className={styles.mobileLink} href={ctas.resume.href} download={ctas.resume.download} onClick={closeMenu}>
+        <a
+          className={styles.mobileLink}
+          href={ctas.resume.href}
+          download={ctas.resume.download}
+          onClick={closeMenu}
+        >
           {ctas.resume.label}
         </a>
-        <a className={styles.mobileLink} href={ctas.contact.href} onClick={closeMenu}>
+        <a
+          className={styles.mobileLink}
+          href={ctas.contact.href}
+          onClick={closeMenu}
+        >
           {ctas.contact.label}
         </a>
         <div className={styles.mobileSocial}>

@@ -10,7 +10,7 @@
 .bar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 12px;
   padding: 14px 28px;
   padding-right: calc(28px + var(--safe-right));
@@ -20,27 +20,6 @@
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(var(--sign-gold-rgb), 0.12);
-}
-
-.brand {
-  flex-shrink: 0;
-  font-size: 16px;
-  letter-spacing: 0.04em;
-  color: var(--text-light);
-  min-height: var(--touch-min);
-  display: inline-flex;
-  align-items: center;
-  padding: 0;
-  border: none;
-  background: none;
-  cursor: pointer;
-  font-family: inherit;
-}
-
-.brand:focus-visible {
-  outline: 2px solid var(--gold);
-  outline-offset: 4px;
-  border-radius: 4px;
 }
 
 .menuButton {
@@ -203,10 +182,6 @@
     padding: 10px 16px;
     padding-right: calc(16px + var(--safe-right));
     padding-left: calc(16px + var(--safe-left));
-  }
-
-  .brand {
-    font-size: 14px;
   }
 
   .menuButton {

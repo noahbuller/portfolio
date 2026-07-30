@@ -30,17 +30,17 @@ export interface Building {
  */
 const BUILDING_SPECS: BuildingSpec[] = [
   { cols: 4, rows: 7, tone: "shadow" },
-  { cols: 3, rows: 4, tone: "mid" },
+  { cols: 3, rows: 5, tone: "mid" },
   { cols: 5, rows: 8, tone: "shadow", roof: "antenna" },
-  { cols: 3, rows: 4, tone: "mid" },
+  { cols: 3, rows: 5, tone: "mid" },
   { cols: 4, rows: 6, tone: "shadow" },
-  { cols: 3, rows: 4, tone: "mid", roof: "tank" },
+  { cols: 3, rows: 5, tone: "mid", roof: "tank" },
   { cols: 5, rows: 8, tone: "shadow", roof: "antenna" },
-  { cols: 3, rows: 4, tone: "mid" },
+  { cols: 3, rows: 5, tone: "mid" },
   { cols: 5, rows: 6, tone: "shadow" },
   { cols: 4, rows: 5, tone: "mid" },
   { cols: 4, rows: 7, tone: "shadow", roof: "tank" },
-  { cols: 3, rows: 4, tone: "mid" },
+  { cols: 3, rows: 5, tone: "mid" },
   { cols: 4, rows: 6, tone: "shadow" },
 ];
 
