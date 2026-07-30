@@ -10,6 +10,7 @@ import {
 } from "@/data/cityBuildings";
 import { ROAD_HEIGHT_VH } from "./roadGeometry";
 import { SkyLayer } from "./SkyLayer";
+import { SunMoonToggle } from "./SunMoonToggle";
 import { SkylineLayer } from "./SkylineLayer";
 import { MidgroundLayer } from "./MidgroundLayer";
 import { ForegroundLayer } from "./ForegroundLayer";
@@ -118,6 +119,7 @@ export function CityScene() {
   return (
     <div className={styles.scene}>
       <SkyLayer />
+      <SunMoonToggle />
 
       <div className={styles.heroTitle} aria-hidden="true">
         <span className={`${styles.heroName} font-display`}>

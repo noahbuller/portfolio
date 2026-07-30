@@ -1,0 +1,65 @@
+.toggle {
+  position: absolute;
+  top: calc(var(--nav-height) + var(--safe-top) + 14px);
+  right: calc(20px + var(--safe-right));
+  z-index: 15;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.toggle:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.iconTrack {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.sunIcon,
+.moonIcon {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 26px;
+  height: 26px;
+  color: var(--window-glow);
+}
+
+.sunIcon {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.moonIcon {
+  transform: translateY(150%);
+  opacity: 0;
+}
+
+:global([data-theme="dark"]) .sunIcon {
+  transform: translateY(-150%);
+  opacity: 0;
+}
+
+:global([data-theme="dark"]) .moonIcon {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .sunIcon,
+  .moonIcon {
+    transition:
+      transform 0.5s ease,
+      opacity 0.5s ease;
+  }
+}
