@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useDocumentVisibility } from "@/hooks/useDocumentVisibility";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { Car, CarType } from "./Car";
+import { randomCarBottomVh, PARKED_CAR_BOTTOMS_VH } from "./roadGeometry";
 import styles from "./TrafficLayer.module.css";
 
 interface CarInstance {
@@ -29,8 +30,22 @@ const COLORS = [
 const MAX_CARS = 3;
 
 const PARKED_CARS: CarInstance[] = [
-  { id: -1, type: "sedan", color: "#ef476f", durationS: 0, bottomVh: 1.4, scale: 1 },
-  { id: -2, type: "van", color: "#577590", durationS: 0, bottomVh: 2.4, scale: 0.92 },
+  {
+    id: -1,
+    type: "sedan",
+    color: "#ef476f",
+    durationS: 0,
+    bottomVh: PARKED_CAR_BOTTOMS_VH.sedan,
+    scale: 1,
+  },
+  {
+    id: -2,
+    type: "van",
+    color: "#577590",
+    durationS: 0,
+    bottomVh: PARKED_CAR_BOTTOMS_VH.van,
+    scale: 0.92,
+  },
 ];
 
 function pick<T>(arr: T[]): T {
@@ -43,7 +58,7 @@ function makeCar(id: number): CarInstance {
     type: pick(TYPES),
     color: pick(COLORS),
     durationS: 19 + Math.random() * 4,
-    bottomVh: 0.8 + Math.random() * 2.4,
+    bottomVh: randomCarBottomVh(),
     scale: 0.85 + Math.random() * 0.25,
   };
 }

@@ -4,6 +4,11 @@ import { useAutoScroll } from "@/hooks/useAutoScroll";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { ctas } from "@/data/ctas";
 import { SocialSvg } from "@/components/icons";
+import {
+  FOREGROUND_TILE_WIDTH,
+  getForegroundBuildings,
+} from "@/data/cityBuildings";
+import { ROAD_HEIGHT_VH } from "./roadGeometry";
 import { SkyLayer } from "./SkyLayer";
 import { SkylineLayer } from "./SkylineLayer";
 import { MidgroundLayer } from "./MidgroundLayer";
@@ -14,15 +19,31 @@ import { TrafficLayer } from "./TrafficLayer";
 import { PlaneLayer } from "./PlaneLayer";
 import styles from "./CityScene.module.css";
 
-const BILLBOARD_TILE = 3000;
+// The billboard tile must scroll in lockstep with the foreground buildings
+// tile (both registered at speed=1) so a billboard's `left` offset always
+// lands on the same building — sharing this width keeps them permanently
+// in phase instead of drifting apart every lcm(tileA, tileB) pixels.
+const BILLBOARD_TILE = FOREGROUND_TILE_WIDTH;
+
+// Buildings each billboard is pinned to, by index into getForegroundBuildings().
+const BUILDINGS = getForegroundBuildings();
+const billboardLeft = (buildingIndex: number) => {
+  const b = BUILDINGS[buildingIndex];
+  return Math.round(b.x + b.w / 2);
+};
 
 export function CityScene() {
   const isMobile = useMediaQuery("(max-width: 768px)");
-  const { registerLayer } = useAutoScroll({ pixelsPerSecond: isMobile ? 22 : 35 });
+  const { registerLayer } = useAutoScroll({
+    pixelsPerSecond: isMobile ? 22 : 35,
+  });
 
   const renderBillboards = (decorative: boolean) => (
     <div className={styles.billboardTile} style={{ width: BILLBOARD_TILE }}>
-      <div className={`${styles.slot} ${styles.slotElevated}`} style={{ left: 220 }}>
+      <div
+        className={`${styles.slot} ${styles.slotElevated}`}
+        style={{ left: billboardLeft(2) }}
+      >
         <Billboard
           decorative={decorative}
           variant="cyan"
@@ -35,7 +56,10 @@ export function CityScene() {
         />
       </div>
 
-      <div className={`${styles.slot} ${styles.slotElevated}`} style={{ left: 880 }}>
+      <div
+        className={`${styles.slot} ${styles.slotElevated}`}
+        style={{ left: billboardLeft(6) }}
+      >
         <Billboard
           decorative={decorative}
           mode="action"
@@ -48,7 +72,7 @@ export function CityScene() {
         />
       </div>
 
-      <div className={styles.slot} style={{ left: 1540 }}>
+      <div className={styles.slot} style={{ left: billboardLeft(9) }}>
         <Billboard
           decorative={decorative}
           variant="coral"
@@ -60,7 +84,10 @@ export function CityScene() {
         />
       </div>
 
-      <div className={`${styles.slot} ${styles.slotElevated}`} style={{ left: 2280 }}>
+      <div
+        className={`${styles.slot} ${styles.slotElevated}`}
+        style={{ left: billboardLeft(12) }}
+      >
         <Billboard
           decorative={decorative}
           mode="group"
@@ -93,7 +120,9 @@ export function CityScene() {
       <SkyLayer />
 
       <div className={styles.heroTitle} aria-hidden="true">
-        <span className={`${styles.heroName} font-display`}>{ctas.hero.label}</span>
+        <span className={`${styles.heroName} font-display`}>
+          {ctas.hero.label}
+        </span>
         <span className={styles.heroSubtitle}>{ctas.hero.subtitle}</span>
       </div>
 
@@ -120,7 +149,11 @@ export function CityScene() {
         renderTile={() => <ForegroundLayer />}
       />
 
-      <div className={styles.road} aria-hidden="true">
+      <div
+        className={styles.road}
+        aria-hidden="true"
+        style={{ "--road-height-vh": ROAD_HEIGHT_VH } as React.CSSProperties}
+      >
         <div className={styles.roadLine} />
       </div>
 
