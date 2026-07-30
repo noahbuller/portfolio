@@ -29,12 +29,12 @@
 }
 
 .modalWide {
-  width: min(900px, 100%);
+  width: min(var(--overlay-width-wide), 100%);
   max-height: min(88dvh, 800px);
 }
 
 .modalFull {
-  width: min(960px, 100%);
+  width: min(var(--overlay-width-full), 100%);
   max-height: min(90dvh, 900px);
 }
 

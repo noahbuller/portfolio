@@ -1,5 +1,5 @@
 .article {
-  max-width: 720px;
+  max-width: var(--overlay-prose-width);
 }
 
 .back {
@@ -17,7 +17,7 @@
 }
 
 .header {
-  margin-bottom: 28px;
+  margin-bottom: var(--overlay-header-gap);
 }
 
 .date {
@@ -73,7 +73,9 @@
   color: var(--text-light);
   border: 2px solid var(--foreground-sand);
   background: rgba(244, 217, 160, 0.12);
-  transition: background 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -85,7 +87,7 @@
 
 .section {
   padding: 22px 24px;
-  margin-bottom: 20px;
+  margin-bottom: var(--overlay-section-gap);
 }
 
 .section p {
@@ -133,6 +135,10 @@
 }
 
 @media (max-width: 600px) {
+  .header {
+    margin-bottom: var(--overlay-header-gap-mobile);
+  }
+
   .section {
     padding: 18px;
   }

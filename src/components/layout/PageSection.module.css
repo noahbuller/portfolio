@@ -1,5 +1,5 @@
 .section {
-  margin-bottom: 60px;
+  margin-bottom: var(--overlay-section-gap);
 }
 
 .section :global(.section-eyebrow) {
@@ -14,7 +14,7 @@
 
 @media (max-width: 600px) {
   .section {
-    margin-bottom: 52px;
+    margin-bottom: var(--overlay-section-gap-mobile);
   }
 
   .divided {

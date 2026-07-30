@@ -4,6 +4,8 @@ import { aboutSkillIcons } from "@/data/projects";
 import { education, experienceRoles } from "@/data/experience";
 import { SkillIcons } from "@/components/SkillIcons";
 import { useOverlay } from "@/components/overlays/OverlayProvider";
+import { PageHeader } from "@/components/layout/PageHeader";
+import { PageSection } from "@/components/layout/PageSection";
 import styles from "./AboutOverlay.module.css";
 
 /** Resume-sourced bio, education, experience, and skills for the About modal. */
@@ -12,20 +14,19 @@ export function AboutContent() {
 
   return (
     <>
-      <header className={styles.header}>
-        <p className={styles.eyebrow}>About</p>
-        <h2 id="about-title" className={`${styles.title} font-display`}>
-          Noah Buller
-        </h2>
-        <p className={styles.subtitle}>Software Engineer</p>
-      </header>
+      <PageHeader
+        eyebrow="About"
+        title="Noah Buller"
+        lead="Software Engineer"
+        titleId="about-title"
+      />
 
       <p className={styles.bio}>
-        Lehigh CS + Business graduate with full-stack internship experience in Next.js, React, and AWS.
+        Lehigh CS + Business graduate with full-stack internship experience in
+        Next.js, React, and AWS.
       </p>
 
-      <section className={styles.section}>
-        <h3 className="section-eyebrow">Experience</h3>
+      <PageSection id="about-experience-heading" title="Experience">
         <ul className={styles.roleList}>
           {experienceRoles.map((role) => (
             <li key={role.id} className={styles.roleItem}>
@@ -40,13 +41,16 @@ export function AboutContent() {
             </li>
           ))}
         </ul>
-        <button type="button" className={styles.readMore} onClick={openExperience}>
+        <button
+          type="button"
+          className={styles.readMore}
+          onClick={openExperience}
+        >
           Full experience & coursework →
         </button>
-      </section>
+      </PageSection>
 
-      <section className={styles.section}>
-        <h3 className="section-eyebrow">Education</h3>
+      <PageSection id="about-education-heading" title="Education">
         <p className={styles.educationMeta}>{education.school}</p>
         <p className={styles.educationDegree}>{education.degree}</p>
         <ul className={styles.honors}>
@@ -54,12 +58,11 @@ export function AboutContent() {
             <li key={honor}>{honor}</li>
           ))}
         </ul>
-      </section>
+      </PageSection>
 
-      <section className={styles.section}>
-        <h3 className="section-eyebrow">Skills</h3>
+      <PageSection id="about-skills-heading" title="Skills">
         <SkillIcons icons={aboutSkillIcons} label="Noah Buller skills" />
-      </section>
+      </PageSection>
     </>
   );
 }
