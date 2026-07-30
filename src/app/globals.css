@@ -17,6 +17,11 @@
   --neon-secondary: #ef476f;
   --neon-cyan: #06d6a0;
 
+  --deep-tint-rgb: 13, 59, 102;
+  --neon-accent-rgb: 255, 209, 102;
+  --neon-secondary-rgb: 239, 71, 111;
+  --neon-cyan-rgb: 6, 214, 160;
+
   --gold: #ffcf5c;
 
   --text-light: #f5f0e8;
@@ -74,6 +79,51 @@
 
   --font-body: var(--font-space-grotesk), Arial, Helvetica, sans-serif;
   --font-display: var(--font-space-grotesk), Arial, Helvetica, sans-serif;
+}
+
+/*
+ * Silhouette Theatre dark mode — mapped from DESIGN.md's amber/near-black
+ * backlit-theatre palette. Same variable names as the light palette above;
+ * only the values change, so every component that already consumes these
+ * tokens re-themes automatically.
+ */
+:root[data-theme="dark"] {
+  --sky-top: #e8c98f;
+  --sky-mid: #eba85c;
+  --sky-horizon: #d9622c;
+  --water: #4a3626;
+  --water-deep: #1f150d;
+  --foreground-sand: #f0dbb0;
+  --building-far: #6b5540;
+  --building-mid: #3a2a1c;
+  --building-shadow: #14100a;
+  --window-glow: #f7dfa0;
+
+  --neon-accent: #eab155;
+  --neon-secondary: #b8452e;
+  --neon-cyan: #f0dbb0;
+
+  --deep-tint-rgb: 20, 16, 10;
+  --neon-accent-rgb: 234, 177, 85;
+  --neon-secondary-rgb: 184, 69, 46;
+  --neon-cyan-rgb: 240, 219, 176;
+
+  --gold: #eab155;
+
+  --text-light: #f3e8d2;
+  --text-muted: #b8a58c;
+
+  --glass-border: rgba(234, 177, 85, 0.32);
+  --glass-bg: linear-gradient(
+    165deg,
+    rgba(20, 16, 10, 0.78),
+    rgba(58, 42, 28, 0.5)
+  );
+  --glass-nav-bg: linear-gradient(
+    180deg,
+    rgba(20, 16, 10, 0.92),
+    rgba(58, 42, 28, 0.8)
+  );
 }
 
 html {
