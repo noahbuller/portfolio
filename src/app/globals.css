@@ -62,6 +62,16 @@
   );
   --touch-min: 44px;
 
+  /* Overlay spacing — shared by About, Projects, Project detail, Experience
+     so header/section rhythm and modal width read as one system. */
+  --overlay-header-gap: 40px;
+  --overlay-header-gap-mobile: 32px;
+  --overlay-section-gap: 40px;
+  --overlay-section-gap-mobile: 32px;
+  --overlay-width-wide: 900px;
+  --overlay-width-full: 960px;
+  --overlay-prose-width: 720px;
+
   --font-body: var(--font-space-grotesk), Arial, Helvetica, sans-serif;
   --font-display: var(--font-space-grotesk), Arial, Helvetica, sans-serif;
 }
