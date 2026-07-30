@@ -56,16 +56,13 @@
   color: var(--text-light);
   background: var(--glass-bg);
   border: 2px solid var(--accent, var(--sign-pale));
-  border-radius: 8px;
-  box-shadow:
-    0 0 14px var(--accent-glow, rgba(var(--sign-pale-rgb), 0.5)),
-    0 8px 18px rgba(0, 0, 0, 0.4);
   white-space: nowrap;
   clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 14px 50%);
   transition:
     transform 0.2s ease,
-    box-shadow 0.2s ease;
+    filter 0.2s ease;
   font-family: inherit;
+  border-radius: 8px;
 }
 
 .rope {
@@ -97,9 +94,10 @@
 @media (hover: hover) and (pointer: fine) {
   .banner:hover {
     transform: translateY(-3px);
-    box-shadow:
-      0 0 22px var(--accent-glow, rgba(var(--sign-pale-rgb), 0.65)),
-      0 12px 24px rgba(0, 0, 0, 0.5);
+    filter: drop-shadow(
+        0 0 12px var(--accent-glow, rgba(var(--sign-pale-rgb), 0.65))
+      )
+      drop-shadow(0 8px 14px rgba(0, 0, 0, 0.5));
   }
 }
 
@@ -116,6 +114,8 @@
 }
 
 .banner:focus-visible {
-  outline: 3px solid var(--accent, var(--sign-pale));
-  outline-offset: 3px;
+  outline: none;
+  box-shadow:
+    0 0 0 3px var(--accent, var(--sign-pale)),
+    0 0 14px var(--accent-glow, rgba(var(--sign-pale-rgb), 0.5));
 }
