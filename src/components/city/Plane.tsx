@@ -25,7 +25,7 @@ export function Plane() {
       {/* near wing */}
       <ellipse cx="46" cy="16" rx="16" ry="3" fill="#dde3ea" />
       {/* cockpit windows */}
-      <circle cx="68" cy="18" r="2.1" fill="var(--neon-cyan)" />
+      <circle cx="68" cy="18" r="2.1" fill="var(--sign-pale)" />
       <circle cx="40" cy="18.5" r="1.5" fill="#9fb3c0" />
       <circle cx="48" cy="18.3" r="1.5" fill="#9fb3c0" />
       <circle cx="56" cy="18.1" r="1.5" fill="#9fb3c0" />

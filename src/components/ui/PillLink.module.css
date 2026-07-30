@@ -1,0 +1,35 @@
+.pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--touch-min);
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-light);
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.primary {
+  border: 2px solid var(--gold);
+  background: rgba(234, 177, 85, 0.12);
+}
+
+.secondary {
+  border: 2px solid rgba(234, 177, 85, 0.28);
+  background: rgba(13, 59, 102, 0.45);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .pill:hover {
+    background: rgba(234, 177, 85, 0.2);
+    box-shadow: 0 4px 16px rgba(234, 177, 85, 0.35);
+  }
+}
+
+.pill:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}

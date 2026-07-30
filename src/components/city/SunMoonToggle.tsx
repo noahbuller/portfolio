@@ -74,17 +74,17 @@ export function SunMoonToggle() {
           viewBox="0 0 24 24"
           fill="currentColor"
         >
-          <path d="M12 3a9 9 0 1 0 0 18a7 7 0 0 1 0-18z" />
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
           <circle
-            cx="10"
-            cy="9.5"
+            cx="8"
+            cy="11"
             r="0.9"
             fill="var(--building-shadow)"
             opacity="0.4"
           />
           <circle
-            cx="13.5"
-            cy="13"
+            cx="12"
+            cy="16"
             r="0.6"
             fill="var(--building-shadow)"
             opacity="0.4"

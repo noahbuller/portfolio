@@ -38,7 +38,10 @@ interface BillboardGroupProps extends BillboardBaseProps {
   mode: "group";
 }
 
-type BillboardProps = BillboardLinkProps | BillboardActionProps | BillboardGroupProps;
+type BillboardProps =
+  | BillboardLinkProps
+  | BillboardActionProps
+  | BillboardGroupProps;
 
 function BillboardFrame({
   eyebrow,
@@ -59,7 +62,8 @@ function BillboardFrame({
 /**
  * A clickable neon billboard. `mount` controls how it sits in the scene:
  * - "ground": raised on two tall poles planted on the road
- * - "building": mounted atop a small lit building block
+ * - "building": rests directly on its target foreground building's own
+ *   roofline (positioned by the caller) — no separate pedestal of its own
  *
  * Use `mode="link"` (default) for a single CTA anchor, `mode="action"` for
  * in-app overlays, or `mode="group"` when the sign contains separate child links.
@@ -79,7 +83,9 @@ export function Billboard(props: BillboardProps) {
   const isGroup = props.mode === "group";
   const isAction = props.mode === "action";
   const observeTarget = useRef<HTMLElement | null>(null);
-  const setObserveTarget = (el: HTMLDivElement | HTMLAnchorElement | HTMLButtonElement | null) => {
+  const setObserveTarget = (
+    el: HTMLDivElement | HTMLAnchorElement | HTMLButtonElement | null,
+  ) => {
     observeTarget.current = el;
   };
   const prefersReducedMotion = usePrefersReducedMotion();
@@ -153,13 +159,11 @@ export function Billboard(props: BillboardProps) {
         </a>
       )}
 
-      {mount === "ground" ? (
+      {mount === "ground" && (
         <div className={styles.standGround} aria-hidden="true">
           <span className={styles.pole} />
           <span className={styles.pole} />
         </div>
-      ) : (
-        <div className={styles.standBuilding} aria-hidden="true" />
       )}
     </div>
   );

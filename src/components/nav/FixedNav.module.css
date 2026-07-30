@@ -16,14 +16,10 @@
   padding-right: calc(28px + var(--safe-right));
   padding-left: calc(28px + var(--safe-left));
   min-height: var(--nav-height);
-  background: linear-gradient(
-    180deg,
-    rgba(13, 59, 102, 0.92),
-    rgba(13, 59, 102, 0.55)
-  );
+  background: var(--glass-nav-bg);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 209, 102, 0.12);
+  border-bottom: 1px solid rgba(var(--sign-gold-rgb), 0.12);
 }
 
 .brand {
@@ -80,7 +76,9 @@
   height: 2px;
   background: currentColor;
   border-radius: 1px;
-  transition: transform 0.2s ease, top 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    top 0.2s ease;
 }
 
 .menuIcon::before {
@@ -167,7 +165,9 @@
   min-width: var(--touch-min);
   min-height: var(--touch-min);
   color: var(--text-muted);
-  transition: color 0.2s ease, transform 0.2s ease;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .menuBackdrop {
@@ -222,7 +222,7 @@
     position: fixed;
     inset: 0;
     z-index: -1;
-    background: rgba(13, 59, 102, 0.45);
+    background: rgba(0, 0, 0, 0.45);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
   }
@@ -236,13 +236,11 @@
     padding: 0 16px;
     padding-left: calc(16px + var(--safe-left));
     padding-right: calc(16px + var(--safe-right));
-    background: linear-gradient(
-      180deg,
-      rgba(13, 59, 102, 0.98),
-      rgba(13, 59, 102, 0.92)
-    );
-    border-bottom: 1px solid rgba(255, 209, 102, 0.12);
-    transition: max-height 0.3s ease, padding 0.3s ease;
+    background: var(--glass-nav-bg);
+    border-bottom: 1px solid rgba(var(--sign-gold-rgb), 0.12);
+    transition:
+      max-height 0.3s ease,
+      padding 0.3s ease;
   }
 
   .mobileMenuOpen {
@@ -289,7 +287,9 @@
     border-radius: 8px;
     color: var(--text-muted);
     background: rgba(245, 240, 232, 0.06);
-    transition: color 0.15s ease, background 0.15s ease;
+    transition:
+      color 0.15s ease,
+      background 0.15s ease;
   }
 
   .mobileIcon:active {

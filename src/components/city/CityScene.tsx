@@ -6,6 +6,7 @@ import { ctas } from "@/data/ctas";
 import { SocialSvg } from "@/components/icons";
 import {
   FOREGROUND_TILE_WIDTH,
+  GROUND,
   getForegroundBuildings,
 } from "@/data/cityBuildings";
 import { ROAD_HEIGHT_VH } from "./roadGeometry";
@@ -33,6 +34,16 @@ const billboardLeft = (buildingIndex: number) => {
   return Math.round(b.x + b.w / 2);
 };
 
+// Building-mounted signs rest directly on their target building's actual
+// roofline. `.foreground` renders at a fixed pixel height (GROUND), while
+// `.billboards` is offset 3vh from the scene bottom — the calc() cancels
+// that offset out so the sign lands exactly at (GROUND - building.top),
+// the same coordinate space the foreground SVG itself uses.
+const billboardBottom = (buildingIndex: number) => {
+  const b = BUILDINGS[buildingIndex];
+  return `calc(${GROUND - b.top}px - 3vh)`;
+};
+
 export function CityScene() {
   const isMobile = useMediaQuery("(max-width: 768px)");
   const { registerLayer } = useAutoScroll({
@@ -42,8 +53,8 @@ export function CityScene() {
   const renderBillboards = (decorative: boolean) => (
     <div className={styles.billboardTile} style={{ width: BILLBOARD_TILE }}>
       <div
-        className={`${styles.slot} ${styles.slotElevated}`}
-        style={{ left: billboardLeft(2) }}
+        className={styles.slot}
+        style={{ left: billboardLeft(2), bottom: billboardBottom(2) }}
       >
         <Billboard
           decorative={decorative}
@@ -58,8 +69,8 @@ export function CityScene() {
       </div>
 
       <div
-        className={`${styles.slot} ${styles.slotElevated}`}
-        style={{ left: billboardLeft(6) }}
+        className={styles.slot}
+        style={{ left: billboardLeft(6), bottom: billboardBottom(6) }}
       >
         <Billboard
           decorative={decorative}
@@ -86,8 +97,8 @@ export function CityScene() {
       </div>
 
       <div
-        className={`${styles.slot} ${styles.slotElevated}`}
-        style={{ left: billboardLeft(12) }}
+        className={styles.slot}
+        style={{ left: billboardLeft(12), bottom: billboardBottom(12) }}
       >
         <Billboard
           decorative={decorative}

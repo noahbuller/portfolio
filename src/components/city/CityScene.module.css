@@ -159,7 +159,7 @@
   position: absolute;
   bottom: 3vh;
   left: 0;
-  z-index: 8;
+  z-index: 7;
 }
 
 .billboardTile {
@@ -167,14 +167,11 @@
   height: 1px;
 }
 
+/* All billboard signs (ground poles and building pedestals alike) sit at
+   the curb (top of the road) so their base never shares vertical space with
+   the car lane below. */
 .slot {
   position: absolute;
-  bottom: 0;
-}
-
-/* Building-mounted billboards sit at the curb (top of the road), so their
-   building pedestal rises from behind the road instead of standing in it. */
-.slotElevated {
   bottom: 6vh;
 }
 
@@ -198,14 +195,14 @@
 
 @media (hover: hover) and (pointer: fine) {
   .socialChip:hover {
-    color: var(--neon-accent);
-    border-color: var(--neon-accent);
+    color: var(--sign-gold);
+    border-color: var(--sign-gold);
     transform: translateY(-2px);
   }
 }
 
 .socialChip:focus-visible {
-  outline: 2px solid var(--neon-accent);
+  outline: 2px solid var(--sign-gold);
   outline-offset: 3px;
 }
 

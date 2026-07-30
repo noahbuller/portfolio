@@ -1,5 +1,6 @@
 .article {
   max-width: var(--overlay-prose-width);
+  margin: 0 auto;
 }
 
 .back {
