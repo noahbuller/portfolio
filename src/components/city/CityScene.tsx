@@ -11,6 +11,7 @@ import {
 } from "@/data/cityBuildings";
 import { ROAD_HEIGHT_VH } from "./roadGeometry";
 import { SkyLayer } from "./SkyLayer";
+import { CloudLayer } from "./CloudLayer";
 import { SunMoonToggle } from "./SunMoonToggle";
 import { SkylineLayer } from "./SkylineLayer";
 import { MidgroundLayer } from "./MidgroundLayer";
@@ -130,6 +131,14 @@ export function CityScene() {
   return (
     <div className={styles.scene}>
       <SkyLayer />
+
+      <ParallaxLayer
+        speed={0.08}
+        register={registerLayer}
+        className={styles.clouds}
+        renderTile={() => <CloudLayer />}
+      />
+
       <SunMoonToggle />
 
       <div className={styles.heroTitle} aria-hidden="true">

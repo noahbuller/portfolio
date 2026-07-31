@@ -9,7 +9,7 @@ export interface BuildingSpec {
   /** Window grid rows — determines the building's height. */
   rows: number;
   tone: "shadow" | "mid";
-  roof?: "antenna" | "tank";
+  roof?: "antenna" | "tank" | "hvac" | "shed" | "garden";
 }
 
 export interface Building {
@@ -17,7 +17,7 @@ export interface Building {
   w: number;
   top: number;
   tone: "shadow" | "mid";
-  roof?: "antenna" | "tank";
+  roof?: "antenna" | "tank" | "hvac" | "shed" | "garden";
   cols: number;
   rows: number;
 }
@@ -29,18 +29,18 @@ export interface Building {
  * windows (see cityWindows.ts).
  */
 const BUILDING_SPECS: BuildingSpec[] = [
-  { cols: 4, rows: 7, tone: "shadow" },
+  { cols: 4, rows: 7, tone: "shadow", roof: "shed" },
   { cols: 3, rows: 5, tone: "mid" },
   { cols: 5, rows: 8, tone: "shadow", roof: "antenna" },
-  { cols: 3, rows: 5, tone: "mid" },
-  { cols: 4, rows: 6, tone: "shadow" },
+  { cols: 3, rows: 5, tone: "mid", roof: "hvac" },
+  { cols: 4, rows: 6, tone: "shadow", roof: "garden" },
   { cols: 3, rows: 5, tone: "mid", roof: "tank" },
   { cols: 5, rows: 8, tone: "shadow", roof: "antenna" },
   { cols: 3, rows: 5, tone: "mid" },
-  { cols: 5, rows: 6, tone: "shadow" },
-  { cols: 4, rows: 5, tone: "mid" },
+  { cols: 5, rows: 6, tone: "shadow", roof: "hvac" },
+  { cols: 4, rows: 5, tone: "mid", roof: "shed" },
   { cols: 4, rows: 7, tone: "shadow", roof: "tank" },
-  { cols: 3, rows: 5, tone: "mid" },
+  { cols: 3, rows: 5, tone: "mid", roof: "garden" },
   { cols: 4, rows: 6, tone: "shadow" },
 ];
 

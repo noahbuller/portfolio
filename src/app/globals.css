@@ -30,6 +30,10 @@
   --plane-far-wing: #c7ced6;
   --plane-window-dim: #9fb3c0;
 
+  /* ── Clouds (coastal light) — soft pale white-blue ── */
+  --cloud-fill: #f1f6fb;
+  --cloud-opacity-mult: 1;
+
   /* ── Signature/sign colors (coastal light) ── */
   --sign-gold: #ffd166;
   --sign-rose: #ef476f;
@@ -155,6 +159,13 @@
   --plane-far-wing: #5a5248;
   --plane-window-dim: #6b5f4d;
 
+  /* ── Clouds (Silhouette Theatre) — warm amber-lit undersides instead of
+       going dark/silhouette, so they read as sunset-lit not storm clouds.
+       Boosted opacity: warm-on-warm has less natural contrast than the
+       light theme's white-on-navy, so they need the extra push to read. ── */
+  --cloud-fill: #f2c98d;
+  --cloud-opacity-mult: 1.45;
+
   --sign-gold: #eab155;
   --sign-rose: #b8452e;
   --sign-pale: #f0dbb0;
@@ -168,7 +179,12 @@
 
   --glass-border: rgba(var(--sign-gold-rgb), 0.32);
   --glass-bg: rgba(20, 16, 10, 0.82);
-  --glass-nav-bg: rgba(20, 16, 10, 0.92);
+  /* Lower opacity than --glass-bg on purpose: the dark theme's sky-top is a
+     *light* warm amber (unlike light mode's dark navy), so a near-opaque
+     nav here reads as a flat dark bar instead of glass over that sky. This
+     lets more of the blurred sky/cloud color bleed through while staying
+     dark enough for text contrast. */
+  --glass-nav-bg: rgba(20, 16, 10, 0.55);
 }
 
 /* FixedNav switches to smaller padding at this breakpoint (10px vs 14px) —

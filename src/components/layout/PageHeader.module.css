@@ -6,8 +6,9 @@
   font-size: 11px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--foreground-sand);
+  color: var(--sign-gold);
   font-weight: 600;
+  text-shadow: 0 0 12px rgba(var(--sign-gold-rgb), 0.5);
 }
 
 .title {

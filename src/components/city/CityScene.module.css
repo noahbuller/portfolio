@@ -21,6 +21,17 @@
   z-index: 1;
 }
 
+/* High, slow-drifting clouds — spans from the very top of the scene (behind
+   the fixed nav bar's glass blur) down through the upper sky, painted after
+   the flat sky gradient but still behind the hero title/skyline. */
+.clouds {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
 /* Faded title centered in the sky, above the buildings */
 .heroTitle {
   position: absolute;

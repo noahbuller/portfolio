@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useEffect, useRef } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import styles from "./OverlayShell.module.css";
 
 export type OverlaySize = "compact" | "wide" | "full";
@@ -22,6 +22,10 @@ const sizeClass: Record<OverlaySize, string | undefined> = {
   full: styles.modalFull,
 };
 
+// Matches --duration-normal in globals.css — kept as a literal here since
+// the exit unmount timer runs in JS, not CSS, and has to agree with it.
+const EXIT_DURATION_MS = 350;
+
 /** Shared backdrop and glass panel for hash-driven overlays. */
 export function OverlayShell({
   isOpen,
@@ -33,6 +37,34 @@ export function OverlayShell({
   children,
 }: OverlayShellProps) {
   const closeRef = useRef<HTMLButtonElement>(null);
+  // Stays mounted for one extra tick after isOpen goes false so the
+  // scale/fade-out animation has time to play instead of the panel just
+  // vanishing — `open` toggles the entrance/exit animation class.
+  const [shouldRender, setShouldRender] = useState(isOpen);
+  const [open, setOpen] = useState(isOpen);
+
+  // Adjusting state during render (React's recommended pattern for this,
+  // rather than an effect) so both the reopen and the start-of-close happen
+  // on the same render as the prop change instead of a render-then-effect
+  // round trip.
+  if (isOpen && !shouldRender) {
+    setShouldRender(true);
+  }
+  if (!isOpen && open) {
+    setOpen(false);
+  }
+
+  useEffect(() => {
+    if (isOpen) {
+      // Next tick, so the initial mount paints in the "closed" state first
+      // and the transition to "open" actually animates.
+      const raf = requestAnimationFrame(() => setOpen(true));
+      return () => cancelAnimationFrame(raf);
+    }
+
+    const t = setTimeout(() => setShouldRender(false), EXIT_DURATION_MS);
+    return () => clearTimeout(t);
+  }, [isOpen]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -50,7 +82,7 @@ export function OverlayShell({
     };
   }, [isOpen, onClose]);
 
-  if (!isOpen) return null;
+  if (!shouldRender) return null;
 
   const closeButton = (
     <button
@@ -60,16 +92,31 @@ export function OverlayShell({
       onClick={onClose}
       aria-label="Close panel"
     >
-      ×
+      <svg
+        className={styles.closeIcon}
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        aria-hidden="true"
+      >
+        <line x1="6" y1="6" x2="18" y2="18" />
+        <line x1="18" y1="6" x2="6" y2="18" />
+      </svg>
     </button>
   );
 
   if (bare) {
     return (
-      <div className={styles.backdrop} onClick={onClose} role="presentation">
+      <div
+        className={`${styles.backdrop} ${open ? styles.open : ""}`}
+        onClick={onClose}
+        role="presentation"
+      >
         {closeButton}
         <div
-          className={styles.barePanel}
+          className={`${styles.barePanel} ${open ? styles.open : ""}`}
           role="dialog"
           aria-modal="true"
           aria-labelledby={titleId}
@@ -82,23 +129,26 @@ export function OverlayShell({
   }
 
   return (
-    <div className={styles.backdrop} onClick={onClose} role="presentation">
+    <div
+      className={`${styles.backdrop} ${open ? styles.open : ""}`}
+      onClick={onClose}
+      role="presentation"
+    >
       <div
-        className={[styles.modal, sizeClass[size], modalClassName].filter(Boolean).join(" ")}
+        className={[
+          styles.modal,
+          open ? styles.open : "",
+          sizeClass[size],
+          modalClassName,
+        ]
+          .filter(Boolean)
+          .join(" ")}
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
         onClick={(e) => e.stopPropagation()}
       >
-        <button
-          ref={closeRef}
-          type="button"
-          className={styles.close}
-          onClick={onClose}
-          aria-label="Close panel"
-        >
-          ×
-        </button>
+        {closeButton}
         {children}
       </div>
     </div>
