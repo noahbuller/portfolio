@@ -2,10 +2,6 @@
   margin-top: 4px;
 }
 
-.courseSkillIcons {
-  margin-bottom: 14px;
-}
-
 .roleList {
   list-style: none;
   display: flex;
@@ -94,6 +90,8 @@
 }
 
 .courseGroup {
+  display: flex;
+  flex-direction: column;
   padding: 20px 22px;
 }
 
@@ -102,6 +100,15 @@
   font-weight: 600;
   color: var(--text-light);
   margin-bottom: 12px;
+}
+
+.courseFooter {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--glass-border);
 }
 
 @media (max-width: 600px) {

@@ -37,7 +37,9 @@ export function ExperienceOverlay() {
             <li key={role.id} className={`glass-panel ${styles.roleCard}`}>
               <div className={styles.roleHeader}>
                 <div>
-                  <h3 className={`${styles.roleCompany} font-display`}>{role.company}</h3>
+                  <h3 className={`${styles.roleCompany} font-display`}>
+                    {role.company}
+                  </h3>
                   <p className={styles.roleTitle}>
                     {role.title} · {role.location}
                   </p>
@@ -65,7 +67,9 @@ export function ExperienceOverlay() {
         <article className={`glass-panel ${styles.educationCard}`}>
           <div className={styles.roleHeader}>
             <div>
-              <h3 className={`${styles.roleCompany} font-display`}>{education.school}</h3>
+              <h3 className={`${styles.roleCompany} font-display`}>
+                {education.school}
+              </h3>
               <p className={styles.roleTitle}>{education.degree}</p>
             </div>
             <p className={styles.roleDates}>{education.dates}</p>
@@ -83,21 +87,24 @@ export function ExperienceOverlay() {
       <PageSection id="courses-heading" title="Relevant coursework">
         <div className={styles.courseGrid}>
           {courseGroups.map((group) => (
-            <article key={group.label} className={`glass-panel ${styles.courseGroup}`}>
+            <article
+              key={group.label}
+              className={`glass-panel ${styles.courseGroup}`}
+            >
               <h3 className={styles.courseLabel}>{group.label}</h3>
-              {group.skillIcons && (
-                <div className={styles.courseSkillIcons}>
-                  <SkillIcons
-                    icons={group.skillIcons}
-                    label={`${group.label} technologies`}
-                  />
-                </div>
-              )}
               <ul className={styles.bullets}>
                 {group.courses.map((course) => (
                   <li key={course}>{course}</li>
                 ))}
               </ul>
+              <div className={styles.courseFooter}>
+                {group.skillIcons && (
+                  <SkillIcons
+                    icons={group.skillIcons}
+                    label={`${group.label} technologies`}
+                  />
+                )}
+              </div>
             </article>
           ))}
         </div>
@@ -107,7 +114,9 @@ export function ExperienceOverlay() {
         <article className={`glass-panel ${styles.leadershipCard}`}>
           <div className={styles.roleHeader}>
             <div>
-              <h3 className={`${styles.roleCompany} font-display`}>{leadership.shortName}</h3>
+              <h3 className={`${styles.roleCompany} font-display`}>
+                {leadership.shortName}
+              </h3>
               <p className={styles.roleTitle}>{leadership.role}</p>
             </div>
             <p className={styles.roleDates}>{leadership.dates}</p>

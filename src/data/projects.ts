@@ -8,6 +8,8 @@ export interface ProjectPreview {
   alt: string;
   /** Live site URL when the preview is clickable. */
   href?: string;
+  /** Overlay label shown on hover when href is set. Defaults to "Visit live site". */
+  linkLabel?: string;
 }
 
 export interface Project {
@@ -98,18 +100,24 @@ export const projects: Project[] = [
     tagline: "AI-driven blockchain data capstone",
     role: "Lehigh Capstone",
     summary:
-      "Lehigh Capstone integrating four AI services with blockchain-secured personal data payloads (iQubes), plus a full cloud infrastructure migration to production.",
+      "A 4-person Lehigh Capstone connecting AI agents to blockchain-secured personal data payloads (iQubes), including a full migration from a local prototype to production cloud infrastructure.",
     problem:
-      "The capstone prototype ran locally behind a reverse proxy and needed production-grade cloud infrastructure while connecting multiple AI services to secured personal data payloads.",
+      "AI agents and applications need to query and act on personal data without exposing the raw data itself, and the capstone's initial prototype could only demonstrate this locally behind a reverse proxy, with no production-grade infrastructure to run on.",
     approach:
-      "Engineered integrations with OpenAI ChatGPT and DeepSeek to enable AI-driven querying and interaction with blockchain-secured personal data payloads (iQubes).",
+      "As part of a 4-person capstone team, connected 6+ AI and agentic intelligence providers, including OpenAI and DeepSeek, to iQubes so agents could query scoped, verifiable data without ever accessing it in raw form. Owned the migration off the local reverse proxy onto AWS: EC2 for hosting, GoDaddy-managed DNS through Route 53, Secrets Manager for credentials, and Amplify for deployment.",
     outcomes: [
-      "Enabled AI-driven querying across four integrated AI services and iQube payloads.",
-      "Migrated from reverse-proxied local prototype to production on AWS.",
-      "Configured EC2, GoDaddy DNS, Route 53, Secrets Manager, and Amplify for stable deployment.",
+      "Presented the working prototype at Lehigh's capstone poster session, evaluated by faculty.",
+      "Migrated from a reverse-proxied local prototype to a production deployment on AWS with managed DNS, secrets, and CI-driven deploys through Amplify.",
+      'Selected to continue as a second-year capstone, extending the protocol\'s cross-chain "containment" layer.',
     ],
-    skillIcons: "aws,go,git,github,docker,ts",
-    links: [],
+    skillIcons: "aws,solidity,git,github,docker,ts",
+    links: [{ label: "Capstone poster", href: "/projects/iqubeCapstone.png" }],
+    preview: {
+      src: "/projects/iqubeCapstone.png",
+      alt: "iQube Protocol capstone poster covering the abstract, architecture, and results",
+      href: "/projects/iqubeCapstone.png",
+      linkLabel: "View full poster",
+    },
   },
 ];
 

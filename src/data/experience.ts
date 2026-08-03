@@ -31,7 +31,7 @@ export const experienceRoles: ExperienceRole[] = [
       "Engineered a dynamic search-query builder supporting 8 user-facing inputs across 7 PostgreSQL tables (~5,000–6,000 rows), using indexed queries and cross-table checks to increase search speed and reduce invalid responses.",
       "Integrated Zod-based server-side validation across 8 user-input API routes to enforce runtime schema checks and improve backend robustness.",
     ],
-    skillIcons: "ts,aws,postgres,go,lambda",
+    skillIcons: "ts,aws,postgres,go",
   },
   {
     id: "certifydoc",
@@ -57,6 +57,7 @@ export const education = {
   summary:
     "Dual-degree program combining systems fundamentals, software engineering practice, and business application design.",
   honors: [
+    "Graduated with High Honors",
     "Upsilon Pi Epsilon Honor Society",
     "Dean's List (5 Semesters)",
   ],
@@ -80,9 +81,10 @@ export const courseGroups: CourseGroup[] = [
     courses: [
       "Business Application Design",
       "Business Communications",
-      "Manegerial Accounting",
-      "Princples of Finance",
-      "Strategic Management in a Global Enviornment"
+      "Managerial Accounting",
+      "Principles of Finance",
+      "Strategic Management in a Global Environment",
+      "Supply Chain Management",
     ],
   },
 ];

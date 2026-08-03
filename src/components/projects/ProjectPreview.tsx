@@ -29,7 +29,8 @@ export function ProjectPreviewFrame({ preview }: ProjectPreviewProps) {
       >
         {image}
         <span className={styles.overlay}>
-          Visit live site <span aria-hidden="true">↗</span>
+          {preview.linkLabel ?? "Visit live site"}{" "}
+          <span aria-hidden="true">↗</span>
         </span>
       </a>
     );
