@@ -44,7 +44,11 @@ export function ParallaxLayer({
     let cleanup = () => {};
     const update = () => {
       cleanup();
-      const width = tile.getBoundingClientRect().width;
+      // offsetWidth (layout box size) rather than getBoundingClientRect
+      // (post-transform paint size) so an ancestor CSS `transform: scale()`
+      // — e.g. the short-viewport shrink in CityScene.module.css — can't
+      // throw off the modulo math the scroll loop uses to wrap the tile.
+      const width = tile.offsetWidth;
       cleanup = register(track, speed, width);
     };
 
@@ -60,10 +64,7 @@ export function ParallaxLayer({
 
   return (
     <div className={className} style={style}>
-      <div
-        ref={trackRef}
-        style={{ display: "flex", willChange: "transform" }}
-      >
+      <div ref={trackRef} style={{ display: "flex", willChange: "transform" }}>
         <div ref={tileRef} style={{ flex: "none" }}>
           {renderTile(false)}
         </div>

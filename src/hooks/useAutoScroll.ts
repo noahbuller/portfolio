@@ -18,7 +18,9 @@ interface UseAutoScrollOptions {
  * Drives a single requestAnimationFrame loop that translates every registered
  * layer directly via the DOM. Pauses when the tab is hidden or motion is reduced.
  */
-export function useAutoScroll({ pixelsPerSecond = 60 }: UseAutoScrollOptions = {}) {
+export function useAutoScroll({
+  pixelsPerSecond = 60,
+}: UseAutoScrollOptions = {}) {
   const prefersReducedMotion = usePrefersReducedMotion();
   const isVisible = useDocumentVisibility();
   const layersRef = useRef<Map<HTMLElement, RegisteredLayer>>(new Map());
@@ -59,7 +61,13 @@ export function useAutoScroll({ pixelsPerSecond = 60 }: UseAutoScrollOptions = {
     }
 
     const tick = (now: number) => {
-      if (startRef.current === null) startRef.current = now;
+      if (startRef.current === null) {
+        // Re-seed from wherever the offset was frozen (elapsedRef), not 0 —
+        // otherwise every resume (tab refocus, or pixelsPerSecond changing
+        // when isMobile flips mid-resize) snaps every layer back toward its
+        // start position before continuing.
+        startRef.current = now - elapsedRef.current * 1000;
+      }
       const elapsedSeconds = (now - startRef.current) / 1000;
       elapsedRef.current = elapsedSeconds;
       applyOffset(elapsedSeconds * pixelsPerSecond);

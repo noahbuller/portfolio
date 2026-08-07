@@ -65,6 +65,37 @@
   opacity: 0.3;
 }
 
+/* Wraps every fixed-pixel-height, ground-anchored layer (skyline through
+   billboards) so they can be shrunk together as one unit on short
+   viewports — see the height media queries below. Sits between the hero
+   title (z-index 2) and the plane layer/toggle (9/15), which stay outside
+   the wrapper and are unaffected by the scale. */
+.groundScene {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+}
+
+/* Landscape phones (and any short browser window) can be shorter than the
+   scene's fixed pixel stack (540px foreground alone), which would otherwise
+   push the tallest buildings and their roof-mounted billboards — including
+   the resume CTA — above the visible viewport. Scaling from the bottom-left
+   keeps the ground line pinned to the screen bottom while bringing
+   everything above it back into view. */
+@media (max-height: 480px) {
+  .groundScene {
+    transform: scale(0.78);
+    transform-origin: left bottom;
+  }
+}
+
+@media (max-height: 380px) {
+  .groundScene {
+    transform: scale(0.62);
+    transform-origin: left bottom;
+  }
+}
+
 .skyline {
   position: absolute;
   bottom: 38vh;

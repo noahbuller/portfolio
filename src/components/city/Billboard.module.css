@@ -27,6 +27,7 @@
     0 0 22px var(--accent-glow, rgba(var(--sign-gold-rgb), 0.5)),
     0 14px 28px rgba(0, 0, 0, 0.55);
   cursor: pointer;
+  touch-action: manipulation;
   /* Pre-entrance state; .inView pops it to full */
   opacity: 0.7;
   transform: translateY(10px) scale(0.92);

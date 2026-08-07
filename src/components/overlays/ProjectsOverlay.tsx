@@ -34,7 +34,9 @@ function ProjectsGrid() {
               <ProjectCardMedia project={project} />
               <div className={styles.cardBody}>
                 <span className={styles.date}>{project.date}</span>
-                <h2 className={`${styles.cardTitle} font-display`}>{project.title}</h2>
+                <h2 className={`${styles.cardTitle} font-display`}>
+                  {project.title}
+                </h2>
                 <p className={styles.tagline}>{project.tagline}</p>
                 <div className={styles.icons}>
                   <SkillIcons
@@ -78,7 +80,10 @@ function ProjectDetail({ slug }: { slug: string }) {
           <span className={detailStyles.date}>{project.date}</span>
           <span className={detailStyles.role}>{project.role}</span>
         </p>
-        <h1 id="projects-overlay-title" className={`${detailStyles.title} font-display`}>
+        <h1
+          id="projects-overlay-title"
+          className={`${detailStyles.title} font-display`}
+        >
           {project.title}
         </h1>
         <p className={detailStyles.tagline}>{project.tagline}</p>
@@ -128,14 +133,17 @@ function ProjectDetail({ slug }: { slug: string }) {
 
       <section className={`glass-panel ${detailStyles.section}`}>
         <h2 className="section-eyebrow">Tech stack</h2>
-        <SkillIcons icons={project.skillIcons} label={`${project.title} tech stack`} />
+        <SkillIcons
+          icons={project.skillIcons}
+          label={`${project.title} tech stack`}
+        />
       </section>
     </article>
   );
 }
 
 export function ProjectsOverlay() {
-  const { view, closeOverlay } = useOverlay();
+  const { view, closeOverlay, goBack } = useOverlay();
   const isOpen = isProjectsView(view);
   const isDetail = typeof view === "object" && view?.type === "project";
   const slug = isDetail ? view.slug : "";
@@ -143,15 +151,14 @@ export function ProjectsOverlay() {
   return (
     <OverlayShell
       isOpen={isOpen}
-      onClose={closeOverlay}
+      // From a project's detail view, Escape/backdrop-click/X should step
+      // back to the list first — the same thing the in-panel "← All
+      // projects" button does — instead of closing the whole overlay.
+      onClose={isDetail ? goBack : closeOverlay}
       titleId="projects-overlay-title"
       size={isDetail ? "full" : "wide"}
     >
-      {isDetail ? (
-        <ProjectDetail slug={slug} />
-      ) : (
-        <ProjectsGrid />
-      )}
+      {isDetail ? <ProjectDetail slug={slug} /> : <ProjectsGrid />}
     </OverlayShell>
   );
 }

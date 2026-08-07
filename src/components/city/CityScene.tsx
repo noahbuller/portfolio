@@ -148,45 +148,51 @@ export function CityScene() {
         <span className={styles.heroSubtitle}>{ctas.hero.subtitle}</span>
       </div>
 
-      <ParallaxLayer
-        speed={0.18}
-        register={registerLayer}
-        className={styles.skyline}
-        renderTile={() => <SkylineLayer />}
-      />
+      {/* Ground-anchored layers (fixed pixel heights) share one wrapper so a
+          single `transform: scale()` can shrink them all uniformly on short
+          viewports — see .groundScene in CityScene.module.css — instead of
+          letting the tallest buildings/billboards clip above the viewport. */}
+      <div className={styles.groundScene}>
+        <ParallaxLayer
+          speed={0.18}
+          register={registerLayer}
+          className={styles.skyline}
+          renderTile={() => <SkylineLayer />}
+        />
 
-      <ParallaxLayer
-        speed={0.45}
-        register={registerLayer}
-        className={styles.midground}
-        renderTile={() => <MidgroundLayer />}
-      />
+        <ParallaxLayer
+          speed={0.45}
+          register={registerLayer}
+          className={styles.midground}
+          renderTile={() => <MidgroundLayer />}
+        />
 
-      <div className={styles.sunReflection} aria-hidden="true" />
+        <div className={styles.sunReflection} aria-hidden="true" />
 
-      <ParallaxLayer
-        speed={1}
-        register={registerLayer}
-        className={styles.foreground}
-        renderTile={() => <ForegroundLayer />}
-      />
+        <ParallaxLayer
+          speed={1}
+          register={registerLayer}
+          className={styles.foreground}
+          renderTile={() => <ForegroundLayer />}
+        />
 
-      <div
-        className={styles.road}
-        aria-hidden="true"
-        style={{ "--road-height-vh": ROAD_HEIGHT_VH } as React.CSSProperties}
-      >
-        <div className={styles.roadLine} />
+        <div
+          className={styles.road}
+          aria-hidden="true"
+          style={{ "--road-height-vh": ROAD_HEIGHT_VH } as React.CSSProperties}
+        >
+          <div className={styles.roadLine} />
+        </div>
+
+        <TrafficLayer />
+
+        <ParallaxLayer
+          speed={1}
+          register={registerLayer}
+          className={styles.billboards}
+          renderTile={renderBillboards}
+        />
       </div>
-
-      <TrafficLayer />
-
-      <ParallaxLayer
-        speed={1}
-        register={registerLayer}
-        className={styles.billboards}
-        renderTile={renderBillboards}
-      />
 
       <PlaneLayer />
     </div>

@@ -26,6 +26,7 @@
   width: min(560px, 100%);
   max-height: min(85dvh, 720px);
   overflow-y: auto;
+  overscroll-behavior: contain;
   padding: 28px 32px 32px;
   border-radius: 16px;
   border: 2px solid var(--glass-border);
@@ -96,6 +97,7 @@
   position: relative;
   width: min(560px, 100%);
   max-height: min(85dvh, 720px);
+  overscroll-behavior: contain;
   color: var(--text-light);
   opacity: 0;
   transform: scale(0.94) translateY(12px);
@@ -139,7 +141,15 @@
   outline-offset: 3px;
 }
 
-@media (max-width: 600px) {
+.dragHandle {
+  display: none;
+}
+
+/* Matches FixedNav's 768px breakpoint (FixedNav.module.css) rather than a
+   separate 600px cutoff — otherwise there's a dead zone between the two
+   where the nav has already collapsed to its mobile hamburger but the
+   overlay is still presented as a centered desktop card. */
+@media (max-width: 768px) {
   .backdrop {
     padding: 12px;
     padding-bottom: calc(12px + var(--safe-bottom));
@@ -160,6 +170,19 @@
   .closeBare {
     top: calc(12px + var(--safe-top));
     right: calc(12px + var(--safe-right));
+  }
+
+  /* Only shown once the panel actually presents as a bottom sheet — the
+     grab target for the swipe-down-to-close gesture wired up in
+     OverlayShell.tsx. */
+  .dragHandle {
+    display: block;
+    width: 36px;
+    height: 4px;
+    margin: -8px auto 14px;
+    border-radius: 2px;
+    background: rgba(245, 240, 232, 0.35);
+    touch-action: none;
   }
 }
 

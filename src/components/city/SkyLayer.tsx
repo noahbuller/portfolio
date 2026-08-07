@@ -5,20 +5,27 @@
  * its own component (SunMoonToggle), rendered on top of this layer.
  */
 export function SkyLayer() {
+  // `preserveAspectRatio="xMidYMid slice"` crops horizontally on narrow
+  // (portrait phone) viewports, leaving only roughly the central 700-1220
+  // band of this 1920-wide viewBox visible. Half the stars sit inside that
+  // band so the sky isn't nearly empty on mobile; the rest spread across
+  // the full width for the wide-desktop view.
   const stars = [
+    [760, 70],
+    [840, 130],
+    [900, 60],
+    [960, 160],
+    [1020, 90],
+    [1080, 140],
+    [1140, 70],
+    [880, 190],
+    [1020, 200],
     [120, 60],
     [320, 110],
-    [540, 70],
-    [760, 140],
-    [980, 90],
-    [1180, 50],
-    [1380, 130],
     [1560, 80],
     [1760, 120],
     [1880, 60],
     [220, 180],
-    [680, 200],
-    [1080, 170],
     [1500, 210],
   ];
 

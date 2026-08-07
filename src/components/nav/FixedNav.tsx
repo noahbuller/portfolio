@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { ctas } from "@/data/ctas";
 import { SocialSvg } from "@/components/icons";
 import { useOverlay } from "@/components/overlays/OverlayProvider";
+import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 import styles from "./FixedNav.module.css";
 
 /**
@@ -20,17 +21,16 @@ export function FixedNav() {
     setMenuOpen(false);
   }
 
+  useBodyScrollLock(menuOpen);
+
   useEffect(() => {
     if (!menuOpen) return;
-
-    document.body.style.overflow = "hidden";
 
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setMenuOpen(false);
     };
     window.addEventListener("keydown", onKey);
     return () => {
-      document.body.style.overflow = "";
       window.removeEventListener("keydown", onKey);
     };
   }, [menuOpen]);
