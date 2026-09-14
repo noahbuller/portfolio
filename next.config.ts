@@ -19,8 +19,14 @@ const nextConfig: NextConfig = {
       // to a removed project) — land on the Projects list instead of a
       // hard 404. Must come after the specific slug entries above so a
       // known slug still lands on its own detail view.
+      //
+      // The `(?!.*\\.)` lookahead excludes any path containing a dot, so this
+      // never swallows the static files in `public/projects/` (the preview
+      // images in `src/data/projects.ts`). Redirects are evaluated before
+      // public/ files are served, so without it `/projects/foo.png` 307s to
+      // `/#projects` and `next/image` fails with a 400.
       {
-        source: "/projects/:slug*",
+        source: "/projects/:slug((?!.*\\.).*)",
         destination: "/#projects",
         permanent: false,
       },
