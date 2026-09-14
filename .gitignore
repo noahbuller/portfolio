@@ -44,3 +44,12 @@ next-env.d.ts
 *.claude
 *.Claude
 CLAUDE.md
+.ui-craft/
+.impeccable/
+.mcp.json
+.playwright-cli/
+.ui-craft/backups/
+DESIGN.md
+MANUAL_AUDIT.md
+PRODUCT.md
+.ui-craft-backups/
