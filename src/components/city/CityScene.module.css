@@ -35,7 +35,8 @@
 /* Faded title centered in the sky, above the buildings */
 .heroTitle {
   position: absolute;
-  top: 11vh;
+  /* Never tucked under the fixed nav on short (landscape) screens. */
+  top: max(11vh, calc(var(--nav-height) + 8px));
   left: 0;
   right: 0;
   z-index: 2;
@@ -79,19 +80,19 @@
 /* Landscape phones (and any short browser window) can be shorter than the
    scene's fixed pixel stack (~540px foreground + street alone), which would otherwise
    push the tallest buildings and their roof-mounted billboards — including
-   the resume CTA — above the visible viewport. Scaling from the bottom-left
+   the resume CTA — up under the nav or above the viewport. Scaling from the bottom-left
    keeps the ground line pinned to the screen bottom while bringing
    everything above it back into view. */
 @media (max-height: 480px) {
   .groundScene {
-    transform: scale(0.78);
+    transform: scale(0.6);
     transform-origin: left bottom;
   }
 }
 
 @media (max-height: 380px) {
   .groundScene {
-    transform: scale(0.62);
+    transform: scale(0.5);
     transform-origin: left bottom;
   }
 }
@@ -279,4 +280,18 @@
     transform: translateX(-50%) scale(1.12);
     transform-origin: bottom center;
   }
+}
+
+/* Silhouette Theatre: against the lit amber sky the name reads as part of
+   the silhouette (dark ink) rather than as faint cream on cream. Comes
+   after the mobile block so it overrides its opacities too. */
+:global(:root[data-theme="dark"]) .heroName {
+  color: var(--building-mid);
+  opacity: 0.55;
+  text-shadow: none;
+}
+
+:global(:root[data-theme="dark"]) .heroSubtitle {
+  color: var(--building-mid);
+  opacity: 0.6;
 }

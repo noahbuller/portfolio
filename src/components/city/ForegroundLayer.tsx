@@ -12,6 +12,7 @@ import {
   WINDOW_CELL_HEIGHT,
 } from "@/data/cityWindows";
 import { STREET_HEIGHT } from "@/data/street";
+import { Storefront } from "./Storefront";
 import { Street } from "./Street";
 import styles from "./ForegroundLayer.module.css";
 
@@ -83,7 +84,8 @@ export function ForegroundLayer() {
               stroke="rgba(6, 14, 20, 0.45)"
               strokeWidth={1.5}
             />
-            {Array.from({ length: b.rows }, (_, row) =>
+            {/* A shop, if any, takes the bottom row (see Storefront). */}
+            {Array.from({ length: b.shop ? b.rows - 1 : b.rows }, (_, row) =>
               Array.from({ length: b.cols }, (_, col) => {
                 const seed = windowSeed++;
                 // Rounded to 2dp: the browser re-serializes inline style
@@ -114,6 +116,7 @@ export function ForegroundLayer() {
                 );
               }),
             )}
+            <Storefront b={b} ground={GROUND} />
             {b.roof === "antenna" && (
               <rect
                 x={b.x + b.w / 2 - 2}

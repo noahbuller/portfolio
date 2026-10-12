@@ -1,7 +1,19 @@
+"use client";
+
+import { useId } from "react";
 import styles from "./MidgroundLayer.module.css";
 
 /** y of the bay's waterline inside the midground tile. */
 export const MIDGROUND_WATERLINE = 106;
+
+// Glints of light on the water: [x, y, width, opacity], deterministic so
+// server and client render the same thing.
+const GLINTS = Array.from({ length: 46 }, (_, i) => [
+  (i * 173) % 2000,
+  MIDGROUND_WATERLINE + 6 + ((i * 37) % 70),
+  24 + ((i * 53) % 60),
+  0.12 + ((i * 7) % 5) * 0.04,
+]);
 
 /**
  * Midground: the bay between the far-shore skyline and the foreground
@@ -19,6 +31,8 @@ export const MIDGROUND_WATERLINE = 106;
  * revival later; for now the water stands on its own.
  */
 export function MidgroundLayer() {
+  // Rendered twice by ParallaxLayer, so ids must be unique per instance.
+  const gradientId = `water${useId().replace(/[^a-zA-Z0-9_-]/g, "")}`;
   const hull = { fill: "var(--building-far)" };
 
   // A small boat that sails the full width of the tile — kept simple for
@@ -48,13 +62,40 @@ export function MidgroundLayer() {
       aria-hidden="true"
       style={{ display: "block" }}
     >
+      <defs>
+        {/* Lighter toward the far shore, where the water catches the sky. */}
+        <linearGradient
+          id={gradientId}
+          gradientUnits="userSpaceOnUse"
+          x1="0"
+          y1={MIDGROUND_WATERLINE}
+          x2="0"
+          y2={MIDGROUND_WATERLINE + 95}
+        >
+          <stop offset="0" style={{ stopColor: "var(--water)" }} />
+          <stop offset="1" style={{ stopColor: "var(--water-deep)" }} />
+        </linearGradient>
+      </defs>
       <rect
         x="0"
         y={MIDGROUND_WATERLINE}
         width="2000"
         height={280 - MIDGROUND_WATERLINE}
-        style={{ fill: "var(--water-deep)" }}
+        fill={`url(#${gradientId})`}
       />
+      <g fill="var(--window-glow)">
+        {GLINTS.map(([x, y, w, opacity], i) => (
+          <rect
+            key={i}
+            x={x}
+            y={y}
+            width={w}
+            height={1.5}
+            rx={0.75}
+            opacity={Math.round(opacity * 100) / 100}
+          />
+        ))}
+      </g>
       {boat}
     </svg>
   );

@@ -28,18 +28,16 @@
     0 14px 28px rgba(0, 0, 0, 0.55);
   cursor: pointer;
   touch-action: manipulation;
-  /* Pre-entrance state; .inView pops it to full */
-  opacity: 0.7;
-  transform: translateY(10px) scale(0.92);
+  /* Pre-entrance state: full opacity so signs never look washed out while
+     they scroll in; .inView adds a small lift. */
+  transform: translateY(8px);
   transition:
     transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 0.45s ease,
     box-shadow 0.2s ease;
 }
 
 .inView {
-  opacity: 1;
-  transform: translateY(0) scale(1);
+  transform: translateY(0);
 }
 
 .frame {
@@ -163,7 +161,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .board {
-    opacity: 1;
     transform: none;
     transition: none;
   }
