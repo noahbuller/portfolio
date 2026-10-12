@@ -11,10 +11,13 @@ import {
   WINDOW_CELL_WIDTH,
   WINDOW_CELL_HEIGHT,
 } from "@/data/cityWindows";
+import { STREET_HEIGHT } from "@/data/street";
+import { Street } from "./Street";
 import styles from "./ForegroundLayer.module.css";
 
 /**
- * Foreground street buildings with lit windows. Theme-aware via CSS custom
+ * Foreground street buildings with lit windows, plus the street below them
+ * (see Street.tsx). Theme-aware via CSS custom
  * properties. Geometry is derived from src/data/cityBuildings.ts so
  * buildings are always contiguous across the tile and every window pattern
  * is anchored to its own building's corner (never a shared global origin),
@@ -41,8 +44,8 @@ export function ForegroundLayer() {
   return (
     <svg
       width={FOREGROUND_TILE_WIDTH}
-      height={GROUND}
-      viewBox={`0 0 ${FOREGROUND_TILE_WIDTH} ${GROUND}`}
+      height={GROUND + STREET_HEIGHT}
+      viewBox={`0 0 ${FOREGROUND_TILE_WIDTH} ${GROUND + STREET_HEIGHT}`}
       preserveAspectRatio="none"
       aria-hidden="true"
       style={{ display: "block" }}
@@ -215,14 +218,7 @@ export function ForegroundLayer() {
         );
       })}
 
-      {/* Street */}
-      <rect
-        x="0"
-        y={GROUND - 20}
-        width={FOREGROUND_TILE_WIDTH}
-        height="20"
-        style={{ fill: "var(--building-shadow)" }}
-      />
+      <Street ground={GROUND} />
     </svg>
   );
 }

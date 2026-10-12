@@ -1,43 +1,49 @@
-.lane {
+/* No overflow clipping here: .scene already clips, and clipping at this
+   box would cut traffic short of the right edge whenever .groundScene is
+   scaled down on short viewports. */
+.traffic {
   position: absolute;
   inset: 0;
   z-index: 8;
   pointer-events: none;
-  overflow: hidden;
 }
 
-.car {
+/* Zero-height rail sitting on a lane's tire line; vehicles hang upward
+   from it. The near lane renders after the far one, so it overlaps it. */
+.lane {
   position: absolute;
   left: 0;
-  transform: translateX(-200px);
-  will-change: transform;
-  animation-name: drive;
-  animation-timing-function: linear;
-  animation-iteration-count: 1;
-  animation-fill-mode: both;
+  right: 0;
+  height: 0;
 }
 
-.inner {
-  transform: scale(var(--car-scale, 1));
-  transform-origin: bottom center;
+.vehicle,
+.parked {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.vehicle {
+  will-change: transform;
+  transform: translateX(var(--from));
+  animation: drive linear 1 both;
 }
 
 @keyframes drive {
   from {
-    transform: translateX(-200px);
+    transform: translateX(var(--from));
   }
   to {
-    transform: translateX(calc(100vw + 200px));
+    transform: translateX(var(--to));
   }
 }
 
-.parked {
-  animation: none;
-  left: var(--parked-left, 20vw);
+.westbound {
+  transform: scaleX(-1);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .car {
-    animation: none;
-  }
+/* Further lane recedes slightly into the haze. */
+.farLane {
+  filter: brightness(0.85);
 }

@@ -1,7 +1,11 @@
 import { tightBuildingWidth, tightBuildingTop } from "./cityWindows";
 
-/** SVG y-coordinate of the street line the foreground buildings stand on. */
-export const GROUND = 540;
+/**
+ * SVG y-coordinate of the sidewalk line the foreground buildings stand on.
+ * The street (street.ts STREET_HEIGHT) is drawn below it, so the foreground
+ * SVG is GROUND + STREET_HEIGHT tall.
+ */
+export const GROUND = 450;
 
 export interface BuildingSpec {
   /** Window grid columns — determines the building's width. */
@@ -23,25 +27,27 @@ export interface Building {
 }
 
 /**
- * Foreground street buildings, left to right. Only `cols`/`rows`/`tone`/`roof`
- * are authored here — x/width/top are derived below so every building is
- * guaranteed to be contiguous with its neighbors and to contain only whole
- * windows (see cityWindows.ts).
+ * Foreground street buildings, left to right. Rows count only what's visible
+ * above the sidewalk — the street (see street.ts) is drawn below GROUND, not
+ * over the facades. Only `cols`/`rows`/`tone`/`roof` are authored here —
+ * x/width/top are derived below so every building is guaranteed to be
+ * contiguous with its neighbors and to contain only whole windows (see
+ * cityWindows.ts).
  */
 const BUILDING_SPECS: BuildingSpec[] = [
-  { cols: 4, rows: 7, tone: "shadow", roof: "shed" },
-  { cols: 3, rows: 5, tone: "mid" },
-  { cols: 5, rows: 8, tone: "shadow", roof: "antenna" },
-  { cols: 3, rows: 5, tone: "mid", roof: "hvac" },
-  { cols: 4, rows: 6, tone: "shadow", roof: "garden" },
-  { cols: 3, rows: 5, tone: "mid", roof: "tank" },
-  { cols: 5, rows: 8, tone: "shadow", roof: "antenna" },
-  { cols: 3, rows: 5, tone: "mid" },
-  { cols: 5, rows: 6, tone: "shadow", roof: "hvac" },
-  { cols: 4, rows: 5, tone: "mid", roof: "shed" },
-  { cols: 4, rows: 7, tone: "shadow", roof: "tank" },
-  { cols: 3, rows: 5, tone: "mid", roof: "garden" },
-  { cols: 4, rows: 6, tone: "shadow" },
+  { cols: 4, rows: 5, tone: "shadow", roof: "shed" },
+  { cols: 3, rows: 3, tone: "mid" },
+  { cols: 5, rows: 6, tone: "shadow", roof: "antenna" },
+  { cols: 3, rows: 3, tone: "mid", roof: "hvac" },
+  { cols: 4, rows: 4, tone: "shadow", roof: "garden" },
+  { cols: 3, rows: 3, tone: "mid", roof: "tank" },
+  { cols: 5, rows: 6, tone: "shadow", roof: "antenna" },
+  { cols: 3, rows: 3, tone: "mid" },
+  { cols: 5, rows: 4, tone: "shadow", roof: "hvac" },
+  { cols: 4, rows: 3, tone: "mid", roof: "shed" },
+  { cols: 4, rows: 5, tone: "shadow", roof: "tank" },
+  { cols: 3, rows: 3, tone: "mid", roof: "garden" },
+  { cols: 4, rows: 4, tone: "shadow" },
 ];
 
 function deriveBuildings(specs: BuildingSpec[]): Building[] {

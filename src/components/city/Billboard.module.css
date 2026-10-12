@@ -115,6 +115,21 @@
   border-radius: 2px 2px 0 0;
 }
 
+/* Building mount: short legs lift the sign off the roof */
+.standRoof {
+  display: flex;
+  justify-content: space-between;
+  width: 64%;
+  height: 18px;
+  margin-top: -2px;
+}
+
+.leg {
+  width: 6px;
+  height: 100%;
+  background: var(--building-shadow);
+}
+
 /* Accent variants */
 .lime {
   --accent: var(--sign-gold);

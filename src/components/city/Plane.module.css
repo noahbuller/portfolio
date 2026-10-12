@@ -1,0 +1,44 @@
+.plane {
+  display: block;
+  overflow: visible;
+}
+
+/* Flipping one blade every half-cycle reads as a spinning propeller next to
+   the translucent blur disc. */
+.blade {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: prop 0.11s linear infinite;
+}
+
+@keyframes prop {
+  50% {
+    transform: scaleY(-1);
+  }
+}
+
+.beacon {
+  opacity: 0;
+  animation: blink 1.6s steps(1) infinite;
+}
+
+@keyframes blink {
+  0%,
+  86% {
+    opacity: 0;
+  }
+  88% {
+    opacity: var(--plane-beacon-opacity, 0.7);
+  }
+}
+
+.beaconOff {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blade,
+  .beacon {
+    animation: none;
+  }
+}
