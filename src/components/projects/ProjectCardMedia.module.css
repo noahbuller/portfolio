@@ -1,6 +1,6 @@
 .thumbWrap {
   overflow: hidden;
-  border-bottom: 1px solid rgba(255, 209, 102, 0.15);
+  border-radius: var(--radius-sm);
 }
 
 .thumb {
@@ -22,12 +22,8 @@
   aspect-ratio: 16 / 9;
   padding: 24px;
   text-align: center;
-  border-bottom: 1px solid rgba(255, 209, 102, 0.15);
-  background: linear-gradient(
-    165deg,
-    rgba(13, 59, 102, 0.85),
-    rgba(42, 157, 143, 0.55)
-  );
+  border-radius: var(--radius-sm);
+  background: var(--building-mid);
 }
 
 .placeholderTitle {

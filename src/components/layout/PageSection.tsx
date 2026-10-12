@@ -15,7 +15,7 @@ export function PageSection({ id, title, children, divided }: PageSectionProps) 
       className={`${styles.section} ${divided ? styles.divided : ""}`}
       aria-labelledby={id}
     >
-      <h2 id={id} className="section-eyebrow">
+      <h2 id={id} className={`${styles.heading} font-display`}>
         {title}
       </h2>
       {children}

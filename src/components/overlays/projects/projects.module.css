@@ -1,7 +1,7 @@
 .grid {
   list-style: none;
   display: grid;
-  gap: 24px;
+  gap: 18px;
 }
 
 @media (min-width: 600px) {
@@ -10,12 +10,27 @@
   }
 }
 
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.grid li {
+  display: flex;
+}
+
+/* A poster pasted on the board: thin accent rule, no card chrome of its own. */
 .card {
-  display: block;
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  overflow: hidden;
-  padding: 0;
-  border: none;
+  padding: 10px;
+  border: 1px solid rgba(var(--accent-rgb), 0.45);
+  border-radius: var(--radius-md);
+  background: rgba(245, 240, 232, 0.03);
+  color: inherit;
+  font: inherit;
   text-align: left;
   cursor: pointer;
   /* A double-tap on an unfamiliar card is a plausible exploratory gesture;
@@ -23,22 +38,23 @@
      taps. */
   touch-action: manipulation;
   transition:
-    transform 0.2s ease,
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
+    transform var(--duration-fast) ease,
+    border-color var(--duration-fast) ease,
+    box-shadow var(--duration-fast) ease;
 }
 
 .cardBody {
-  padding: 22px 26px 26px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 14px 6px 6px;
 }
 
 @media (hover: hover) and (pointer: fine) {
   .card:hover {
-    transform: translateY(-4px);
-    border-color: var(--gold);
-    box-shadow:
-      0 0 18px rgba(255, 209, 102, 0.25),
-      0 16px 32px rgba(0, 0, 0, 0.35);
+    transform: translateY(-3px);
+    border-color: var(--accent);
+    box-shadow: 0 0 18px rgba(var(--accent-rgb), 0.3);
   }
 
   .card:hover :global(img) {
@@ -47,43 +63,40 @@
 }
 
 .date {
-  font-size: 12px;
-  letter-spacing: 0.08em;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--text-muted);
 }
 
 .cardTitle {
-  margin-top: 8px;
-  font-size: clamp(20px, 4.5vw, 24px);
+  margin-top: 6px;
+  font-size: clamp(24px, 4.5vw, 28px);
+  line-height: 1;
 }
 
 .tagline {
   margin-top: 8px;
-  font-size: clamp(14px, 3.2vw, 15px);
+  font-size: 14px;
   line-height: 1.5;
   color: var(--text-muted);
 }
 
 .icons {
-  margin-top: 16px;
+  margin-top: 14px;
 }
 
 .cta {
   display: inline-block;
-  margin-top: 18px;
+  margin-top: auto;
+  padding-top: 14px;
   font-size: 13px;
   font-weight: 600;
-  color: var(--gold);
+  color: var(--window-glow);
 }
 
 .card:focus-visible {
-  outline: 3px solid var(--gold);
+  outline: 3px solid var(--accent);
   outline-offset: 3px;
-}
-
-@media (max-width: 600px) {
-  .cardBody {
-    padding: 18px 18px 22px;
-  }
 }
