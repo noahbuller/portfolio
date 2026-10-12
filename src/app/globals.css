@@ -171,21 +171,21 @@
        as the lowest, furthest-back surface, warm-neutral asphalt not navy. ── */
   --road-top: #1c140d;
   --road-bottom: #0a0704;
-  --sidewalk: #241a11;
+  --sidewalk: #30231a;
   --curb: #5a4630;
-  --street-tree: #1a120b;
-  --street-light-opacity: 0.45;
-  --street-reflection-opacity: 0.2;
+  --street-tree: #454020;
+  --street-light-opacity: 0.85;
+  --street-reflection-opacity: 0.35;
 
-  /* ── Traffic (Silhouette Theatre) — bodies are silhouettes (structure);
-       only head/tail lights, the taxi sign and cabin glow are lit. ── */
-  --car-1: #2a1f15;
-  --car-2: #33261a;
-  --car-3: #3d2e20;
-  --car-4: #211810;
-  --car-5: #2e2218;
-  --car-taxi: #33261a;
-  --car-glass: #6b5235;
+  /* ── Traffic (Silhouette Theatre) — bodies are distinct warm paints kept
+       darker than anything lit; head/tail lights and cabin glass are lit. ── */
+  --car-1: #7a2e24;
+  --car-2: #94511f;
+  --car-3: #a37a35;
+  --car-4: #4f4b25;
+  --car-5: #6b4a2e;
+  --car-taxi: #d29a3a;
+  --car-glass: #e7b866;
   --car-tire: #0a0704;
   --car-hub: #4a3a28;
   --car-steel: #3a2a1c;
