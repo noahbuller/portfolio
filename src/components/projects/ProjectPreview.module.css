@@ -1,14 +1,12 @@
+/* A lit window: thick silhouette frame, warm glow spilling out of it. */
 .frame {
   position: relative;
   display: block;
-  margin-bottom: 36px;
-  border-radius: 16px;
   overflow: hidden;
-  border: 2px solid var(--glass-border);
-  box-shadow:
-    0 0 24px rgba(255, 209, 102, 0.15),
-    0 16px 40px rgba(0, 0, 0, 0.35);
-  background: var(--glass-bg);
+  border: 6px solid var(--building-mid);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 0 24px rgba(var(--sign-gold-rgb), 0.22);
+  background: var(--building-mid);
 }
 
 .image {
@@ -32,8 +30,8 @@
   font-size: 13px;
   font-weight: 600;
   color: var(--text-light);
-  background: rgba(13, 59, 102, 0.88);
-  border: 1px solid var(--foreground-sand);
+  background: rgba(0, 0, 0, 0.72);
+  border: 1px solid var(--window-glow);
   opacity: 0;
   transform: translateY(6px);
   transition:
@@ -49,15 +47,11 @@
 }
 
 .frame:focus-visible {
-  outline: 2px solid var(--gold);
+  outline: 2px solid var(--accent, var(--gold));
   outline-offset: 4px;
 }
 
 @media (max-width: 600px) {
-  .frame {
-    margin-bottom: 28px;
-  }
-
   .overlay {
     opacity: 1;
     transform: none;

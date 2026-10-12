@@ -2,14 +2,19 @@
   margin-bottom: var(--overlay-section-gap);
 }
 
-.section :global(.section-eyebrow) {
-  margin-bottom: 20px;
+/* Sign-lettering heading in the board's accent (set by OverlayShell). */
+.heading {
+  margin-bottom: 16px;
+  font-size: 26px;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  color: var(--accent, var(--sign-gold));
 }
 
 .divided {
   margin-top: 8px;
-  padding-top: 48px;
-  border-top: 1px solid rgba(255, 209, 102, 0.22);
+  padding-top: 40px;
+  border-top: 1px dashed rgba(245, 240, 232, 0.2);
 }
 
 @media (max-width: 600px) {
@@ -18,6 +23,11 @@
   }
 
   .divided {
-    padding-top: 40px;
+    padding-top: 32px;
   }
+}
+
+/* The board's frame already pads its bottom edge. */
+.section:last-child {
+  margin-bottom: 0;
 }

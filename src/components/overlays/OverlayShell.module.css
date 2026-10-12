@@ -1,3 +1,5 @@
+/* The city stays visible behind the board — a plain scrim, no blur, so the
+   overlay reads as a sign pulled close rather than a separate page. */
 .backdrop {
   position: fixed;
   inset: 0;
@@ -5,10 +7,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  padding: 32px 24px 24px;
+  background: rgba(0, 0, 0, 0.45);
   opacity: 0;
   transition: opacity var(--duration-normal) var(--ease-standard);
 }
@@ -21,32 +21,62 @@
   opacity: 1;
 }
 
+/* ── The board: same construction as a billboard (Billboard.module.css) —
+   accent border, flat silhouette fill, dashed inner frame, bulb row. ── */
+.accentGold {
+  --accent: var(--sign-gold);
+  --accent-rgb: var(--sign-gold-rgb);
+}
+
+.accentRose {
+  --accent: var(--sign-rose);
+  --accent-rgb: var(--sign-rose-rgb);
+}
+
+.accentPale {
+  --accent: var(--sign-pale);
+  --accent-rgb: var(--sign-pale-rgb);
+}
+
 .modal {
   position: relative;
+  display: flex;
+  flex-direction: column;
   width: min(560px, 100%);
   max-height: min(85dvh, 720px);
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  padding: 28px 32px 32px;
-  border-radius: 16px;
-  border: 2px solid var(--glass-border);
-  background: var(--glass-bg);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  padding: 5px;
+  border-radius: var(--radius-xl);
+  border: 3px solid var(--accent);
+  background: var(--building-shadow);
   box-shadow:
-    0 0 24px rgba(var(--sign-gold-rgb), 0.2),
-    0 24px 48px rgba(0, 0, 0, 0.45);
+    0 0 0 2px rgba(0, 0, 0, 0.45),
+    0 0 28px rgba(var(--accent-rgb), 0.45),
+    0 24px 48px rgba(0, 0, 0, 0.5);
   color: var(--text-light);
   opacity: 0;
   transform: scale(0.94) translateY(12px);
   transition:
     opacity var(--duration-normal) var(--ease-out),
-    transform var(--duration-normal) var(--ease-out);
+    transform var(--duration-normal) var(--ease-out),
+    border-color var(--duration-normal) var(--ease-standard),
+    box-shadow var(--duration-normal) var(--ease-standard);
+}
+
+/* Grows out of / shrinks back into the sign that opened it — the
+   --flip-* values are measured in OverlayShell.tsx. */
+.modal[data-flip] {
+  transform-origin: 0 0;
+}
+
+.modal[data-flip]:not(.open) {
+  opacity: 0.35;
+  transform: translate(var(--flip-x), var(--flip-y))
+    scale(var(--flip-sx), var(--flip-sy));
 }
 
 .modal.open {
   opacity: 1;
-  transform: scale(1) translateY(0);
+  transform: none;
 }
 
 .modalWide {
@@ -59,32 +89,84 @@
   max-height: min(90dvh, 900px);
 }
 
+/* Scroll container. Content fades in a beat after the board lands so text
+   isn't seen stretching during the grow-from-sign scale. */
+.frame {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 36px 40px 40px;
+  border: 1px dashed rgba(245, 240, 232, 0.22);
+  border-radius: var(--radius-lg);
+  opacity: 0;
+  transition: opacity 150ms var(--ease-standard);
+}
+
+.modal.open .frame {
+  opacity: 1;
+  transition: opacity 250ms var(--ease-standard) 120ms;
+}
+
+.swap {
+  animation: swapIn 250ms var(--ease-standard);
+}
+
+@keyframes swapIn {
+  from {
+    opacity: 0;
+  }
+}
+
+.bulbs {
+  position: absolute;
+  top: -16px;
+  left: 28px;
+  right: 28px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  touch-action: none;
+}
+
+.bulb {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--window-glow);
+  box-shadow: 0 0 8px rgba(var(--sign-gold-rgb), 0.9);
+}
+
+.bulb:nth-child(3n) {
+  opacity: 0.45;
+  box-shadow: none;
+}
+
 .close {
   position: absolute;
-  top: calc(12px + var(--safe-top));
-  right: calc(14px + var(--safe-right));
+  top: -18px;
+  right: -18px;
+  z-index: 1;
   width: var(--touch-min);
   height: var(--touch-min);
   display: flex;
   align-items: center;
   justify-content: center;
-  border: none;
+  border: 2px solid var(--accent);
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.55);
+  background: var(--building-shadow);
   color: var(--window-glow);
   cursor: pointer;
-  transition:
-    background 0.2s ease,
-    box-shadow 0.2s ease;
+  transition: box-shadow var(--duration-fast) ease;
 }
 
 .close:hover {
-  background: rgba(0, 0, 0, 0.68);
-  box-shadow: 0 0 14px rgba(var(--sign-gold-rgb), 0.45);
+  box-shadow: 0 0 14px rgba(var(--accent-rgb), 0.6);
 }
 
 .close:focus-visible {
-  outline: 2px solid var(--gold);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 
@@ -152,14 +234,40 @@
 @media (max-width: 768px) {
   .backdrop {
     padding: 12px;
-    padding-bottom: calc(12px + var(--safe-bottom));
+    padding-top: calc(24px + var(--safe-top));
+    padding-bottom: 0;
     align-items: flex-end;
   }
 
+  /* Bottom sheet: the sign rises from the street. The bulb row doubles as
+     the swipe-down-to-close grab target. */
   .modal {
-    padding: 24px 20px 28px;
     max-height: 90dvh;
-    border-radius: 16px 16px 0 0;
+    padding-bottom: 0;
+    border-bottom: none;
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  }
+
+  .modalWide,
+  .modalFull {
+    max-height: 90dvh;
+  }
+
+  .frame {
+    padding: 28px 20px calc(28px + var(--safe-bottom));
+    border-bottom: none;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+
+  .bulbs {
+    left: 16px;
+    right: 64px;
+  }
+
+  .close {
+    top: 14px;
+    right: 14px;
+    border-width: 1px;
   }
 
   .barePanel {
@@ -172,9 +280,6 @@
     right: calc(12px + var(--safe-right));
   }
 
-  /* Only shown once the panel actually presents as a bottom sheet — the
-     grab target for the swipe-down-to-close gesture wired up in
-     OverlayShell.tsx. */
   .dragHandle {
     display: block;
     width: 36px;
@@ -189,7 +294,13 @@
 @media (prefers-reduced-motion: reduce) {
   .backdrop,
   .modal,
+  .frame,
+  .modal.open .frame,
   .barePanel {
     transition: none;
+  }
+
+  .swap {
+    animation: none;
   }
 }

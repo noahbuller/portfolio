@@ -1,8 +1,21 @@
 .bio {
-  font-size: 15px;
-  line-height: 1.65;
-  color: var(--text-muted);
-  margin-bottom: 22px;
+  max-width: 52ch;
+  margin-top: 14px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-light);
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 40px;
+}
+
+@media (max-width: 720px) {
+  .columns {
+    grid-template-columns: 1fr;
+  }
 }
 
 .roleList {
@@ -13,13 +26,8 @@
 }
 
 .roleItem {
-  padding-bottom: 16px;
-  border-bottom: 1px solid rgba(255, 209, 102, 0.12);
-}
-
-.roleItem:last-child {
-  padding-bottom: 0;
-  border-bottom: none;
+  padding-top: 14px;
+  border-top: 1px dashed rgba(245, 240, 232, 0.16);
 }
 
 .roleMeta {
@@ -37,7 +45,8 @@
 
 .roleDates {
   font-size: 12px;
-  color: var(--foreground-sand);
+  font-variant-numeric: tabular-nums;
+  color: var(--window-glow);
   white-space: nowrap;
 }
 
@@ -95,27 +104,29 @@
   background: var(--window-glow);
 }
 
+/* Filled in the board's accent — the one solid-color control on the sign. */
 .readMore {
   display: inline-flex;
   align-items: center;
   min-height: var(--touch-min);
-  margin-top: 12px;
-  padding: 0;
+  margin-top: 20px;
+  padding: 0 18px;
   border: none;
-  background: none;
+  border-radius: var(--radius-sm);
+  background: var(--accent, var(--sign-gold));
   font-size: 14px;
   font-weight: 600;
-  color: var(--foreground-sand);
+  color: var(--building-shadow);
   cursor: pointer;
-  transition: color 0.2s ease;
+  transition: box-shadow var(--duration-fast) ease;
 }
 
 .readMore:hover {
-  color: var(--gold);
+  box-shadow: 0 0 16px rgba(var(--accent-rgb, var(--sign-gold-rgb)), 0.55);
 }
 
 .readMore:focus-visible {
-  outline: 2px solid var(--gold);
+  outline: 2px solid var(--accent, var(--gold));
   outline-offset: 3px;
   border-radius: 4px;
 }

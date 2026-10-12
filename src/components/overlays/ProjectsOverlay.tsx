@@ -28,7 +28,7 @@ function ProjectsGrid() {
           <li key={project.slug}>
             <button
               type="button"
-              className={`glass-panel ${styles.card}`}
+              className={styles.card}
               onClick={() => openProject(project.slug)}
             >
               <ProjectCardMedia project={project} />
@@ -75,69 +75,79 @@ function ProjectDetail({ slug }: { slug: string }) {
         ← All projects
       </button>
 
-      <header className={detailStyles.header}>
-        <p className={detailStyles.meta}>
-          <span className={detailStyles.date}>{project.date}</span>
-          <span className={detailStyles.role}>{project.role}</span>
-        </p>
-        <h1
-          id="projects-overlay-title"
-          className={`${detailStyles.title} font-display`}
-        >
-          {project.title}
-        </h1>
-        <p className={detailStyles.tagline}>{project.tagline}</p>
-      </header>
-
-      {project.preview && <ProjectPreviewFrame preview={project.preview} />}
-
-      {project.links.length > 0 && (
-        <div className={detailStyles.links}>
-          {project.links.map((link) => (
-            <a
-              key={link.href}
-              className={detailStyles.external}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
+      <div className={detailStyles.layout}>
+        <div>
+          <header className={detailStyles.header}>
+            <p className={detailStyles.meta}>
+              <span className={detailStyles.date}>{project.date}</span>
+              <span className={detailStyles.role}>{project.role}</span>
+            </p>
+            <h1
+              id="projects-overlay-title"
+              className={`${detailStyles.title} font-display`}
             >
-              {link.label} ↗
-            </a>
-          ))}
+              {project.title}
+            </h1>
+            <p className={detailStyles.tagline}>{project.tagline}</p>
+          </header>
+
+          {project.preview && (
+            <ProjectPreviewFrame preview={project.preview} />
+          )}
+
+          {/* The window sill: stack on the left, outbound links on the right. */}
+          <div className={detailStyles.sill}>
+            <section className={detailStyles.stack}>
+              <h2 className={detailStyles.label}>Tech stack</h2>
+              <SkillIcons
+                icons={project.skillIcons}
+                label={`${project.title} tech stack`}
+              />
+            </section>
+            {project.links.length > 0 && (
+              <div className={detailStyles.links}>
+                {project.links.map((link) => (
+                  <a
+                    key={link.href}
+                    className={detailStyles.external}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {link.label} ↗
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
-      )}
 
-      <section className={`glass-panel ${detailStyles.section}`}>
-        <h2 className="section-eyebrow">Overview</h2>
-        <p>{project.summary}</p>
-      </section>
+        <div className={detailStyles.acts}>
+          <section className={detailStyles.act}>
+            <h2 className={detailStyles.label}>Overview</h2>
+            <p>{project.summary}</p>
+          </section>
 
-      <section className={`glass-panel ${detailStyles.section}`}>
-        <h2 className="section-eyebrow">Problem</h2>
-        <p>{project.problem}</p>
-      </section>
+          <section className={detailStyles.act}>
+            <h2 className={detailStyles.label}>Problem</h2>
+            <p>{project.problem}</p>
+          </section>
 
-      <section className={`glass-panel ${detailStyles.section}`}>
-        <h2 className="section-eyebrow">Approach</h2>
-        <p>{project.approach}</p>
-      </section>
+          <section className={detailStyles.act}>
+            <h2 className={detailStyles.label}>Approach</h2>
+            <p>{project.approach}</p>
+          </section>
 
-      <section className={`glass-panel ${detailStyles.section}`}>
-        <h2 className="section-eyebrow">Outcomes</h2>
-        <ul>
-          {project.outcomes.map((outcome) => (
-            <li key={outcome}>{outcome}</li>
-          ))}
-        </ul>
-      </section>
-
-      <section className={`glass-panel ${detailStyles.section}`}>
-        <h2 className="section-eyebrow">Tech stack</h2>
-        <SkillIcons
-          icons={project.skillIcons}
-          label={`${project.title} tech stack`}
-        />
-      </section>
+          <section className={detailStyles.act}>
+            <h2 className={detailStyles.label}>Outcomes</h2>
+            <ul>
+              {project.outcomes.map((outcome) => (
+                <li key={outcome}>{outcome}</li>
+              ))}
+            </ul>
+          </section>
+        </div>
+      </div>
     </article>
   );
 }
@@ -157,6 +167,10 @@ export function ProjectsOverlay() {
       onClose={isDetail ? goBack : closeOverlay}
       titleId="projects-overlay-title"
       size={isDetail ? "full" : "wide"}
+      accent="rose"
+      // List ↔ detail swaps the board's contents in place instead of
+      // closing and reopening it.
+      contentKey={isDetail ? slug : "list"}
     >
       {isDetail ? <ProjectDetail slug={slug} /> : <ProjectsGrid />}
     </OverlayShell>

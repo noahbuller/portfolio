@@ -1,72 +1,97 @@
-.skillIcons {
-  margin-top: 4px;
+/* Rail column + reading column. Below 900px the rail turns into a chip row
+   (SectionRail.module.css) and this collapses to one column. */
+.split {
+  display: grid;
+  grid-template-columns: 170px minmax(0, 1fr);
+  gap: 36px;
 }
 
-.roleList {
+.content section {
+  scroll-margin-top: 16px;
+}
+
+.entryList {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 24px;
 }
 
-.roleCard,
-.educationCard,
-.leadershipCard {
-  padding: 24px 26px;
+.entry {
+  padding-block: 18px;
+  border-top: 1px dashed rgba(245, 240, 232, 0.16);
 }
 
-.roleHeader {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 12px 24px;
-  margin-bottom: 12px;
+.entryList > .entry:first-child,
+.content section > .entry {
+  padding-top: 0;
+  border-top: none;
 }
 
-.roleCompany {
-  font-size: clamp(18px, 3.5vw, 20px);
-  line-height: 1.25;
+.credit {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.creditName {
+  font-size: clamp(26px, 4vw, 32px);
+  line-height: 1;
   color: var(--text-light);
 }
 
-.roleTitle {
-  margin-top: 4px;
-  font-size: 14px;
-  color: var(--text-muted);
+.leader {
+  border-bottom: 2px dotted rgba(245, 240, 232, 0.3);
+  transform: translateY(-5px);
 }
 
-.roleDates {
+.creditDates {
   font-size: 13px;
+  font-variant-numeric: tabular-nums;
   letter-spacing: 0.04em;
-  color: var(--foreground-sand);
+  color: var(--window-glow);
   white-space: nowrap;
 }
 
-.roleSummary {
-  font-size: clamp(15px, 3.2vw, 16px);
-  line-height: 1.65;
-  color: var(--text-light);
-  margin-bottom: 16px;
-}
-
-.gpa {
+.entryTitle {
+  margin-top: 6px;
   font-size: 14px;
   font-weight: 600;
   color: var(--text-light);
+}
+
+.summary {
+  margin-top: 8px;
   margin-bottom: 12px;
+  max-width: 68ch;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text-light);
+}
+
+.gpa {
+  margin-top: 4px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: var(--text-muted);
 }
 
 .bullets {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-bottom: 16px;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.bullets:last-child {
+  margin-bottom: 0;
 }
 
 .bullets li {
   position: relative;
   padding-left: 18px;
+  max-width: 68ch;
   font-size: 14px;
   line-height: 1.6;
   color: var(--text-muted);
@@ -85,45 +110,47 @@
 
 .courseGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px 32px;
 }
 
 .courseGroup {
-  display: flex;
-  flex-direction: column;
-  padding: 20px 22px;
+  padding-top: 14px;
+  border-top: 1px dashed rgba(245, 240, 232, 0.16);
 }
 
 .courseLabel {
+  margin-bottom: 12px;
   font-size: 14px;
   font-weight: 600;
   color: var(--text-light);
-  margin-bottom: 12px;
 }
 
-.courseFooter {
-  display: flex;
-  align-items: center;
-  min-height: 48px;
-  margin-top: auto;
-  padding-top: 14px;
-  border-top: 1px solid var(--glass-border);
+@media (max-width: 900px) {
+  /* minmax(0, …) so the chip row's nowrap width scrolls inside itself
+     instead of stretching the column past the board's edge. */
+  .split {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  /* Clear the sticky chip row when a jump lands on a section. */
+  .content section {
+    scroll-margin-top: 64px;
+  }
 }
 
 @media (max-width: 600px) {
-  .roleHeader {
-    flex-direction: column;
+  .credit {
+    grid-template-columns: 1fr;
+    gap: 4px;
   }
 
-  .roleCard,
-  .educationCard,
-  .leadershipCard,
-  .courseGroup {
-    padding: 18px;
+  .leader {
+    display: none;
   }
 
-  .roleDates {
+  .creditDates {
     white-space: normal;
   }
 }

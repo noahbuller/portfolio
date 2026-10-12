@@ -9,6 +9,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { trackOverlayOrigin } from "@/lib/overlayOrigin";
 import { hashToView, OverlayView, viewToHash } from "@/lib/overlayView";
 
 interface OverlayContextValue {
@@ -51,6 +52,8 @@ export function OverlayProvider({ children }: { children: ReactNode }) {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setView(hashToView(window.location.hash));
   }, []);
+
+  useEffect(() => trackOverlayOrigin(), []);
 
   const navigate = useCallback((next: OverlayView, replace = false) => {
     setView(next);
