@@ -96,19 +96,67 @@
   }
 }
 
+/* The skyline stands on the far shore of the bay, so both skyline bands are
+   anchored to the midground's waterline rather than to the viewport:
+   --waterline is the midground's bottom plus the 174px from its bottom edge
+   up to the water (280px tile, waterline at y=106), and the skyline's ground
+   sits SKYLINE_SUBMERGED (30px) below it so building bases are always
+   hidden by the water, at any viewport height. */
+.groundScene {
+  --midground-bottom: 22vh;
+  --waterline: calc(var(--midground-bottom) + 174px);
+  /* Shrinks the skyline bands (and their reflection) on shorter screens so
+     the tallest towers stay clear of the hero subtitle. */
+  --skyline-scale: 1;
+}
+
+@media (max-height: 820px) and (min-height: 481px) {
+  .groundScene {
+    --skyline-scale: 0.84;
+  }
+}
+
+@media (max-height: 740px) and (min-height: 481px) {
+  .groundScene {
+    --skyline-scale: 0.72;
+  }
+}
+
+.farSkyline,
 .skyline {
   position: absolute;
-  bottom: 38vh;
+  bottom: calc(var(--waterline) - 30px * var(--skyline-scale));
   left: 0;
   z-index: 3;
-  opacity: 0.85;
+}
+
+/* Sizes come from SKYLINE_TILE_WIDTH × SKYLINE_HEIGHT (1600 × 360); the
+   reflection is 150px deep. ParallaxLayer re-measures the tile on resize. */
+.farSkyline svg,
+.skyline svg {
+  width: calc(1600px * var(--skyline-scale));
+  height: calc(360px * var(--skyline-scale));
+}
+
+.skylineReflection svg {
+  width: calc(1600px * var(--skyline-scale));
+  height: calc(150px * var(--skyline-scale));
 }
 
 .midground {
   position: absolute;
-  bottom: 22vh;
+  bottom: var(--midground-bottom);
   left: 0;
   z-index: 4;
+}
+
+/* Hangs from the waterline: 150px of mirrored skyline over the water. */
+.skylineReflection {
+  position: absolute;
+  bottom: calc(var(--waterline) - 150px * var(--skyline-scale));
+  left: 0;
+  z-index: 4;
+  pointer-events: none;
 }
 
 /* Soft glow of the sun on the water (sun lives in the static sky) */
@@ -219,12 +267,8 @@
     opacity: 0.28;
   }
 
-  .skyline {
-    bottom: 42vh;
-  }
-
-  .midground {
-    bottom: 28vh;
+  .groundScene {
+    --midground-bottom: 28vh;
   }
 
   .sunReflection {

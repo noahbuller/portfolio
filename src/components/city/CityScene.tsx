@@ -14,7 +14,11 @@ import { SIDEWALK_MID, STREET_HEIGHT } from "@/data/street";
 import { SkyLayer } from "./SkyLayer";
 import { CloudLayer } from "./CloudLayer";
 import { SunMoonToggle } from "./SunMoonToggle";
-import { SkylineLayer } from "./SkylineLayer";
+import {
+  FarSkylineLayer,
+  SkylineLayer,
+  SkylineReflection,
+} from "./SkylineLayer";
 import { MidgroundLayer } from "./MidgroundLayer";
 import { ForegroundLayer } from "./ForegroundLayer";
 import { ParallaxLayer } from "./ParallaxLayer";
@@ -175,6 +179,13 @@ export function CityScene() {
           letting the tallest buildings/billboards clip above the viewport. */}
       <div ref={groundRef} className={styles.groundScene}>
         <ParallaxLayer
+          speed={0.1}
+          register={registerLayer}
+          className={styles.farSkyline}
+          renderTile={() => <FarSkylineLayer />}
+        />
+
+        <ParallaxLayer
           speed={0.18}
           register={registerLayer}
           className={styles.skyline}
@@ -186,6 +197,15 @@ export function CityScene() {
           register={registerLayer}
           className={styles.midground}
           renderTile={() => <MidgroundLayer />}
+        />
+
+        {/* Same speed and tile width as the skyline, so the reflection stays
+            locked under its buildings while the water scrolls faster. */}
+        <ParallaxLayer
+          speed={0.18}
+          register={registerLayer}
+          className={styles.skylineReflection}
+          renderTile={() => <SkylineReflection />}
         />
 
         <div className={styles.sunReflection} aria-hidden="true" />

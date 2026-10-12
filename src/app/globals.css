@@ -16,6 +16,12 @@
   --water-deep: #1d7a70;
   --foreground-sand: #f4d9a0;
   --building-far: #3d5a73;
+  /* Skyline haze: building-far blended ~45% toward the horizon; the far band
+     is mostly sky (42% far + sky-mid at the top, 30% far + horizon below). */
+  --skyline-haze: #948a86;
+  --skyline-far-top: #32668a;
+  --skyline-far-bottom: #c5a591;
+  --skyline-reflection-opacity: 0.12;
   --building-mid: #274156;
   --building-shadow: #16303f;
   --window-glow: #ffd27a;
@@ -163,6 +169,10 @@
   --water-deep: #1f150d;
   --foreground-sand: #f0dbb0;
   --building-far: #6b5540;
+  --skyline-haze: #9d5b37;
+  --skyline-far-top: #b58550;
+  --skyline-far-bottom: #b85e32;
+  --skyline-reflection-opacity: 0.16;
   --building-mid: #3a2a1c;
   --building-shadow: #14100a;
   --window-glow: #f7dfa0;
