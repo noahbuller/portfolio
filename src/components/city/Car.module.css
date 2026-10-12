@@ -1,0 +1,49 @@
+.car {
+  display: block;
+  overflow: visible;
+}
+
+/* Wheels spin at a rate the traffic layer derives from road speed, so the
+   tread never looks like it's skating. fill-box keeps each wheel rotating
+   around its own hub rather than the SVG origin. */
+.wheel {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: spin var(--spin, 0.45s) linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Sub-pixel suspension bob so bodies don't read as rigid stickers. */
+.body {
+  animation: bob 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes bob {
+  to {
+    transform: translateY(-0.8px);
+  }
+}
+
+.beam {
+  opacity: var(--car-beam-opacity, 0.12);
+}
+
+.car[data-parked] .beam {
+  display: none;
+}
+
+.tail {
+  opacity: var(--car-tail-opacity, 0.5);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wheel,
+  .body {
+    animation: none;
+  }
+}

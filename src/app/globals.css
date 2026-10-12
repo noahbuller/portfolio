@@ -23,6 +23,25 @@
   /* ── Road (coastal light) ── */
   --road-top: #1a3146;
   --road-bottom: #0e1d2b;
+  --sidewalk: #2b4558;
+  --curb: #4f6a7d;
+  --street-tree: #1e6b5c;
+  --street-light-opacity: 0.16;
+  --street-reflection-opacity: 0.06;
+
+  /* ── Traffic (coastal light) — painted toy cars, lights barely on ── */
+  --car-1: #e5566f;
+  --car-2: #4f8fb0;
+  --car-3: #e0e3e7;
+  --car-4: #2f5d7a;
+  --car-5: #e76f51;
+  --car-taxi: #ffd166;
+  --car-glass: #8fc3d1;
+  --car-tire: #1c2227;
+  --car-hub: #9aa3aa;
+  --car-steel: #c3ccd3;
+  --car-beam-opacity: 0.12;
+  --car-tail-opacity: 0.5;
 
   /* ── Plane sprite (coastal light) ── */
   --plane-hull: #eef2f6;
@@ -151,6 +170,26 @@
        as the lowest, furthest-back surface, warm-neutral asphalt not navy. ── */
   --road-top: #1c140d;
   --road-bottom: #0a0704;
+  --sidewalk: #241a11;
+  --curb: #5a4630;
+  --street-tree: #1a120b;
+  --street-light-opacity: 0.45;
+  --street-reflection-opacity: 0.2;
+
+  /* ── Traffic (Silhouette Theatre) — bodies are silhouettes (structure);
+       only head/tail lights, the taxi sign and cabin glow are lit. ── */
+  --car-1: #2a1f15;
+  --car-2: #33261a;
+  --car-3: #3d2e20;
+  --car-4: #211810;
+  --car-5: #2e2218;
+  --car-taxi: #33261a;
+  --car-glass: #6b5235;
+  --car-tire: #0a0704;
+  --car-hub: #4a3a28;
+  --car-steel: #3a2a1c;
+  --car-beam-opacity: 0.45;
+  --car-tail-opacity: 0.9;
 
   /* ── Plane sprite (Silhouette Theatre) — muted warm silhouette instead of
        a bright white toy plane, matching the near-black building tones. ── */

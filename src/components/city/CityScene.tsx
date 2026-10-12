@@ -9,7 +9,7 @@ import {
   GROUND,
   getForegroundBuildings,
 } from "@/data/cityBuildings";
-import { ROAD_HEIGHT_VH } from "./roadGeometry";
+import { SIDEWALK_MID, STREET_HEIGHT } from "@/data/street";
 import { SkyLayer } from "./SkyLayer";
 import { CloudLayer } from "./CloudLayer";
 import { SunMoonToggle } from "./SunMoonToggle";
@@ -36,20 +36,17 @@ const billboardLeft = (buildingIndex: number) => {
 };
 
 // Building-mounted signs rest directly on their target building's actual
-// roofline. `.foreground` renders at a fixed pixel height (GROUND), while
-// `.billboards` is offset 3vh from the scene bottom — the calc() cancels
-// that offset out so the sign lands exactly at (GROUND - building.top),
-// the same coordinate space the foreground SVG itself uses.
+// roofline. Both `.foreground` and `.billboards` sit on the scene bottom and
+// are sized in px, so a building's roof is (street + building height) up.
 const billboardBottom = (buildingIndex: number) => {
   const b = BUILDINGS[buildingIndex];
-  return `calc(${GROUND - b.top}px - 3vh)`;
+  return STREET_HEIGHT + GROUND - b.top;
 };
 
 export function CityScene() {
   const isMobile = useMediaQuery("(max-width: 768px)");
-  const { registerLayer } = useAutoScroll({
-    pixelsPerSecond: isMobile ? 22 : 35,
-  });
+  const scrollSpeed = isMobile ? 22 : 35;
+  const { registerLayer } = useAutoScroll({ pixelsPerSecond: scrollSpeed });
 
   const renderBillboards = (decorative: boolean) => (
     <div className={styles.billboardTile} style={{ width: BILLBOARD_TILE }}>
@@ -85,7 +82,10 @@ export function CityScene() {
         />
       </div>
 
-      <div className={styles.slot} style={{ left: billboardLeft(9) }}>
+      <div
+        className={styles.slot}
+        style={{ left: billboardLeft(9), bottom: SIDEWALK_MID }}
+      >
         <Billboard
           decorative={decorative}
           variant="coral"
@@ -176,15 +176,7 @@ export function CityScene() {
           renderTile={() => <ForegroundLayer />}
         />
 
-        <div
-          className={styles.road}
-          aria-hidden="true"
-          style={{ "--road-height-vh": ROAD_HEIGHT_VH } as React.CSSProperties}
-        >
-          <div className={styles.roadLine} />
-        </div>
-
-        <TrafficLayer />
+        <TrafficLayer scrollSpeed={scrollSpeed} />
 
         <ParallaxLayer
           speed={1}
