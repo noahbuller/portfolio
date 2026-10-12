@@ -62,8 +62,8 @@ function BillboardFrame({
 /**
  * A clickable neon billboard. `mount` controls how it sits in the scene:
  * - "ground": raised on two tall poles planted on the road
- * - "building": rests directly on its target foreground building's own
- *   roofline (positioned by the caller) — no separate pedestal of its own
+ * - "building": raised on short steel legs standing on its target
+ *   foreground building's roofline (positioned by the caller)
  *
  * Use `mode="link"` (default) for a single CTA anchor, `mode="action"` for
  * in-app overlays, or `mode="group"` when the sign contains separate child links.
@@ -163,6 +163,13 @@ export function Billboard(props: BillboardProps) {
         <div className={styles.standGround} aria-hidden="true">
           <span className={styles.pole} />
           <span className={styles.pole} />
+        </div>
+      )}
+
+      {mount === "building" && (
+        <div className={styles.standRoof} aria-hidden="true">
+          <span className={styles.leg} />
+          <span className={styles.leg} />
         </div>
       )}
     </div>

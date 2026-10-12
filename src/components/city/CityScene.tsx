@@ -1,5 +1,6 @@
 "use client";
 
+import { useCallback, useRef } from "react";
 import { useAutoScroll } from "@/hooks/useAutoScroll";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { ctas } from "@/data/ctas";
@@ -19,7 +20,7 @@ import { ForegroundLayer } from "./ForegroundLayer";
 import { ParallaxLayer } from "./ParallaxLayer";
 import { Billboard } from "./Billboard";
 import { TrafficLayer } from "./TrafficLayer";
-import { PlaneLayer } from "./PlaneLayer";
+import { PlaneLayer, type FlightBand } from "./PlaneLayer";
 import styles from "./CityScene.module.css";
 
 // The billboard tile must scroll in lockstep with the foreground buildings
@@ -47,10 +48,27 @@ export function CityScene() {
   const isMobile = useMediaQuery("(max-width: 768px)");
   const scrollSpeed = isMobile ? 22 : 35;
   const { registerLayer } = useAutoScroll({ pixelsPerSecond: scrollSpeed });
+  const heroRef = useRef<HTMLDivElement>(null);
+  const groundRef = useRef<HTMLDivElement>(null);
+
+  // Planes fly in the clear sky between the hero title and the highest
+  // billboard. Measured live (not from building data) so it accounts for the
+  // short-viewport scale() on .groundScene and the mobile sign scale-up.
+  const getFlightBand = useCallback((): FlightBand | null => {
+    const hero = heroRef.current;
+    const ground = groundRef.current;
+    if (!hero || !ground) return null;
+    let signTop = Infinity;
+    ground.querySelectorAll("[data-billboard-slot]").forEach((slot) => {
+      signTop = Math.min(signTop, slot.getBoundingClientRect().top);
+    });
+    return { titleBottom: hero.getBoundingClientRect().bottom, signTop };
+  }, []);
 
   const renderBillboards = (decorative: boolean) => (
     <div className={styles.billboardTile} style={{ width: BILLBOARD_TILE }}>
       <div
+        data-billboard-slot
         className={styles.slot}
         style={{ left: billboardLeft(2), bottom: billboardBottom(2) }}
       >
@@ -67,6 +85,7 @@ export function CityScene() {
       </div>
 
       <div
+        data-billboard-slot
         className={styles.slot}
         style={{ left: billboardLeft(6), bottom: billboardBottom(6) }}
       >
@@ -83,6 +102,7 @@ export function CityScene() {
       </div>
 
       <div
+        data-billboard-slot
         className={styles.slot}
         style={{ left: billboardLeft(9), bottom: SIDEWALK_MID }}
       >
@@ -98,6 +118,7 @@ export function CityScene() {
       </div>
 
       <div
+        data-billboard-slot
         className={styles.slot}
         style={{ left: billboardLeft(12), bottom: billboardBottom(12) }}
       >
@@ -141,7 +162,7 @@ export function CityScene() {
 
       <SunMoonToggle />
 
-      <div className={styles.heroTitle} aria-hidden="true">
+      <div ref={heroRef} className={styles.heroTitle} aria-hidden="true">
         <span className={`${styles.heroName} font-display`}>
           {ctas.hero.label}
         </span>
@@ -152,7 +173,7 @@ export function CityScene() {
           single `transform: scale()` can shrink them all uniformly on short
           viewports — see .groundScene in CityScene.module.css — instead of
           letting the tallest buildings/billboards clip above the viewport. */}
-      <div className={styles.groundScene}>
+      <div ref={groundRef} className={styles.groundScene}>
         <ParallaxLayer
           speed={0.18}
           register={registerLayer}
@@ -186,7 +207,7 @@ export function CityScene() {
         />
       </div>
 
-      <PlaneLayer />
+      <PlaneLayer getFlightBand={getFlightBand} />
     </div>
   );
 }

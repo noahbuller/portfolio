@@ -9,10 +9,11 @@
   overflow: hidden;
 }
 
+/* `top` is a px altitude lane from PlaneLayer, measured to clear the signs. */
 .plane {
   position: absolute;
   left: 0;
-  transform: translateX(-360px);
+  transform: translateX(-420px);
   will-change: transform;
   animation-name: fly;
   animation-timing-function: linear;
@@ -28,7 +29,7 @@
 
 @keyframes fly {
   from {
-    transform: translateX(-360px);
+    transform: translateX(-420px);
   }
   to {
     transform: translateX(calc(100vw + 80px));
@@ -44,36 +45,67 @@
   }
 }
 
+/* Swallowtail cloth: BannerCloth draws the rippling accent fabric behind the
+   label; the padding leaves room for the fork on the left and the sleeve on
+   the right. */
 .banner {
+  position: relative;
   pointer-events: auto;
   cursor: pointer;
   touch-action: manipulation;
   display: inline-flex;
   align-items: center;
-  padding: 9px 18px 9px 24px;
+  height: 46px;
   min-height: var(--touch-min);
-  font-size: 15px;
+  padding: 0 20px 0 30px;
+  font-size: 24px;
   line-height: 1;
-  color: var(--text-light);
-  background: var(--glass-bg);
-  border: 2px solid var(--accent, var(--sign-pale));
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   white-space: nowrap;
-  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 14px 50%);
+  color: var(--building-shadow);
+  background: none;
+  border: 0;
   transition:
     transform 0.2s ease,
     filter 0.2s ease;
-  font-family: inherit;
-  border-radius: 8px;
 }
 
-.rope {
-  width: 20px;
-  height: 2px;
-  background: rgba(245, 240, 232, 0.45);
+.cloth {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.label {
+  position: relative;
+  padding-top: 2px;
+}
+
+.bridle {
+  display: block;
+  flex: none;
+  overflow: visible;
+}
+
+.bridle path {
+  fill: none;
+  stroke: var(--text-light);
+  stroke-opacity: 0.6;
+  stroke-width: 1.5;
+}
+
+:root[data-theme="dark"] .bridle path {
+  stroke: var(--building-shadow);
+  stroke-opacity: 0.55;
 }
 
 .sprite {
   display: block;
+  flex: none;
+  margin-left: -2px;
 }
 
 /* Accent variants */
@@ -95,11 +127,15 @@
 @media (hover: hover) and (pointer: fine) {
   .banner:hover {
     transform: translateY(-3px);
-    filter: drop-shadow(
-        0 0 12px var(--accent-glow, rgba(var(--sign-pale-rgb), 0.65))
-      )
-      drop-shadow(0 8px 14px rgba(0, 0, 0, 0.5));
+    filter: drop-shadow(0 0 12px var(--accent-glow))
+      drop-shadow(0 8px 14px rgba(0, 0, 0, 0.4));
   }
+}
+
+.banner:focus-visible {
+  outline: 3px solid var(--text-light);
+  outline-offset: 4px;
+  border-radius: 4px;
 }
 
 .parked {
@@ -109,14 +145,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .plane {
+  .plane,
+  .inner {
     animation: none;
   }
-}
-
-.banner:focus-visible {
-  outline: none;
-  box-shadow:
-    0 0 0 3px var(--accent, var(--sign-pale)),
-    0 0 14px var(--accent-glow, rgba(var(--sign-pale-rgb), 0.5));
 }

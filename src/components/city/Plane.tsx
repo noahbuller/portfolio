@@ -1,36 +1,99 @@
+import styles from "./Plane.module.css";
+
+/** Sprite size in px; the tow line attaches at the tail, PLANE_TAIL_Y down. */
+export const PLANE_WIDTH = 116;
+export const PLANE_HEIGHT = 46;
+
 /**
- * Small side-view aircraft sprite (nose pointing right). The towed banner is
- * rendered by PlaneLayer and attached at the tail.
+ * High-wing banner-tow prop plane (nose pointing right). The towed banner is
+ * rendered by PlaneLayer and attached at the tail. The fuselage stripe takes
+ * the banner's `--accent` so each plane matches the cloth it pulls.
  */
-export function Plane() {
+export function Plane({ spinning = true }: { spinning?: boolean }) {
   return (
     <svg
-      width={84}
-      height={36}
-      viewBox="0 0 84 36"
+      className={styles.plane}
+      width={PLANE_WIDTH}
+      height={PLANE_HEIGHT}
+      viewBox={`0 0 ${PLANE_WIDTH} ${PLANE_HEIGHT}`}
       aria-hidden="true"
-      style={{ display: "block", overflow: "visible" }}
     >
-      {/* horizontal wing (far) */}
-      <ellipse cx="44" cy="24" rx="20" ry="4" fill="var(--plane-far-wing)" />
+      {/* tail fin + horizontal stabilizer */}
+      <path d="M6 6 L15 6 L25 22 L4 22 Z" fill="var(--plane-hull)" />
+      <path
+        d="M0 22 L24 21 L24 25.5 L3 25.5 Z"
+        fill="var(--plane-hull-shade)"
+      />
       {/* fuselage */}
       <path
-        d="M10 20 Q5 16 16 14 L62 12 Q78 13 80 19 Q78 25 62 24 L18 25 Q7 25 10 20 Z"
+        d="M4 24 Q4 20 12 20 L62 17 Q66 12 74 12 L90 13 Q101 15 105 21 L105 29 Q97 33 80 33 L20 30 Q6 29 4 24 Z"
         fill="var(--plane-hull)"
       />
-      {/* tail fin */}
-      <path d="M12 14 L4 3 L20 13 Z" fill="var(--plane-hull)" />
-      {/* horizontal stabilizer */}
-      <path d="M10 16 L0 12 L14 17 Z" fill="var(--plane-hull-shade)" />
-      {/* near wing */}
-      <ellipse cx="46" cy="16" rx="16" ry="3" fill="var(--plane-hull-shade)" />
-      {/* cockpit windows */}
-      <circle cx="68" cy="18" r="2.1" fill="var(--sign-pale)" />
-      <circle cx="40" cy="18.5" r="1.5" fill="var(--plane-window-dim)" />
-      <circle cx="48" cy="18.3" r="1.5" fill="var(--plane-window-dim)" />
-      <circle cx="56" cy="18.1" r="1.5" fill="var(--plane-window-dim)" />
-      {/* nose accent */}
-      <path d="M76 17 Q82 19 76 22 Z" fill="var(--window-glow)" />
+      {/* cockpit glass */}
+      <path
+        d="M70 15 L88 15 Q96 17 99 21 L70 21 Z"
+        fill="var(--plane-window-dim)"
+      />
+      {/* high wing + strut */}
+      <rect
+        x="46"
+        y="9"
+        width="48"
+        height="5"
+        rx="2.5"
+        fill="var(--plane-hull-shade)"
+      />
+      <line
+        x1="56"
+        y1="14"
+        x2="72"
+        y2="29"
+        stroke="var(--plane-hull-shade)"
+        strokeWidth="2"
+      />
+      {/* accent stripe */}
+      <path
+        d="M14 26.5 L100 25.5 L100 28.5 L14 29 Z"
+        style={{ fill: "var(--accent)" }}
+      />
+      {/* landing gear */}
+      <line
+        x1="80"
+        y1="32"
+        x2="85"
+        y2="40"
+        stroke="var(--car-tire)"
+        strokeWidth="2.2"
+      />
+      <circle cx="85" cy="41" r="4.5" fill="var(--car-tire)" />
+      <circle cx="10" cy="30.5" r="2" fill="var(--car-tire)" />
+      {/* spinner, propeller blur and blade */}
+      <path d="M105 20 Q114 25 105 30 Z" fill="var(--plane-hull-shade)" />
+      <ellipse
+        cx="113"
+        cy="25"
+        rx="2"
+        ry="15"
+        fill="var(--plane-hull)"
+        opacity="0.28"
+      />
+      <rect
+        className={spinning ? styles.blade : undefined}
+        x="112"
+        y="11"
+        width="2.4"
+        height="14"
+        rx="1.2"
+        fill="var(--plane-hull-shade)"
+      />
+      {/* tail beacon */}
+      <circle
+        className={spinning ? styles.beacon : styles.beaconOff}
+        cx="11"
+        cy="6"
+        r="2.6"
+        fill="var(--sign-gold)"
+      />
     </svg>
   );
 }
