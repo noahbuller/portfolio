@@ -39,9 +39,7 @@ interface BillboardGroupProps extends BillboardBaseProps {
 }
 
 type BillboardProps =
-  | BillboardLinkProps
-  | BillboardActionProps
-  | BillboardGroupProps;
+  BillboardLinkProps | BillboardActionProps | BillboardGroupProps;
 
 function BillboardFrame({
   eyebrow,
@@ -100,7 +98,7 @@ export function Billboard(props: BillboardProps) {
 
     const observer = new IntersectionObserver(
       ([entry]) => setObservedInView(entry.isIntersecting),
-      { threshold: 0.55 },
+      { threshold: 0.15 },
     );
     observer.observe(el);
     return () => observer.disconnect();

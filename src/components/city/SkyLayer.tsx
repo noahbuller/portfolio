@@ -53,7 +53,7 @@ export function SkyLayer() {
             cx={cx}
             cy={cy}
             r={i % 3 === 0 ? 2 : 1.3}
-            opacity={0.85}
+            style={{ opacity: "var(--star-opacity)" }}
           />
         ))}
       </g>

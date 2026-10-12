@@ -22,6 +22,10 @@
   --skyline-far-top: #32668a;
   --skyline-far-bottom: #c5a591;
   --skyline-reflection-opacity: 0.12;
+  /* Daytime sky: no stars. */
+  --star-opacity: 0;
+  --shop-glass-opacity: 0.55;
+  --shop-neon-opacity: 0;
   --building-mid: #274156;
   --building-shadow: #16303f;
   --window-glow: #ffd27a;
@@ -173,6 +177,9 @@
   --skyline-far-top: #b58550;
   --skyline-far-bottom: #b85e32;
   --skyline-reflection-opacity: 0.16;
+  --star-opacity: 0.85;
+  --shop-glass-opacity: 0.85;
+  --shop-neon-opacity: 1;
   --building-mid: #3a2a1c;
   --building-shadow: #14100a;
   --window-glow: #f7dfa0;
@@ -230,12 +237,10 @@
 
   --glass-border: rgba(var(--sign-gold-rgb), 0.32);
   --glass-bg: rgba(20, 16, 10, 0.82);
-  /* Lower opacity than --glass-bg on purpose: the dark theme's sky-top is a
-     *light* warm amber (unlike light mode's dark navy), so a near-opaque
-     nav here reads as a flat dark bar instead of glass over that sky. This
-     lets more of the blurred sky/cloud color bleed through while staying
-     dark enough for text contrast. */
-  --glass-nav-bg: rgba(20, 16, 10, 0.55);
+  /* Near-opaque on purpose: at lower opacity the dark over the light amber
+     sky mixed into a muddy olive. Mostly solid, it reads as part of the
+     silhouette, with just a hint of the sky through the blur. */
+  --glass-nav-bg: rgba(20, 16, 10, 0.86);
 }
 
 /* FixedNav switches to smaller padding at this breakpoint (10px vs 14px) —
