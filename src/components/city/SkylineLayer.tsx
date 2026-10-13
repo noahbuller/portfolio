@@ -165,13 +165,9 @@ function building(b: SkylineBuilding, i: number) {
             <path
               d={`M${b.x + 10} ${b.top - 18} Q${cx} ${b.top - 76} ${b.x + b.w - 10} ${b.top - 18} Z`}
             />
-            <rect x={cx - 6} y={b.top - 64} width={12} height={12} />
-            <path
-              d={`M${cx - 8} ${b.top - 64} L${cx} ${b.top - 76} L${cx + 8} ${b.top - 64} Z`}
-            />
           </>
         ),
-        windows: [...faceWindows(), { x: cx - 2, y: b.top - 61, opacity: 0.9 }],
+        windows: faceWindows(),
         extras: null,
       };
     case "setback": {
