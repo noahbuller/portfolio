@@ -1,0 +1,84 @@
+/* Spans the ground scene's width; the tug's waterline lands on the same
+   line of the bay the old sailboat used (87px above the midground's bottom),
+   clear of the skyline and the foreground's lower rooftops. */
+.layer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(var(--midground-bottom) + 82px);
+  height: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.crossing,
+.parked {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.crossing {
+  will-change: transform;
+  animation-name: sail;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  animation-fill-mode: both;
+}
+
+@keyframes sail {
+  from {
+    transform: translateX(var(--from));
+  }
+  to {
+    transform: translateX(var(--to));
+  }
+}
+
+.parked {
+  left: 30%;
+}
+
+.link {
+  display: block;
+  pointer-events: auto;
+  cursor: pointer;
+  touch-action: manipulation;
+  border-radius: 6px;
+  transition: filter 0.2s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .link:hover {
+    filter: drop-shadow(0 0 10px rgba(var(--sign-rose-rgb), 0.55));
+  }
+}
+
+.link:focus-visible {
+  outline: 3px solid var(--text-light);
+  outline-offset: 4px;
+}
+
+/* Pitches on the swell around the hull's waterline. */
+.bob {
+  display: block;
+  transform-origin: 50% 94%;
+  animation: bob 3.6s ease-in-out infinite;
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1.4deg);
+  }
+  50% {
+    transform: translateY(1.5px) rotate(1.4deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .crossing,
+  .bob {
+    animation: none;
+  }
+}

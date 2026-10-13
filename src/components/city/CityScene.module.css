@@ -201,6 +201,17 @@
   z-index: 5;
 }
 
+/* The layer's box covers the bay above the low rooftops; only the painted
+   buildings should catch the pointer, so the tug behind is clickable
+   wherever it's visible (and blocked where a building hides it). */
+.foreground {
+  pointer-events: none;
+}
+
+.foreground svg * {
+  pointer-events: visiblePainted;
+}
+
 .billboards {
   position: absolute;
   bottom: 0;

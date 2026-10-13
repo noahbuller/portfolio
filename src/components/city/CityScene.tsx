@@ -24,6 +24,7 @@ import { ForegroundLayer } from "./ForegroundLayer";
 import { ParallaxLayer } from "./ParallaxLayer";
 import { Billboard } from "./Billboard";
 import { TrafficLayer } from "./TrafficLayer";
+import { TugLayer } from "./TugLayer";
 import { PlaneLayer, type FlightBand } from "./PlaneLayer";
 import styles from "./CityScene.module.css";
 
@@ -209,6 +210,8 @@ export function CityScene() {
         />
 
         <div className={styles.sunReflection} aria-hidden="true" />
+
+        <TugLayer />
 
         <ParallaxLayer
           speed={1}
